@@ -1,0 +1,37 @@
+.product {}
+
+.product__table {
+    font-size: 16px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #e5e5e5;
+}
+
+.product__item + .product__item {
+    border-top: 1px solid #e5e5e5;
+}
+.product__item.highlight {
+    background-color: #cbffaf;
+}
+
+
+.product__item td {
+    padding: 15px;
+}
+
+.product__item td img {
+
+}
+
+.product__pic  img {
+    max-height: 100px;
+    display: block;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.product__name {
+    font-size:  115%;
+}
