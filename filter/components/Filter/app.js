@@ -25,13 +25,22 @@ const Filter = React.createClass({
 
     },
 
+    filterList: function(e) {
+        const trgValue = e.target.value;
+        const regExp = new RegExp(trgValue, 'gi');
+        const filteredWords = this.state.wordsList.filter((word) => {
+            return regExp.test(word);
+        });
+        // trgValue.length > 0 ? this.setState({wordsList: filteredWords}) : this.setState({wordsList: this.props.words});
+    },
+
     render: function () {
         return React.DOM.div({className: 'filter'},
             React.DOM.div({className: 'filter__input-wrap'},
                 React.DOM.div({className: 'filter__check-wrap'},
                     React.DOM.input({type: 'checkbox', name: 'sort', defaultChecked: false, onClick: this.sortList}),
                 ),
-                React.DOM.input({type: 'text', name: 'filter'})
+                React.DOM.input({type: 'text', name: 'filter', onChange: this.filterList})
             ),
             React.DOM.ul({className: 'filter__list'},
                 this.state.wordsList.map((word, i) => {
