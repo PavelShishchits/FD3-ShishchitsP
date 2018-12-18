@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Filter</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./components/Filter/style.css">
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script src="components/Filter/app.js"></script>
+
+</head>
+<body>
+
+    <div class="container">
+
+    </div>
+
+    <script>
+
+        const stringsArray = [
+            'частнопредпринимательский',
+            'переосвидетельствоваться',
+            'субстанционализироваться',
+            'высокопревосходительство',
+            'одиннадатиклассница',
+            'округление',
+            'параграф',
+        ];
+
+        ReactDOM.render(
+            React.createElement(Filter, {words: stringsArray}),
+            document.querySelector('.container')
+        );
+
+    </script>
+</body>
+</html>

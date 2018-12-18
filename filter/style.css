@@ -1,0 +1,23 @@
+.filter {}
+
+.filter__list {
+    display: inline-block;
+    border: 1px solid #a8a6a6;
+    padding: 10px 15px;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.filter__item {
+    list-style: none;
+    padding: 3px 0;
+}
+
+.filter__input-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.filter__check-wrap {
+    margin-right:  10px;
+}
