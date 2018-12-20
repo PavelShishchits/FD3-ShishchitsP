@@ -36,9 +36,7 @@ const Filter = React.createClass({
 
     filterList: function(e) {
         const filteredList = this.props.words.filter(this.filterCb);
-        this.setState((currenetState, props) => {
-            return {wordsList: this.state.isChecked ? filteredList.slice().sort() : filteredList}
-        });
+        this.setState({wordsList: this.state.isChecked ? filteredList.slice().sort() : filteredList})
     },
 
     filterCb: function(word) {
