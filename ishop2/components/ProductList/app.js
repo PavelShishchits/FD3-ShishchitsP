@@ -24,14 +24,11 @@ var ProductList = React.createClass({
     if (!this.userConfirmation(prodToDelete)) {
       return false;
     }
-    const renewedList = this.state.productList.reduce((totalList, product) => {
-      if (prodToDelete.id !== product.id) {
-        totalList.push(product);
-      }
-      return totalList;
-    }, []);
+    const filteredLis = this.state.productList.filter((product) => {
+      return prodToDelete.id !== product.id
+    });
 
-    this.setState({productList: renewedList});
+    this.setState({productList: filteredLis});
   },
 
   onProductClick: function(productId) {

@@ -1,6 +1,12 @@
 const Filter = React.createClass({
 
-    'displayName': 'Filter',
+    displayName: 'Filter',
+
+    getDefaultProps: function() {
+        return {
+            fallbackText: 'Совпадений нет'
+        }
+    },
 
     getInitialState: function() {
         return {
@@ -21,19 +27,25 @@ const Filter = React.createClass({
     },
 
     sortList: function() {
-        if (this.state.isChecked) {
-            this.setState({wordsList: this.props.words.slice().sort()});
-        } else {
-            this.setState({wordsList: this.props.words});
-        }
+        this.setState({wordsList: this.state.isChecked ? this.state.wordsList.slice().sort() : this.props.words.filter(this.filterCb)})
     },
 
     inputHandler: function(e) {
-        this.setState({filterText: e.target.value});
+        this.setState({filterText: e.target.value}, this.filterList);
+    },
+
+    filterList: function(e) {
+        const filteredList = this.props.words.filter(this.filterCb);
+        this.setState((currenetState, props) => {
+            return {wordsList: this.state.isChecked ? filteredList.slice().sort() : filteredList}
+        });
+    },
+
+    filterCb: function(word) {
+        return word.toLowerCase().indexOf(this.state.filterText.toLowerCase()) >= 0;
     },
 
     render: function () {
-        console.log(this.state.wordsList.length);
         return React.DOM.div({className: 'filter'},
             React.DOM.div({className: 'filter__input-wrap'},
                 React.DOM.div({className: 'filter__check-wrap'},
@@ -42,13 +54,13 @@ const Filter = React.createClass({
                 React.DOM.input({type: 'text', name: 'filter', onChange: this.inputHandler})
             ),
             React.DOM.ul({className: 'filter__list'},
-                this.state.wordsList
-                    .filter((word) => {
-                        return word.toLowerCase().indexOf(this.state.filterText.toLowerCase()) >= 0;
-                    })
-                    .map((word) => {
-                        return React.DOM.li({className: 'filter__item', key: word}, word)
-                    })
+                this.state.wordsList.length > 0
+                ?
+                this.state.wordsList.map((word) => {
+                    return React.DOM.li({className: 'filter__item', key: word}, word)
+                })
+                :
+                React.DOM.li({className: 'filter__item'}, this.props.fallbackText)
             )
         );
     }
