@@ -22,21 +22,23 @@ const Filter = React.createClass({
         ).isRequired
     },
 
-    checkBoxHandler: function() {
-        this.setState({isChecked: !this.state.isChecked}, this.sortList);
-    },
-
-    sortList: function() {
-        this.setState({wordsList: this.state.isChecked ? this.state.wordsList.slice().sort() : this.props.words.filter(this.filterCb)})
+    checkBoxHandler: function(e) {
+        this.setState({isChecked: e.target.checked}, this.sortNFilterList);
     },
 
     inputHandler: function(e) {
-        this.setState({filterText: e.target.value}, this.filterList);
+        this.setState({filterText: e.target.value}, this.sortNFilterList);
     },
 
-    filterList: function(e) {
-        const filteredList = this.props.words.filter(this.filterCb);
-        this.setState({wordsList: this.state.isChecked ? filteredList.slice().sort() : filteredList})
+    sortNFilterList: function() {
+        let resultArray = this.props.words.slice();
+        if (this.state.filterText.length > 0) {
+            resultArray = resultArray.filter((word) => word.toLowerCase().indexOf(this.state.filterText.toLowerCase()) > -1);
+        }
+        if (this.state.isChecked) {
+            resultArray.sort();
+        }
+        this.setState({wordsList: resultArray});
     },
 
     filterCb: function(word) {
