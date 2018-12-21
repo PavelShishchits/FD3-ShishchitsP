@@ -41,10 +41,6 @@ const Filter = React.createClass({
         this.setState({wordsList: resultArray});
     },
 
-    filterCb: function(word) {
-        return word.toLowerCase().indexOf(this.state.filterText.toLowerCase()) >= 0;
-    },
-
     render: function () {
         return React.DOM.div({className: 'filter'},
             React.DOM.div({className: 'filter__input-wrap'},
