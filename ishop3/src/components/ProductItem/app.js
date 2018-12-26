@@ -1,5 +1,4 @@
 import React from 'react';
-import DOM from 'react-dom-factories';
 import PropTypes from 'prop-types';
 import './style.css';
 
@@ -34,7 +33,7 @@ class ProductItem extends React.Component {
     return (
       <tr className={`product__item ${this.props.id === this.props.selectedProduct ? `highlight` : ``}`} onClick={this.highlightProduct}>
         <td className='product__pic'>
-            <img src={this.props.picUrl} alt={this.props.name}/>
+            <img src={`img/${this.props.picUrl}`} alt={this.props.name}/>
         </td>
         <td className='product__name'>{this.props.name}</td>
         <td className='product__price'>{this.props.price}</td>
