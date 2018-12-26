@@ -1,9 +1,10 @@
 import React from 'react';
-import DOM from 'react-dom';
+import DOM from 'react-dom-factories';
+import CreateReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import './style.css'
 
-var ProductItem = React.createClass({
+var ProductItem = CreateReactClass({
 
   displayName: 'ProductItem',
 

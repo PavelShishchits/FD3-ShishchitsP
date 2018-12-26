@@ -1,10 +1,12 @@
 import React from 'react';
-import DOM from 'react-dom';
-import ProductItem from '../ProductItem/app'
+import DOM from 'react-dom-factories';
+import CreateReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import './style.css'
 
-var ProductList = React.createClass({
+import './style.css'
+import ProductItem from '../ProductItem/app'
+
+var ProductList = CreateReactClass({
   
   displayName: 'ProductList',
 
@@ -56,14 +58,13 @@ var ProductList = React.createClass({
   },
   
   render: function () {
-
     return DOM.div({className: 'product'},
       DOM.h1({className: 'shopName'}, this.props.shopName),
       DOM.table({className: 'product__table'},
         DOM.tbody(null,
           this.state.productList.length ?
           this.state.productList.map((prod) => {
-            return createElement(ProductItem, {
+            return React.createElement(ProductItem, {
               key: prod.id,
               id: prod.id,
               name: prod.name,
