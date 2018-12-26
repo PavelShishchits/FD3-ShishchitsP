@@ -799,24 +799,28 @@ if (process.env.NODE_ENV !== 'production') {
 
 /***/ }),
 /* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProductList_app__ = __webpack_require__(21);
 
 
+var _react = __webpack_require__(1);
 
+var _react2 = _interopRequireDefault(_react);
 
-const shopData = __webpack_require__(32);
+var _reactDom = __webpack_require__(13);
 
-console.log(shopData);
-console.log(shopData.name);
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_ProductList_app__["a" /* default */], { shopName: shopData.name, productList: shopData.productList }), document.querySelector('.container'));
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _app = __webpack_require__(21);
+
+var _app2 = _interopRequireDefault(_app);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var shopData = __webpack_require__(32);
+
+_reactDom2.default.render(_react2.default.createElement(_app2.default, { shopName: shopData.name, productList: shopData.productList }), document.querySelector('.container'));
 
 /***/ }),
 /* 11 */
@@ -24340,97 +24344,108 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 
 /***/ }),
 /* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom_factories__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom_factories__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__style_css__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__style_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ProductItem_app__ = __webpack_require__(30);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var _react = __webpack_require__(1);
 
+var _react2 = _interopRequireDefault(_react);
 
+var _reactDomFactories = __webpack_require__(7);
 
+var _reactDomFactories2 = _interopRequireDefault(_reactDomFactories);
 
+var _createReactClass = __webpack_require__(8);
 
-var ProductList = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
+var _createReactClass2 = _interopRequireDefault(_createReactClass);
+
+var _propTypes = __webpack_require__(9);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(29);
+
+var _app = __webpack_require__(30);
+
+var _app2 = _interopRequireDefault(_app);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ProductList = (0, _createReactClass2.default)({
 
   displayName: 'ProductList',
 
-  getDefaultProps: function () {
+  getDefaultProps: function getDefaultProps() {
     return {
       shopName: 'iShop',
       emptyFallbackPhrase: 'Товаров больше не осталось'
     };
   },
 
-  getInitialState: function () {
-    console.log(this.props);
+  getInitialState: function getInitialState() {
     return {
       productList: this.props.productList,
       selectedProduct: null
     };
   },
 
-  userConfirmation: function (prodToDelete) {
-    return confirm(`Вы действительно хотите удалить ${prodToDelete.name}`);
+  userConfirmation: function userConfirmation(prodToDelete) {
+    return confirm('\u0412\u044B \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E \u0445\u043E\u0442\u0438\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C ' + prodToDelete.name);
   },
 
-  onProductDelete: function (prodToDelete) {
+  onProductDelete: function onProductDelete(prodToDelete) {
     if (!this.userConfirmation(prodToDelete)) {
       return false;
     }
-    const filteredLis = this.state.productList.filter(product => {
+    var filteredLis = this.state.productList.filter(function (product) {
       return prodToDelete.id !== product.id;
     });
 
     this.setState({ productList: filteredLis });
   },
 
-  onProductClick: function (productId) {
+  onProductClick: function onProductClick(productId) {
     this.setState({ selectedProduct: productId });
   },
 
   propTypes: {
-    shopName: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string.isRequired,
-    propductList: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.shape({
-      id: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string.isRequired,
-      name: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string.isRequired,
-      price: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.number.isRequired,
-      picUrl: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string.isRequired,
-      balance: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.number.isRequired,
-      selectedProduct: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string
+    shopName: _propTypes2.default.string.isRequired,
+    propductList: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+      id: _propTypes2.default.string.isRequired,
+      name: _propTypes2.default.string.isRequired,
+      price: _propTypes2.default.number.isRequired,
+      picUrl: _propTypes2.default.string.isRequired,
+      balance: _propTypes2.default.number.isRequired,
+      selectedProduct: _propTypes2.default.string
     }))
   },
 
-  render: function () {
-    console.log(this.state);
-    return __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.div({ className: 'product' }, __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.h1({ className: 'shopName' }, this.props.shopName), __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.table({ className: 'product__table' }, __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.tbody(null, this.state.productList.length ? this.state.productList.map(prod => {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__ProductItem_app__["a" /* default */], {
+  render: function render() {
+    var _this = this;
+
+    return _reactDomFactories2.default.div({ className: 'product' }, _reactDomFactories2.default.h1({ className: 'shopName' }, this.props.shopName), _reactDomFactories2.default.table({ className: 'product__table' }, _reactDomFactories2.default.tbody(null, this.state.productList.length ? this.state.productList.map(function (prod) {
+      return _react2.default.createElement(_app2.default, {
         key: prod.id,
         id: prod.id,
         name: prod.name,
         price: prod.price,
         picUrl: prod.picUrl,
         balance: prod.balance,
-        cbSelected: this.onProductClick,
-        selectedProduct: this.state.selectedProduct,
-        cbDeleted: this.onProductDelete
+        cbSelected: _this.onProductClick,
+        selectedProduct: _this.state.selectedProduct,
+        cbDeleted: _this.onProductDelete
       });
-    }) : __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.tr({ className: 'product__item product__item--empty' }, __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.td({}, this.props.emptyFallbackPhrase)))));
+    }) : _reactDomFactories2.default.tr({ className: 'product__item product__item--empty' }, _reactDomFactories2.default.td({}, this.props.emptyFallbackPhrase)))));
   }
 });
 
-/* harmony default export */ __webpack_exports__["a"] = (ProductList);
+exports.default = ProductList;
 
 /***/ }),
 /* 22 */
@@ -26198,60 +26213,70 @@ module.exports = function() {
 
 /***/ }),
 /* 30 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom_factories__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom_factories__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__style_css__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__style_css__);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var _react = __webpack_require__(1);
 
+var _react2 = _interopRequireDefault(_react);
 
+var _reactDomFactories = __webpack_require__(7);
 
-var ProductItem = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
+var _reactDomFactories2 = _interopRequireDefault(_reactDomFactories);
+
+var _createReactClass = __webpack_require__(8);
+
+var _createReactClass2 = _interopRequireDefault(_createReactClass);
+
+var _propTypes = __webpack_require__(9);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(31);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ProductItem = (0, _createReactClass2.default)({
 
   displayName: 'ProductItem',
 
-  getDefaultProps: function () {
+  getDefaultProps: function getDefaultProps() {
     return { deleteBtn: 'Удалить' };
   },
 
   propTypes: {
-    id: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string.isRequired,
-    name: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string.isRequired,
-    price: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.number.isRequired,
-    picUrl: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string.isRequired,
-    balance: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.number.isRequired,
-    selectedProduct: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
-    highlightProduct: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    deleteProduct: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func
+    id: _propTypes2.default.string.isRequired,
+    name: _propTypes2.default.string.isRequired,
+    price: _propTypes2.default.number.isRequired,
+    picUrl: _propTypes2.default.string.isRequired,
+    balance: _propTypes2.default.number.isRequired,
+    selectedProduct: _propTypes2.default.string,
+    highlightProduct: _propTypes2.default.func,
+    deleteProduct: _propTypes2.default.func
   },
 
-  deleteProduct: function (e) {
+  deleteProduct: function deleteProduct(e) {
     e.stopPropagation();
     this.props.cbDeleted(this.props);
   },
 
-  highlightProduct: function () {
+  highlightProduct: function highlightProduct() {
     this.props.cbSelected(this.props.id);
   },
 
-  render: function () {
+  render: function render() {
 
-    return __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.tr({ className: `product__item ${this.props.id === this.props.selectedProduct ? `highlight` : ``}`, onClick: this.highlightProduct }, __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.td({ className: 'product__pic' }, __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.img({ src: `img/${this.props.picUrl}`, alt: this.props.name })), __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.td({ className: 'product__name' }, this.props.name), __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.td({ className: 'product__price' }, this.props.price), __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.td({ className: 'product__balance' }, this.props.balance), __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.td({ className: 'product__delete' }, __WEBPACK_IMPORTED_MODULE_1_react_dom_factories___default.a.button({ className: 'btn delete-btn', onClick: this.deleteProduct }, this.props.deleteBtn)));
+    return _reactDomFactories2.default.tr({ className: 'product__item ' + (this.props.id === this.props.selectedProduct ? 'highlight' : ''), onClick: this.highlightProduct }, _reactDomFactories2.default.td({ className: 'product__pic' }, _reactDomFactories2.default.img({ src: 'img/' + this.props.picUrl, alt: this.props.name })), _reactDomFactories2.default.td({ className: 'product__name' }, this.props.name), _reactDomFactories2.default.td({ className: 'product__price' }, this.props.price), _reactDomFactories2.default.td({ className: 'product__balance' }, this.props.balance), _reactDomFactories2.default.td({ className: 'product__delete' }, _reactDomFactories2.default.button({ className: 'btn delete-btn', onClick: this.deleteProduct }, this.props.deleteBtn)));
   }
 });
 
-/* harmony default export */ __webpack_exports__["a"] = (ProductItem);
+exports.default = ProductItem;
 
 /***/ }),
 /* 31 */
@@ -26267,4 +26292,4 @@ module.exports = {"name":"ishop","productList":[{"id":"product_01","name":"Xiaom
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=app.js.map
