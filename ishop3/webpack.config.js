@@ -7,10 +7,10 @@ const extractCSS = new ExtractTextPlugin({
 });
 
 module.exports = { 
-    entry: "./src/app.js", // основной файл приложения
+    entry: ['@babel/polyfill' ,'./src/app.js'], // основной файл приложения
     output:{
-        path: __dirname + '/dist/', // путь к каталогу выходных файлов
-        filename: "app.js"  // название создаваемого файла
+        path: path.join(__dirname, 'dist'), // путь к каталогу выходных файлов
+        filename: 'app.js'  // название создаваемого файла
     }, 
     devtool:'source-map',
     module:{ 
@@ -30,6 +30,7 @@ module.exports = {
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
+        // contentBase: __dirname + '/dist',
         port: 8080
     },
     plugins: [
