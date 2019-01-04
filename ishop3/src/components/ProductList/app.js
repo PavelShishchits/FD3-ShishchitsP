@@ -28,7 +28,8 @@ class ProductList extends React.Component {
 
   state = {
     productList: this.props.productList,
-    selectedProduct: null
+    selectedProduct: null,
+    prodCardEditable: false
   };
 
   userConfirmation = (prodToDelete) => {
@@ -47,18 +48,30 @@ class ProductList extends React.Component {
     // selectedProduct: this.state.selectedProduct !== prodToDelete.id ? this.state.selectedProduct : null
   };
 
-  onProductClick = (productId) => {
-    this.setState({selectedProduct: this.findSelectedProduct(productId)});
-  };
-
-  onEditClick = (productId) => {
-
+  onProductClick = (productId, editable) => {
+    this.setState({selectedProduct: this.findSelectedProduct(productId), prodCardEditable: editable});
   };
 
   findSelectedProduct = (productId) => {
     return this.state.productList.find((prod) => {
       return prod.id === productId;
     });
+  };
+
+  productEdit = (changedProd) => {
+    // const productArray = this.state.productList.slice();
+    // console.log(product);
+    // console.log(this.state.productList);
+    const changedArray = this.state.productList.map((prod) => {
+      if (prod.id === changedProd.id) {
+          prod = changedProd;
+      }
+      return prod;
+    });
+
+    this.setState({productList: changedArray}, () => {
+      console.log(this.state.productList);
+    })
   };
 
   render() {
@@ -71,7 +84,6 @@ class ProductList extends React.Component {
         picUrl={prod.picUrl}
         balance={prod.balance}
         id={prod.id}
-        cbEdited={this.onEditClick}
         cbSelected={this.onProductClick}
         selectedProduct={this.state.selectedProduct ? this.state.selectedProduct.id : null}
         cbDeleted={this.onProductDelete}
@@ -112,7 +124,8 @@ class ProductList extends React.Component {
               picUrl={this.state.selectedProduct.picUrl}
               balance={this.state.selectedProduct.balance}
               id={this.state.selectedProduct.id}
-              // editTable={}
+              editable={this.state.prodCardEditable}
+              onProductEdit={this.productEdit}
           />
         }
       </div>

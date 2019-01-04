@@ -12,7 +12,8 @@ class ProductItem extends React.Component {
     balance: PropTypes.number.isRequired,
     selectedProduct: PropTypes.string,
     highlightProduct: PropTypes.func,
-    deleteProduct: PropTypes.func
+    deleteProduct: PropTypes.func,
+    editProdCard: PropTypes.func
   };
 
   static defaultProps = {
@@ -26,12 +27,12 @@ class ProductItem extends React.Component {
   };
 
   editProdCard = (e) => {
-      e.stopPropagation();
-      this.props.cbSelected(this.props.id);
+    e.stopPropagation();
+    this.props.cbSelected(this.props.id, true);
   };
 
   highlightProduct = () => {
-    this.props.cbSelected(this.props.id);
+    this.props.cbSelected(this.props.id, false);
   };
 
   render() {
