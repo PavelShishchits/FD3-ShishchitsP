@@ -51,6 +51,10 @@ class ProductList extends React.Component {
     this.setState({selectedProduct: this.findSelectedProduct(productId)});
   };
 
+  onEditClick = (productId) => {
+
+  };
+
   findSelectedProduct = (productId) => {
     return this.state.productList.find((prod) => {
       return prod.id === productId;
@@ -67,6 +71,7 @@ class ProductList extends React.Component {
         picUrl={prod.picUrl}
         balance={prod.balance}
         id={prod.id}
+        cbEdited={this.onEditClick}
         cbSelected={this.onProductClick}
         selectedProduct={this.state.selectedProduct ? this.state.selectedProduct.id : null}
         cbDeleted={this.onProductDelete}
@@ -107,6 +112,7 @@ class ProductList extends React.Component {
               picUrl={this.state.selectedProduct.picUrl}
               balance={this.state.selectedProduct.balance}
               id={this.state.selectedProduct.id}
+              // editTable={}
           />
         }
       </div>

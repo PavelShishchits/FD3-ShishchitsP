@@ -25,6 +25,11 @@ class ProductItem extends React.Component {
     this.props.cbDeleted(this.props);
   };
 
+  editProdCard = (e) => {
+      e.stopPropagation();
+      this.props.cbSelected(this.props.id);
+  };
+
   highlightProduct = () => {
     this.props.cbSelected(this.props.id);
   };
@@ -40,7 +45,7 @@ class ProductItem extends React.Component {
         <td className='product__price'>{this.props.price}</td>
         <td className='product__balance'>{this.props.balance}</td>
         <td className='product__controls'>
-            <button className='btn edit-btn'>{this.props.editBtn}</button>
+            <button className='btn edit-btn' onClick={this.editProdCard}>{this.props.editBtn}</button>
             <button className='btn delete-btn' onClick={this.deleteProduct}>{this.props.deleteBtn}</button>
         </td>
       </tr>

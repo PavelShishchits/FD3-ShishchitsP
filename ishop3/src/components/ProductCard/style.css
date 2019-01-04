@@ -1,0 +1,32 @@
+.ProductCard {
+    background-color: #fff;
+    box-shadow: 0 8px 19.2px 0 rgba(0,0,0,.13);
+    max-width: 500px;
+}
+
+.ProductCard__title {
+    font-size:  22px;
+    padding: 15px;
+    background-color: #d2e6f3;
+}
+
+.ProductCard__inner {}
+
+.ProductCard__row {
+    display: flex;
+}
+
+.ProductCard__row + .ProductCard__row {
+    border-top: 1px solid #e5e5e5;
+}
+
+.ProductCard__name,
+.ProductCard__descr {
+    width: 30%;
+    padding: 15px;
+}
+
+.ProductCard__descr {
+    width: 70%;
+    padding: 15px;
+}

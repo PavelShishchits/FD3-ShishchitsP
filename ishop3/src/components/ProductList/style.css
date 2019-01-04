@@ -1,3 +1,8 @@
+body {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size:  16px;
+}
+
 .container {
     max-width: 960px;
     margin: 0 auto;
@@ -8,12 +13,9 @@
     text-align: center;
 }
 
-.product {}
-
 .product__table {
     width: 100%;
     font-size: 16px;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     border-spacing: 0;
     border: 1px solid #e5e5e5;
@@ -30,7 +32,9 @@
 .product__table {
     background-color: #fff;
     box-shadow: 0 8px 19.2px 0 rgba(0,0,0,.13);
+    margin-bottom:  30px;
 }
+
 .product__table thead {
     background-color: #d2e6f3;
 }
