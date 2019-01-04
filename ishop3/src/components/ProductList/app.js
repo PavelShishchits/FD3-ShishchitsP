@@ -23,7 +23,7 @@ class ProductList extends React.Component {
         balance: PropTypes.number.isRequired,
       })
     ),
-    selectedProduct: PropTypes.string
+    selectedProduct: PropTypes.object
   };
 
   state = {
@@ -42,16 +42,18 @@ class ProductList extends React.Component {
     const filteredList = this.state.productList.filter((product) => {
       return prodToDelete.id !== product.id
     });
-    this.setState({productList: filteredList, selectedProduct: this.state.selectedProduct !== prodToDelete.id ? this.state.selectedProduct : null});
+    this.setState({productList: filteredList});
+
+    // selectedProduct: this.state.selectedProduct !== prodToDelete.id ? this.state.selectedProduct : null
   };
 
   onProductClick = (productId) => {
-    this.setState({selectedProduct: productId});
+    this.setState({selectedProduct: this.findSelectedProduct(productId)});
   };
 
-  findSelectedProduct = () => {
+  findSelectedProduct = (productId) => {
     return this.state.productList.find((prod) => {
-      return prod.id === this.state.selectedProduct;
+      return prod.id === productId;
     });
   };
 
@@ -66,7 +68,7 @@ class ProductList extends React.Component {
         balance={prod.balance}
         id={prod.id}
         cbSelected={this.onProductClick}
-        selectedProduct={this.state.selectedProduct}
+        selectedProduct={this.state.selectedProduct ? this.state.selectedProduct.id : null}
         cbDeleted={this.onProductDelete}
       />
     });
@@ -99,7 +101,13 @@ class ProductList extends React.Component {
 
         {
           (this.state.selectedProduct) &&
-          <ProductCard product={this.findSelectedProduct()} />
+          <ProductCard
+              name={this.state.selectedProduct.name}
+              price={this.state.selectedProduct.price}
+              picUrl={this.state.selectedProduct.picUrl}
+              balance={this.state.selectedProduct.balance}
+              id={this.state.selectedProduct.id}
+          />
         }
       </div>
     );
