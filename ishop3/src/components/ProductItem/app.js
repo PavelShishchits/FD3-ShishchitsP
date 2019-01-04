@@ -16,7 +16,8 @@ class ProductItem extends React.Component {
   };
 
   static defaultProps = {
-    deleteBtn: 'Удалить'
+    deleteBtn: 'Delete',
+    editBtn: 'Edit'
   };
 
   deleteProduct = (e) => {
@@ -38,7 +39,8 @@ class ProductItem extends React.Component {
         <td className='product__name'>{this.props.name}</td>
         <td className='product__price'>{this.props.price}</td>
         <td className='product__balance'>{this.props.balance}</td>
-        <td className='product__delete'>
+        <td className='product__controls'>
+            <button className='btn edit-btn'>{this.props.editBtn}</button>
             <button className='btn delete-btn' onClick={this.deleteProduct}>{this.props.deleteBtn}</button>
         </td>
       </tr>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './style.css'
 
 import ProductItem from '../ProductItem/app'
+import ProductCard from '../ProductCard/app'
 
 class ProductList extends React.Component {
 
@@ -20,9 +21,9 @@ class ProductList extends React.Component {
         price: PropTypes.number.isRequired,
         picUrl: PropTypes.string.isRequired,
         balance: PropTypes.number.isRequired,
-        selectedProduct: PropTypes.string
       })
-    )
+    ),
+    selectedProduct: PropTypes.string
   };
 
   state = {
@@ -38,17 +39,24 @@ class ProductList extends React.Component {
     if (!this.userConfirmation(prodToDelete)) {
       return false;
     }
-    const filteredLis = this.state.productList.filter((product) => {
+    const filteredList = this.state.productList.filter((product) => {
       return prodToDelete.id !== product.id
     });
-    this.setState({productList: filteredLis});
+    this.setState({productList: filteredList, selectedProduct: this.state.selectedProduct !== prodToDelete.id ? this.state.selectedProduct : null});
   };
 
   onProductClick = (productId) => {
-    this.setState({selectedProduct: productId})
+    this.setState({selectedProduct: productId});
+  };
+
+  findSelectedProduct = () => {
+    return this.state.productList.find((prod) => {
+      return prod.id === this.state.selectedProduct;
+    });
   };
 
   render() {
+
     const products = this.state.productList.map((prod) => {
       return <ProductItem
         key={prod.id}
@@ -67,6 +75,15 @@ class ProductList extends React.Component {
       <div className='product'>
         <h1 className='shopName'>{this.props.shopName}</h1>
         <table className='product__table'>
+          <thead>
+            <tr>
+              <th>Picture</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Balance</th>
+              <th>Controls</th>
+            </tr>
+          </thead>
           <tbody>
             {
               this.state.productList.length
@@ -79,6 +96,11 @@ class ProductList extends React.Component {
             }
           </tbody>
         </table>
+
+        {
+          (this.state.selectedProduct) &&
+          <ProductCard product={this.findSelectedProduct()} />
+        }
       </div>
     );
   }

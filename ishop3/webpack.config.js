@@ -9,7 +9,7 @@ const extractCSS = new ExtractTextPlugin({
 module.exports = { 
     entry: './src/app.js', // основной файл приложения
     output:{
-        path: path.join(__dirname, 'dist'), // путь к каталогу выходных файлов
+        path: path.resolve(__dirname, 'dist'), // путь к каталогу выходных файлов
         filename: 'app.js'  // название создаваемого файла
     }, 
     devtool:'source-map',
