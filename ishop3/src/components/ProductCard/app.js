@@ -9,21 +9,26 @@ class ProductCard extends React.Component {
   };
 
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    picUrl: PropTypes.string.isRequired,
-    balance: PropTypes.number.isRequired,
-    onProductEdit: PropTypes.func,
-    workMode: PropTypes.number.isRequired
+    product: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      picUrl: PropTypes.string.isRequired,
+      balance: PropTypes.number.isRequired,
+    }),
+    onProductEdit: PropTypes.func.isRequired,
+    onProdcutAdd: PropTypes.func.isRequired,
+    cardMode: PropTypes.number
   };
 
   submitForm = (e) => {
     e.preventDefault();
-    // const {id, picUrl, name, price, balance} = this.state;
-    const {workMode, ...curProductState} = this.state;
-
-    this.props.onProductEdit(curProductState);
+    const {id, picUrl, name, price, balance} = this.state;
+    if (this.state.cardMode === 2) {
+      this.props.onProductEdit({id, picUrl, name, price, balance});
+    } else if (this.state.cardMode === 3) (
+      this.props.onProdcutAdd({id, picUrl, name, price, balance})
+    )
   };
 
   inputHandler = (e) => {
@@ -38,23 +43,22 @@ class ProductCard extends React.Component {
   };
 
   state = {
-    id: this.props.id,
+    id: this.props.product.id,
     picUrl: '',
     name: '',
     price: '',
     balance: '',
-    workMode: this.props.workMode
+    cardMode: this.props.cardMode
   };
 
   componentWillReceiveProps = (newProps) => {
-    this.setState({workMode: newProps.workMode});
+    this.setState({cardMode: newProps.cardMode});
   };
 
   render() {
-    // console.log(this.props.workMode);
-    //   console.log(this.state.workMode);
+
     return (
-      this.state.workMode === 2 || this.state.workMode === 3
+      this.state.cardMode === 2 || this.state.cardMode === 3
         ?
         <form className='ProductCard' onSubmit={this.submitForm}>
           <div className='ProductCard__title'>{this.props.title}</div>
@@ -95,23 +99,23 @@ class ProductCard extends React.Component {
         </form>
         :
         <div className='ProductCard'>
-          <div className='ProductCard__title'>{this.props.title}</div>
+          <div className='ProductCard__title'>{this.props.product.title}</div>
           <div className='ProductCard__inner'>
             <div className='ProductCard__row'>
               <div className='ProductCard__name'>picture url</div>
-              <div className='ProductCard__descr'>{this.props.picUrl}</div>
+              <div className='ProductCard__descr'>{this.props.product.picUrl}</div>
             </div>
             <div className='ProductCard__row'>
               <div className='ProductCard__name'>name</div>
-              <div className='ProductCard__descr'>{this.props.name}</div>
+              <div className='ProductCard__descr'>{this.props.product.name}</div>
             </div>
             <div className='ProductCard__row'>
               <div className='ProductCard__name'>price</div>
-              <div className='ProductCard__descr'>{this.props.price}</div>
+              <div className='ProductCard__descr'>{this.props.product.price}</div>
             </div>
             <div className='ProductCard__row'>
               <div className='ProductCard__name'>balance</div>
-              <div className='ProductCard__descr'>{this.props.balance}</div>
+              <div className='ProductCard__descr'>{this.props.product.balance}</div>
             </div>
           </div>
         </div>

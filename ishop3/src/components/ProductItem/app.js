@@ -11,9 +11,8 @@ class ProductItem extends React.Component {
     picUrl: PropTypes.string.isRequired,
     balance: PropTypes.number.isRequired,
     selectedProduct: PropTypes.string,
-    highlightProduct: PropTypes.func,
-    deleteProduct: PropTypes.func,
-    editProdCard: PropTypes.func
+    cbTargeted: PropTypes.func.isRequired,
+    cbDeleted: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -26,7 +25,7 @@ class ProductItem extends React.Component {
     this.props.cbDeleted(this.props);
   };
 
-  editProdCard = (e) => {
+  editProduct = (e) => {
     e.stopPropagation();
     this.props.cbTargeted(this.props.id, 2);
   };
@@ -47,7 +46,7 @@ class ProductItem extends React.Component {
         <td className='product__price'>{this.props.price}</td>
         <td className='product__balance'>{this.props.balance}</td>
         <td className='product__controls'>
-          <button className='btn edit-btn' onClick={this.editProdCard}>{this.props.editBtn}</button>
+          <button className='btn edit-btn' onClick={this.editProduct}>{this.props.editBtn}</button>
           <button className='btn delete-btn' onClick={this.deleteProduct}>{this.props.deleteBtn}</button>
         </td>
       </tr>

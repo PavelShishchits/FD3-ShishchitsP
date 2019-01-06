@@ -29,7 +29,7 @@ class ProductList extends React.Component {
   state = {
     productList: this.props.productList,
     selectedProduct: null,
-    workMode: null
+    cardMode: null
   };
 
   userConfirmation = (prodToDelete) => {
@@ -46,8 +46,8 @@ class ProductList extends React.Component {
     this.setState({productList: filteredList});
   };
 
-  onProductClick = (productId, workmode) => {
-    this.setState({selectedProduct: this.findSelectedProduct(productId), workMode: workmode});
+  onProductClick = (productId, cardMode) => {
+    this.setState({selectedProduct: this.findSelectedProduct(productId), cardMode: cardMode});
   };
 
   findSelectedProduct = (productId) => {
@@ -57,6 +57,7 @@ class ProductList extends React.Component {
   };
 
   productEdit = (changedProd) => {
+    console.log(1);
     const changedArray = this.state.productList.map((prod) => {
       if (prod.id === changedProd.id) {
         prod = changedProd;
@@ -65,13 +66,28 @@ class ProductList extends React.Component {
       return prod;
     });
 
-    this.setState({productList: changedArray}, () => {
+    this.setState({productList: changedArray})
+  };
+  
+  addProduct = () => {
+    this.setState({cardMode: 3})
+  };
 
-    })
+  onProductAdd = (product) => {
+    const productList = this.state.productList;
+    const newProduct = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      picUrl: product.picUrl,
+      balance: product.balance
+    };
+    productList.push(newProduct);
+    this.setState({productList: productList, cardMode: null});
   };
 
   render() {
-
+    // console.log(this.state.productList);
     const products = this.state.productList.map((prod) => {
       return <ProductItem
         key={prod.id}
@@ -111,17 +127,15 @@ class ProductList extends React.Component {
           }
           </tbody>
         </table>
+        <button className='btn edit-btn' type='button' onClick={this.addProduct}>New product</button>
 
         {
-          (this.state.workMode) &&
+          (this.state.cardMode) &&
           <ProductCard
-            name={this.state.selectedProduct.name}
-            price={this.state.selectedProduct.price}
-            picUrl={this.state.selectedProduct.picUrl}
-            balance={this.state.selectedProduct.balance}
-            id={this.state.selectedProduct.id}
-            workMode={this.state.workMode}
+            product={this.state.selectedProduct || {id: `product_${this.state.productList.length + 1}`}}
+            cardMode={this.state.cardMode}
             onProductEdit={this.productEdit}
+            onProdcutAdd={this.onProductAdd}
           />
         }
       </div>
