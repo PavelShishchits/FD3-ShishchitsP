@@ -4,102 +4,119 @@ import './style.css'
 
 class ProductCard extends React.Component {
 
-    static defaultProps = {
-        title: 'Product card'
-    };
+  static defaultProps = {
+    title: 'Product card'
+  };
 
-    static propTypes = {
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        picUrl: PropTypes.string.isRequired,
-        balance: PropTypes.number.isRequired,
-        onProductEdit: PropTypes.func
-    };
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    picUrl: PropTypes.string.isRequired,
+    balance: PropTypes.number.isRequired,
+    onProductEdit: PropTypes.func,
+    workMode: PropTypes.number.isRequired
+  };
 
-    submitForm = (e) => {
-        e.preventDefault();
-        console.log(e);
-        this.props.onProductEdit(this.state);
-    };
+  submitForm = (e) => {
+    e.preventDefault();
+    // const {id, picUrl, name, price, balance} = this.state;
+    const {workMode, ...curProductState} = this.state;
 
-    inputHandler = (e) => {
-        const target = e.target;
-        this.setState({
-            [target.name]: target.value
-        });
-    };
+    this.props.onProductEdit(curProductState);
+  };
 
-    state = {
-        id: this.props.id,
-        picUrl: '',
-        name: '',
-        price: '',
-        balance: ''
-    };
+  inputHandler = (e) => {
+    const target = e.target;
+    this.setState({
+      [target.name]: target.value
+    });
+  };
 
-    render() {
-        // console.log(this.props);
-        return (
-            this.props.editable
-            ?
-            <form className='ProductCard' onSubmit={this.submitForm}>
-                <div className='ProductCard__title'>{this.props.title}</div>
-                <div className='ProductCard__inner'>
-                    <div className='ProductCard__row'>
-                        <div className='ProductCard__name'>picture url</div>
-                        <div className='ProductCard__descr'>
-                            <input type='text' value={this.state.picUrl} onChange={this.inputHandler} name='picUrl' required/>
-                        </div>
-                    </div>
-                    <div className='ProductCard__row'>
-                        <div className='ProductCard__name'>name</div>
-                        <div className='ProductCard__descr'>
-                            <input type='text' value={this.state.name} onChange={this.inputHandler} name='name' required/>
-                        </div>
-                    </div>
-                    <div className='ProductCard__row'>
-                        <div className='ProductCard__name'>price</div>
-                        <div className='ProductCard__descr'>
-                            <input type='number' value={this.state.price} onChange={this.inputHandler} name='price' required/>
-                        </div>
-                    </div>
-                    <div className='ProductCard__row'>
-                        <div className='ProductCard__name'>balance</div>
-                        <div className='ProductCard__descr'>
-                            <input type='number' value={this.state.balance} onChange={this.inputHandler} name='balance' required/>
-                        </div>
-                    </div>
-                    <div className='ProductCard__btn-wrap'>
-                        <button type='submit' className='btn edit-btn'>Save</button>
-                        <button className='btn delete-btn-btn'>Cancel</button>
-                    </div>
-                </div>
-            </form>
-            :
-            <div className='ProductCard'>
-                <div className='ProductCard__title'>{this.props.title}</div>
-                <div className='ProductCard__inner'>
-                    <div className='ProductCard__row'>
-                        <div className='ProductCard__name'>picture url</div>
-                        <div className='ProductCard__descr'>{this.props.picUrl}</div>
-                    </div>
-                    <div className='ProductCard__row'>
-                        <div className='ProductCard__name'>name</div>
-                        <div className='ProductCard__descr'>{this.props.name}</div>
-                    </div>
-                    <div className='ProductCard__row'>
-                        <div className='ProductCard__name'>price</div>
-                        <div className='ProductCard__descr'>{this.props.price}</div>
-                    </div>
-                    <div className='ProductCard__row'>
-                        <div className='ProductCard__name'>balance</div>
-                        <div className='ProductCard__descr'>{this.props.balance}</div>
-                    </div>
-                </div>
+  validateInput = (e) => {
+    const target = e.target;
+  };
+
+  state = {
+    id: this.props.id,
+    picUrl: '',
+    name: '',
+    price: '',
+    balance: '',
+    workMode: this.props.workMode
+  };
+
+  componentWillReceiveProps = (newProps) => {
+    this.setState({workMode: newProps.workMode});
+  };
+
+  render() {
+    // console.log(this.props.workMode);
+    //   console.log(this.state.workMode);
+    return (
+      this.state.workMode === 2 || this.state.workMode === 3
+        ?
+        <form className='ProductCard' onSubmit={this.submitForm}>
+          <div className='ProductCard__title'>{this.props.title}</div>
+          <div className='ProductCard__inner'>
+            <div className='ProductCard__row'>
+              <div className='ProductCard__name'>picture url</div>
+              <div className='ProductCard__descr'>
+                <input type='text' value={this.state.picUrl} onChange={this.inputHandler} onBlur={this.validateInput}
+                       name='picUrl' required/>
+              </div>
             </div>
-        )
-    }
+            <div className='ProductCard__row'>
+              <div className='ProductCard__name'>name</div>
+              <div className='ProductCard__descr'>
+                <input type='text' value={this.state.name} onChange={this.inputHandler} onBlur={this.validateInput}
+                       name='name' required/>
+              </div>
+            </div>
+            <div className='ProductCard__row'>
+              <div className='ProductCard__name'>price</div>
+              <div className='ProductCard__descr'>
+                <input type='text' value={this.state.price} onChange={this.inputHandler} onBlur={this.validateInput}
+                       name='price' required/>
+              </div>
+            </div>
+            <div className='ProductCard__row'>
+              <div className='ProductCard__name'>balance</div>
+              <div className='ProductCard__descr'>
+                <input type='text' value={this.state.balance} onChange={this.inputHandler} onBlur={this.validateInput}
+                       name='balance' required/>
+              </div>
+            </div>
+            <div className='ProductCard__btn-wrap'>
+              <button type='submit' className='btn edit-btn'>Save</button>
+              <button className='btn delete-btn-btn'>Cancel</button>
+            </div>
+          </div>
+        </form>
+        :
+        <div className='ProductCard'>
+          <div className='ProductCard__title'>{this.props.title}</div>
+          <div className='ProductCard__inner'>
+            <div className='ProductCard__row'>
+              <div className='ProductCard__name'>picture url</div>
+              <div className='ProductCard__descr'>{this.props.picUrl}</div>
+            </div>
+            <div className='ProductCard__row'>
+              <div className='ProductCard__name'>name</div>
+              <div className='ProductCard__descr'>{this.props.name}</div>
+            </div>
+            <div className='ProductCard__row'>
+              <div className='ProductCard__name'>price</div>
+              <div className='ProductCard__descr'>{this.props.price}</div>
+            </div>
+            <div className='ProductCard__row'>
+              <div className='ProductCard__name'>balance</div>
+              <div className='ProductCard__descr'>{this.props.balance}</div>
+            </div>
+          </div>
+        </div>
+    )
+  }
 }
 
 export default ProductCard;

@@ -29,7 +29,7 @@ class ProductList extends React.Component {
   state = {
     productList: this.props.productList,
     selectedProduct: null,
-    prodCardEditable: false
+    workMode: null
   };
 
   userConfirmation = (prodToDelete) => {
@@ -44,12 +44,10 @@ class ProductList extends React.Component {
       return prodToDelete.id !== product.id
     });
     this.setState({productList: filteredList});
-
-    // selectedProduct: this.state.selectedProduct !== prodToDelete.id ? this.state.selectedProduct : null
   };
 
-  onProductClick = (productId, editable) => {
-    this.setState({selectedProduct: this.findSelectedProduct(productId), prodCardEditable: editable});
+  onProductClick = (productId, workmode) => {
+    this.setState({selectedProduct: this.findSelectedProduct(productId), workMode: workmode});
   };
 
   findSelectedProduct = (productId) => {
@@ -59,18 +57,16 @@ class ProductList extends React.Component {
   };
 
   productEdit = (changedProd) => {
-    // const productArray = this.state.productList.slice();
-    // console.log(product);
-    // console.log(this.state.productList);
     const changedArray = this.state.productList.map((prod) => {
       if (prod.id === changedProd.id) {
-          prod = changedProd;
+        prod = changedProd;
       }
+
       return prod;
     });
 
     this.setState({productList: changedArray}, () => {
-      console.log(this.state.productList);
+
     })
   };
 
@@ -84,7 +80,7 @@ class ProductList extends React.Component {
         picUrl={prod.picUrl}
         balance={prod.balance}
         id={prod.id}
-        cbSelected={this.onProductClick}
+        cbTargeted={this.onProductClick}
         selectedProduct={this.state.selectedProduct ? this.state.selectedProduct.id : null}
         cbDeleted={this.onProductDelete}
       />
@@ -95,37 +91,37 @@ class ProductList extends React.Component {
         <h1 className='shopName'>{this.props.shopName}</h1>
         <table className='product__table'>
           <thead>
-            <tr>
-              <th>Picture</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Balance</th>
-              <th>Controls</th>
-            </tr>
+          <tr>
+            <th>Picture</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Balance</th>
+            <th>Controls</th>
+          </tr>
           </thead>
           <tbody>
-            {
-              this.state.productList.length
+          {
+            this.state.productList.length
               ?
-                products
+              products
               :
               <tr className='product__item product__item--empty'>
                 <td>{this.props.emptyFallbackPhrase}</td>
               </tr>
-            }
+          }
           </tbody>
         </table>
 
         {
-          (this.state.selectedProduct) &&
+          (this.state.workMode) &&
           <ProductCard
-              name={this.state.selectedProduct.name}
-              price={this.state.selectedProduct.price}
-              picUrl={this.state.selectedProduct.picUrl}
-              balance={this.state.selectedProduct.balance}
-              id={this.state.selectedProduct.id}
-              editable={this.state.prodCardEditable}
-              onProductEdit={this.productEdit}
+            name={this.state.selectedProduct.name}
+            price={this.state.selectedProduct.price}
+            picUrl={this.state.selectedProduct.picUrl}
+            balance={this.state.selectedProduct.balance}
+            id={this.state.selectedProduct.id}
+            workMode={this.state.workMode}
+            onProductEdit={this.productEdit}
           />
         }
       </div>

@@ -28,26 +28,27 @@ class ProductItem extends React.Component {
 
   editProdCard = (e) => {
     e.stopPropagation();
-    this.props.cbSelected(this.props.id, true);
+    this.props.cbTargeted(this.props.id, 2);
   };
 
   highlightProduct = () => {
-    this.props.cbSelected(this.props.id, false);
+    this.props.cbTargeted(this.props.id, 1);
   };
 
   render() {
 
     return (
-      <tr className={`product__item ${this.props.id === this.props.selectedProduct ? `highlight` : ``}`} onClick={this.highlightProduct}>
+      <tr className={`product__item ${this.props.id === this.props.selectedProduct ? `highlight` : ``}`}
+          onClick={this.highlightProduct}>
         <td className='product__pic'>
-            <img src={`img/${this.props.picUrl}`} alt={this.props.name}/>
+          <img src={`img/${this.props.picUrl}`} alt={this.props.name}/>
         </td>
         <td className='product__name'>{this.props.name}</td>
         <td className='product__price'>{this.props.price}</td>
         <td className='product__balance'>{this.props.balance}</td>
         <td className='product__controls'>
-            <button className='btn edit-btn' onClick={this.editProdCard}>{this.props.editBtn}</button>
-            <button className='btn delete-btn' onClick={this.deleteProduct}>{this.props.deleteBtn}</button>
+          <button className='btn edit-btn' onClick={this.editProdCard}>{this.props.editBtn}</button>
+          <button className='btn delete-btn' onClick={this.deleteProduct}>{this.props.deleteBtn}</button>
         </td>
       </tr>
     );
