@@ -4,31 +4,25 @@ import './style.css'
 
 class ProductCard extends React.Component {
 
-  static defaultProps = {
-    title: 'Product card'
-  };
-
   static propTypes = {
+    title: PropTypes.string.isRequired,
     product: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      picUrl: PropTypes.string.isRequired,
-      balance: PropTypes.number.isRequired,
+      id: PropTypes.string,
+      name: PropTypes.string,
+      price: PropTypes.number,
+      picUrl: PropTypes.string,
+      balance: PropTypes.number,
     }),
-    onProductEdit: PropTypes.func.isRequired,
-    onProdcutAdd: PropTypes.func.isRequired,
+    onProductEdit: PropTypes.func,
+    onProdcutAdd: PropTypes.func,
+    onFormClose: PropTypes.func,
     cardMode: PropTypes.number
   };
 
   submitForm = (e) => {
     e.preventDefault();
     const {id, picUrl, name, price, balance} = this.state;
-    if (this.state.cardMode === 2) {
-      this.props.onProductEdit({id, picUrl, name, price, balance});
-    } else if (this.state.cardMode === 3) (
-      this.props.onProdcutAdd({id, picUrl, name, price, balance})
-    )
+    this.props.onFormSubmit({id, picUrl, name, price, balance});
   };
 
   inputHandler = (e) => {
@@ -42,6 +36,10 @@ class ProductCard extends React.Component {
     const target = e.target;
   };
 
+  closeForm = () => {
+    this.props.onFormClose();
+  };
+
   state = {
     id: this.props.product.id,
     picUrl: '',
@@ -52,7 +50,7 @@ class ProductCard extends React.Component {
   };
 
   componentWillReceiveProps = (newProps) => {
-    this.setState({cardMode: newProps.cardMode});
+    this.setState({cardMode: newProps.cardMode, id: newProps.product.id});
   };
 
   render() {
@@ -63,6 +61,10 @@ class ProductCard extends React.Component {
         <form className='ProductCard' onSubmit={this.submitForm}>
           <div className='ProductCard__title'>{this.props.title}</div>
           <div className='ProductCard__inner'>
+            <div className="ProductCard__row">
+              <div className='ProductCard__name'>id</div>
+              <div className='ProductCard__descr'>{this.state.id}</div>
+            </div>
             <div className='ProductCard__row'>
               <div className='ProductCard__name'>picture url</div>
               <div className='ProductCard__descr'>
@@ -93,13 +95,13 @@ class ProductCard extends React.Component {
             </div>
             <div className='ProductCard__btn-wrap'>
               <button type='submit' className='btn edit-btn'>Save</button>
-              <button className='btn delete-btn-btn'>Cancel</button>
+              <button className='btn delete-btn' onClick={this.closeForm}>Cancel</button>
             </div>
           </div>
         </form>
         :
         <div className='ProductCard'>
-          <div className='ProductCard__title'>{this.props.product.title}</div>
+          <div className='ProductCard__title'>{this.props.title}</div>
           <div className='ProductCard__inner'>
             <div className='ProductCard__row'>
               <div className='ProductCard__name'>picture url</div>

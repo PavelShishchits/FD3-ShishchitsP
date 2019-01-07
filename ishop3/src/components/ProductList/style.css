@@ -9,6 +9,10 @@ body {
     padding: 0 15px;
 }
 
+.product.editing .product__table {
+    pointer-events: none;
+}
+
 .shopName {
     text-align: center;
 }
@@ -68,6 +72,12 @@ body {
     cursor: pointer;
     min-width: 100px;
     transition: all .5s ease;
+}
+
+.btn.disabled {
+    background-color: #e5e5e5;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .delete-btn:hover {

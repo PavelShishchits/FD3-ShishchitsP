@@ -9,7 +9,9 @@ class ProductList extends React.Component {
 
   static defaultProps = {
     shopName: 'iShop',
-    emptyFallbackPhrase: 'Товаров больше не осталось'
+    emptyFallbackPhrase: 'No products left',
+    editProdTitle: 'Edit existing product',
+    addProdTitle: 'Add new product'
   };
 
   static propTypes = {
@@ -29,15 +31,11 @@ class ProductList extends React.Component {
   state = {
     productList: this.props.productList,
     selectedProduct: null,
-    cardMode: null
-  };
-
-  userConfirmation = (prodToDelete) => {
-    return confirm(`Вы действительно хотите удалить ${prodToDelete.name}`);
+    cardMode: null // {num} 1 - ProductCard View, 2 - ProductCard Edit, 3 - ProductCard Add
   };
 
   onProductDelete = (prodToDelete) => {
-    if (!this.userConfirmation(prodToDelete)) {
+    if (!confirm(`Вы действительно хотите удалить ${prodToDelete.name}`)) {
       return false;
     }
     const filteredList = this.state.productList.filter((product) => {
@@ -56,21 +54,19 @@ class ProductList extends React.Component {
     });
   };
 
-  productEdit = (changedProd) => {
-    console.log(1);
+  onProductEdit = (changedProd) => {
     const changedArray = this.state.productList.map((prod) => {
       if (prod.id === changedProd.id) {
         prod = changedProd;
       }
-
       return prod;
     });
 
-    this.setState({productList: changedArray})
+    this.setState({productList: changedArray, cardMode: 1, selectedProduct: changedProd})
   };
   
   addProduct = () => {
-    this.setState({cardMode: 3})
+    this.setState({cardMode: 3, newProduct: {id: `product_${this.state.productList.length + 1}`}})
   };
 
   onProductAdd = (product) => {
@@ -86,8 +82,11 @@ class ProductList extends React.Component {
     this.setState({productList: productList, cardMode: null});
   };
 
+  onFormClose = () => {
+    this.setState({cardMode: this.state.selectedProduct ? 1 : null})
+  };
+
   render() {
-    // console.log(this.state.productList);
     const products = this.state.productList.map((prod) => {
       return <ProductItem
         key={prod.id}
@@ -103,7 +102,7 @@ class ProductList extends React.Component {
     });
 
     return (
-      <div className='product'>
+      <div className={`product ${this.state.cardMode === 2 ? `editing` : ``}`}>
         <h1 className='shopName'>{this.props.shopName}</h1>
         <table className='product__table'>
           <thead>
@@ -127,15 +126,33 @@ class ProductList extends React.Component {
           }
           </tbody>
         </table>
-        <button className='btn edit-btn' type='button' onClick={this.addProduct}>New product</button>
-
+        <button className={`btn edit-btn ${this.state.cardMode === 2 ? `disabled` : ``}`} type='button' onClick={this.addProduct}>New product</button>
         {
-          (this.state.cardMode) &&
+          (this.state.cardMode === 3) &&
           <ProductCard
-            product={this.state.selectedProduct || {id: `product_${this.state.productList.length + 1}`}}
+            title={this.props.addProdTitle}
+            product={this.state.newProduct}
+            onFormSubmit={this.onProductAdd}
+            onFormClose={this.onFormClose}
             cardMode={this.state.cardMode}
-            onProductEdit={this.productEdit}
-            onProdcutAdd={this.onProductAdd}
+          />
+        }
+        {
+          (this.state.cardMode === 2) &&
+          <ProductCard
+            title={this.props.editProdTitle}
+            product={this.state.selectedProduct}
+            onFormSubmit={this.onProductEdit}
+            onFormClose={this.onFormClose}
+            cardMode={this.state.cardMode}
+          />
+        }
+        {
+          (this.state.cardMode === 1) &&
+          <ProductCard
+            title={this.state.selectedProduct.name}
+            product={this.state.selectedProduct}
+            cardMode={this.state.cardMode}
           />
         }
       </div>
