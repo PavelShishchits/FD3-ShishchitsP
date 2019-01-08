@@ -40,7 +40,7 @@ class ProductItem extends React.Component {
       <tr className={`product__item ${this.props.id === this.props.selectedProduct ? `highlight` : ``}`}
           onClick={this.highlightProduct}>
         <td className='product__pic'>
-          <img src={`img/${this.props.picUrl}`} alt={this.props.name}/>
+          <img src={this.props.picUrl} alt={this.props.name}/>
         </td>
         <td className='product__name'>{this.props.name}</td>
         <td className='product__price'>{this.props.price}</td>

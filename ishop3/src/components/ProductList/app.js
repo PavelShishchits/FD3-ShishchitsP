@@ -31,6 +31,7 @@ class ProductList extends React.Component {
   state = {
     productList: this.props.productList,
     selectedProduct: null,
+    newProduct: null,
     cardMode: null // {num} 1 - ProductCard View, 2 - ProductCard Edit, 3 - ProductCard Add
   };
 
@@ -79,7 +80,7 @@ class ProductList extends React.Component {
       balance: product.balance
     };
     productList.push(newProduct);
-    this.setState({productList: productList, cardMode: null});
+    this.setState({productList: productList, cardMode: 1, selectedProduct: newProduct});
   };
 
   onFormClose = () => {
@@ -102,7 +103,7 @@ class ProductList extends React.Component {
     });
 
     return (
-      <div className={`product ${this.state.cardMode === 2 ? `editing` : ``}`}>
+      <div className={`product ${this.state.cardMode === 2 || this.state.cardMode === 3 ? `editing` : ``}`}>
         <h1 className='shopName'>{this.props.shopName}</h1>
         <table className='product__table'>
           <thead>

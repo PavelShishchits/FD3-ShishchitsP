@@ -5,28 +5,28 @@
       "id": "product_1",
       "name": "Xiaomi Mi Notebook Pro 15.6",
       "price": 2093,
-      "picUrl": "Xiaomi_Mi_Notebook_Pro_15.6.jpeg",
+      "picUrl": "img/Xiaomi_Mi_Notebook_Pro_15.6.jpeg",
       "balance": 10
     },
     {
       "id": "product_2",
       "name": "Apple MacBook Pro 15",
       "price": 5957,
-      "picUrl": "Apple_MacBook_Pro_15_Touch_Bar.jpeg",
+      "picUrl": "img/Apple_MacBook_Pro_15_Touch_Bar.jpeg",
       "balance": 5
     },
     {
       "id": "product_3",
       "name": "Apple MacBook Air 13",
       "price": 1990,
-      "picUrl": "Apple_MacBook_Air_13.jpeg",
+      "picUrl": "img/Apple_MacBook_Air_13.jpeg",
       "balance": 8
     },
     {
       "id": "product_4",
       "name": "Lenovo IdeaPad 330S-15IKB",
       "price": 1859,
-      "picUrl": "Lenovo_IdeaPad_330S-15IKB.jpeg",
+      "picUrl": "img/Lenovo_IdeaPad_330S-15IKB.jpeg",
       "balance": 2
     }
   ]

@@ -21,13 +21,17 @@
     border-top: 1px solid #e5e5e5;
 }
 
-.ProductCard__name,
-.ProductCard__descr {
+.ProductCard__name {
     width: 30%;
     padding: 15px;
+    flex-shrink: 0;
 }
 
 .ProductCard__descr {
     width: 70%;
     padding: 15px;
+}
+
+.ProductCard__descr > img {
+    max-width: 170px;
 }
