@@ -1,7 +1,7 @@
 .ProductCard {
     background-color: #fff;
     box-shadow: 0 8px 19.2px 0 rgba(0,0,0,.13);
-    max-width: 500px;
+    max-width: 750px;
     margin: 30px 0 30px;
 }
 
@@ -17,6 +17,24 @@
     display: flex;
 }
 
+.ProductCard__row.error .controls {
+    display: block;
+    color: red;
+}
+
+.ProductCard__row.error input {
+    border-color: red;
+}
+
+.ProductCard__row.success input {
+    border-color: green;
+}
+
+.ProductCard__row .controls {
+    padding: 0 5px;
+    display: none;
+}
+
 .ProductCard__row + .ProductCard__row {
     border-top: 1px solid #e5e5e5;
 }
@@ -30,8 +48,16 @@
 .ProductCard__descr {
     width: 70%;
     padding: 15px;
+    display: flex;
+    margin: 0 -5px;
 }
+.ProductCard__input-wrap {
+    padding: 0 5px;
+}
+
 
 .ProductCard__descr > img {
     max-width: 170px;
 }
+
+

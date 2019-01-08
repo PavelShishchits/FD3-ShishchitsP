@@ -11,9 +11,9 @@ class ProductCard extends React.Component {
 
   static defaultProps = {
     picError: 'Download an image',
-    name: 'Please fill the filed. Value must be a string',
-    price: 'Please fill the filed. Value must be a positive number',
-    balance: 'Please fill the filed. Value must be a positive number',
+    nameError: 'Please fill the filed. Value must be a string',
+    priceError: 'Please fill the filed. Value must be a positive number',
+    balanceError: 'Please fill the filed. Value must be a positive number',
   };
 
   static propTypes = {
@@ -57,8 +57,27 @@ class ProductCard extends React.Component {
     fileReader.readAsDataURL(inpFile.files[0]);
   };
 
+  validateNumber = (num) => {
+    if (isNaN(num)) {
+      return false;
+    }
+    return parseInt(num);
+  };
+
   validateInput = (e) => {
     const target = e.target;
+
+    switch (target.name) {
+      case 'name':
+        this.setState({name: {...this.state.name, isValid: target.value.length >= 1}});
+        break;
+      case 'price':
+        this.setState({price: {...this.state.price, isValid: target.value.length >= 1, value: this.validateNumber(target.value)}});
+        break;
+      case 'balance':
+        this.setState({balance: {...this.state.balance, isValid: target.value.length >= 1, value: this.validateNumber(target.value)}});
+        break;
+    }
   };
 
   closeForm = () => {
@@ -70,24 +89,25 @@ class ProductCard extends React.Component {
     picUrl: {
       value: '',
       isValid: null,
-      errorMessage: ''
+      errorMessage: this.props.picError
     },
     name: {
       value: '',
       isValid: null,
-      errorMessage: ''
+      errorMessage: this.props.nameError
     },
     price: {
       value: '',
       isValid: null,
-      errorMessage: ''
+      errorMessage: this.props.priceError
     },
     balance: {
       value: '',
       isValid: null,
-      errorMessage: ''
+      errorMessage: this.props.balaceError
     },
-    cardMode: this.props.cardMode
+    cardMode: this.props.cardMode,
+    formValid: null
   };
 
   componentWillReceiveProps = (newProps) => {
@@ -102,46 +122,54 @@ class ProductCard extends React.Component {
         <form className='ProductCard' onSubmit={this.submitForm}>
           <div className='ProductCard__title'>{this.props.title}</div>
           <div className='ProductCard__inner'>
-            <div className="ProductCard__row">
+            <div className='ProductCard__row'>
               <div className='ProductCard__name'>id</div>
               <div className='ProductCard__descr'>{this.state.id}</div>
             </div>
-            <div className='ProductCard__row'>
+            <div className={`ProductCard__row ${this.state.picUrl.isValid === false ? `error` : this.state.picUrl.isValid === true ? `success` : ``}`}>
               <div className='ProductCard__name'>picture</div>
               <div className='ProductCard__descr'>
-                <input type='file' ref={this.fileInput} onChange={this.inputFileHandler}
-                       onBlur={this.validateInput}
-                       name='picUrl' required/>
+                <div className="ProductCard__input-wrap">
+                  <input type='file' ref={this.fileInput} onChange={this.inputFileHandler}
+                         onBlur={this.validateInput}
+                         name='picUrl' required/>
+                </div>
                 <div className='controls'>{this.state.picUrl.errorMessage}</div>
               </div>
             </div>
-            <div className='ProductCard__row'>
+            <div className={`ProductCard__row ${this.state.name.isValid === false ? `error` : this.state.name.isValid === true ? `success` : ``}`}>
               <div className='ProductCard__name'>name</div>
               <div className='ProductCard__descr'>
-                <input type='text' value={this.state.name.value} onChange={this.inputHandler} onBlur={this.validateInput}
-                       name='name' required/>
+                <div className="ProductCard__input-wrap">
+                  <input type='text' value={this.state.name.value} onChange={this.inputHandler} onBlur={this.validateInput}
+                         name='name' required/>
+                </div>
                 <div className='controls'>{this.state.name.errorMessage}</div>
               </div>
             </div>
-            <div className='ProductCard__row'>
+            <div className={`ProductCard__row ${this.state.price.isValid === false ? `error` : this.state.price.isValid === true ? `success` : ``}`}>
               <div className='ProductCard__name'>price</div>
               <div className='ProductCard__descr'>
-                <input type='text' value={this.state.price.value} onChange={this.inputHandler} onBlur={this.validateInput}
-                       name='price' required/>
+                <div className="ProductCard__input-wrap">
+                  <input type='text' value={this.state.price.value} onChange={this.inputHandler} onBlur={this.validateInput}
+                         name='price' required/>
+                </div>
                 <div className='controls'>{this.state.price.errorMessage}</div>
               </div>
             </div>
-            <div className='ProductCard__row'>
+            <div className={`ProductCard__row ${this.state.balance.isValid === false ? `error` : this.state.balance.isValid === true ? `success` : ``}`}>
               <div className='ProductCard__name'>balance</div>
               <div className='ProductCard__descr'>
-                <input type='text' value={this.state.balance.value} onChange={this.inputHandler} onBlur={this.validateInput}
-                       name='balance' required/>
+                <div className="ProductCard__input-wrap">
+                  <input type='text' value={this.state.balance.value} onChange={this.inputHandler} onBlur={this.validateInput}
+                         name='balance' required/>
+                </div>
                 <div className='controls'>{this.state.balance.errorMessage}</div>
               </div>
             </div>
             <div className='ProductCard__row'>
               <div className="ProductCard__descr">
-                <button type='submit' className='btn edit-btn'>Save</button>
+                <button type='submit' className={`btn edit-btn ${this.state.formValid === false ? `disabled` : ``}`}>Save</button>
                 <button className='btn delete-btn' onClick={this.closeForm}>Cancel</button>
               </div>
             </div>
