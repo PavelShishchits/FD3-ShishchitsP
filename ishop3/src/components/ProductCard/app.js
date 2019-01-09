@@ -1,20 +1,39 @@
 import React from 'React';
 import PropTypes from 'prop-types';
 import './style.css'
+import utils from '../../utlls'
 
 class ProductCard extends React.Component {
 
   constructor(props) {
     super(props);
     this.fileInput = React.createRef();
+    this.state = {
+      id: this.props.product.id,
+      picUrl: {
+        value: '',
+        isValid: null,
+        errorMessage: ''
+      },
+      name: {
+        value: '',
+        isValid: null,
+        errorMessage: ''
+      },
+      price: {
+        value: '',
+        isValid: null,
+        errorMessage: ''
+      },
+      balance: {
+        value: '',
+        isValid: null,
+        errorMessage: ''
+      },
+      cardMode: this.props.cardMode,
+      formValid: null
+    }
   }
-
-  static defaultProps = {
-    picError: 'Download an image',
-    nameError: 'Please fill the filed. Value must be a string',
-    priceError: 'Please fill the filed. Value must be a positive number',
-    balanceError: 'Please fill the filed. Value must be a positive number',
-  };
 
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -57,57 +76,33 @@ class ProductCard extends React.Component {
     fileReader.readAsDataURL(inpFile.files[0]);
   };
 
-  validateNumber = (num) => {
-    if (isNaN(num)) {
-      return false;
-    }
-    return parseInt(num);
-  };
-
   validateInput = (e) => {
     const target = e.target;
 
     switch (target.name) {
+      case 'picUrl':
+        this.setState({[target.name]: utils.validateTextInput(this.state[target.name])});
+        break;
       case 'name':
-        this.setState({name: {...this.state.name, isValid: target.value.length >= 1}});
+        this.setState({[target.name]: utils.validateTextInput(this.state[target.name], 5, 25)});
         break;
       case 'price':
-        this.setState({price: {...this.state.price, isValid: target.value.length >= 1, value: this.validateNumber(target.value)}});
+        this.setState({[target.name]: utils.validateNumberInput(this.state[target.name])});
         break;
       case 'balance':
-        this.setState({balance: {...this.state.balance, isValid: target.value.length >= 1, value: this.validateNumber(target.value)}});
+        this.setState({[target.name]: utils.validateNumberInput(this.state[target.name])});
         break;
     }
+
+    this.checkFormValidity();
+  };
+
+  checkFormValidity = () => {
+
   };
 
   closeForm = () => {
     this.props.onFormClose();
-  };
-
-  state = {
-    id: this.props.product.id,
-    picUrl: {
-      value: '',
-      isValid: null,
-      errorMessage: this.props.picError
-    },
-    name: {
-      value: '',
-      isValid: null,
-      errorMessage: this.props.nameError
-    },
-    price: {
-      value: '',
-      isValid: null,
-      errorMessage: this.props.priceError
-    },
-    balance: {
-      value: '',
-      isValid: null,
-      errorMessage: this.props.balaceError
-    },
-    cardMode: this.props.cardMode,
-    formValid: null
   };
 
   componentWillReceiveProps = (newProps) => {
