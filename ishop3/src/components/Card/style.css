@@ -1,62 +1,67 @@
-.ProductCard {
+.card {
     background-color: #fff;
     box-shadow: 0 8px 19.2px 0 rgba(0,0,0,.13);
-    max-width: 750px;
+    max-width: 500px;
     margin: 30px 0 30px;
 }
 
-.ProductCard__title {
+.card.form-view {
+    max-width: 750px;
+}
+
+.card__title {
     font-size:  22px;
     padding: 15px;
     background-color: #d2e6f3;
 }
 
-.ProductCard__inner {}
+.card__inner {}
 
-.ProductCard__row {
+.card__row {
     display: flex;
 }
 
-.ProductCard__row.error .controls {
+.card__row.error .controls {
     display: block;
     color: red;
 }
 
-.ProductCard__row.error input {
+.card__row.error input {
     border-color: red;
 }
 
-.ProductCard__row.success input {
+.card__row.success input {
     border-color: green;
 }
 
-.ProductCard__row .controls {
+.card__row .controls {
     padding: 0 5px;
     display: none;
 }
 
-.ProductCard__row + .ProductCard__row {
+.card__row + .card__row {
     border-top: 1px solid #e5e5e5;
 }
 
-.ProductCard__name {
+.card__name {
     width: 30%;
     padding: 15px;
     flex-shrink: 0;
 }
 
-.ProductCard__descr {
+.card__descr {
     width: 70%;
     padding: 15px;
     display: flex;
     margin: 0 -5px;
 }
-.ProductCard__input-wrap {
+.card__input-wrap {
     padding: 0 5px;
+    max-width: 180px;
 }
 
 
-.ProductCard__descr > img {
+.card__descr > img {
     max-width: 170px;
     max-height: 100px;
 }

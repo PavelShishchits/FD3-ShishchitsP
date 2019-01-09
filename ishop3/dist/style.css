@@ -1,19 +1,35 @@
+body {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size:  16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 .container {
     max-width: 960px;
     margin: 0 auto;
     padding: 0 15px;
 }
 
+.product.editing .product__table {
+    pointer-events: none;
+}
+
 .shopName {
     text-align: center;
 }
 
-.product {}
-
 .product__table {
     width: 100%;
     font-size: 16px;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     border-spacing: 0;
     border: 1px solid #e5e5e5;
@@ -24,19 +40,24 @@
 }
 
 .product__item.highlight {
-    background-color: #faff83;
+    background-color: #f4faff;
 }
 
-.product__item td {
-   padding: 15px;
+.product__table {
+    background-color: #fff;
+    box-shadow: 0 8px 19.2px 0 rgba(0,0,0,.13);
+    margin-bottom:  30px;
 }
 
-.product__item--empty td {
-    padding: 30px;
-    font-size:  20px;
+.product__table thead {
+    background-color: #d2e6f3;
+}
+
+.product__table th,
+.product__table td {
+    padding: 15px;
     text-align: center;
 }
-
 
 .product__pic  img {
     max-height: 100px;
@@ -50,23 +71,103 @@
     font-size:  115%;
 }
 
-.product__delete {
-    text-align: center;
-}
-
-.product__table .btn {
+.btn {
     padding: 10px 15px;
     display: inline-block;
-    background-color: #4a87e5;
+    background-color: #005fa9;
     border: 0;
     color: #fff;
     font-size:  16px;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     cursor: pointer;
+    min-width: 100px;
+    transition: all .5s ease;
 }
 
-.product__table .btn:hover {
-    background-color: #1358e5;
+.btn.disabled {
+    background-color: #e5e5e5;
+    cursor: not-allowed;
+    pointer-events: none;
 }
+
+.delete-btn:hover {
+    background-color: #005190;
+}
+
+.edit-btn {
+    background-color: #ebac40;
+}
+
+.edit-btn:hover {
+    background-color: #eb9b22;
+}.card {
+    background-color: #fff;
+    box-shadow: 0 8px 19.2px 0 rgba(0,0,0,.13);
+    max-width: 500px;
+    margin: 30px 0 30px;
+}
+
+.card.form-view {
+    max-width: 750px;
+}
+
+.card__title {
+    font-size:  22px;
+    padding: 15px;
+    background-color: #d2e6f3;
+}
+
+.card__inner {}
+
+.card__row {
+    display: flex;
+}
+
+.card__row.error .controls {
+    display: block;
+    color: red;
+}
+
+.card__row.error input {
+    border-color: red;
+}
+
+.card__row.success input {
+    border-color: green;
+}
+
+.card__row .controls {
+    padding: 0 5px;
+    display: none;
+}
+
+.card__row + .card__row {
+    border-top: 1px solid #e5e5e5;
+}
+
+.card__name {
+    width: 30%;
+    padding: 15px;
+    flex-shrink: 0;
+}
+
+.card__descr {
+    width: 70%;
+    padding: 15px;
+    display: flex;
+    margin: 0 -5px;
+}
+.card__input-wrap {
+    padding: 0 5px;
+    max-width: 180px;
+}
+
+
+.card__descr > img {
+    max-width: 170px;
+    max-height: 100px;
+}
+
+
 
 /*# sourceMappingURL=style.css.map*/

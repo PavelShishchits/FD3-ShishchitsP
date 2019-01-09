@@ -38,7 +38,7 @@ export default {
     });
   },
 
-  validateFileInput: (field) => {
-
+  checkFileInput: (formats, fileType) => {
+    return formats.some((format) => format.toLowerCase() === fileType.toLowerCase());
   }
 }

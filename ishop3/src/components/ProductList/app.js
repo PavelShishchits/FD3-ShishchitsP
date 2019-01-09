@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import './style.css'
 
 import ProductItem from '../ProductItem/app'
-import ProductCard from '../ProductCard/app'
+import Card from '../Card/app'
 
 class ProductList extends React.Component {
 
   static defaultProps = {
     shopName: 'iShop',
     emptyFallbackPhrase: 'No products left',
-    editProdTitle: 'Edit existing product',
-    addProdTitle: 'Add new product'
   };
 
   static propTypes = {
@@ -32,7 +30,7 @@ class ProductList extends React.Component {
     productList: this.props.productList,
     selectedProduct: null,
     newProduct: null,
-    cardMode: null // {num} 1 - ProductCard View, 2 - ProductCard Edit, 3 - ProductCard Add
+    cardMode: null // {num} 1 - Card View, 2 - Card Edit, 3 - Card Add
   };
 
   onProductDelete = (prodToDelete) => {
@@ -131,8 +129,9 @@ class ProductList extends React.Component {
         <button className={`btn edit-btn ${this.state.cardMode === 2 ? `disabled` : ``}`} type='button' onClick={this.addProduct}>New product</button>
         {
           (this.state.cardMode === 3) &&
-          <ProductCard
-            title={this.props.addProdTitle}
+          <Card
+            title='Add new product'
+            btnText='Add'
             product={this.state.newProduct}
             onFormSubmit={this.onProductAdd}
             onFormClose={this.onFormClose}
@@ -141,8 +140,9 @@ class ProductList extends React.Component {
         }
         {
           (this.state.cardMode === 2) &&
-          <ProductCard
-            title={this.props.editProdTitle}
+          <Card
+            title='Edit existing product'
+            btnText='Save'
             product={this.state.selectedProduct}
             onFormSubmit={this.onProductEdit}
             onFormClose={this.onFormClose}
@@ -151,7 +151,7 @@ class ProductList extends React.Component {
         }
         {
           (this.state.cardMode === 1) &&
-          <ProductCard
+          <Card
             title={this.state.selectedProduct.name}
             product={this.state.selectedProduct}
             cardMode={this.state.cardMode}
