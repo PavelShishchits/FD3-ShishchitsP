@@ -25157,8 +25157,12 @@ var Card = function (_React$Component) {
       _this.setState(_defineProperty({}, target.name, _extends({}, _this.state[target.name], { value: target.value })));
     };
 
+    _this.setInputFile = function (element) {
+      _this.inputFile = element;
+    };
+
     _this.inputFileHandler = function () {
-      var inpFile = _this.fileInput.current;
+      var inpFile = _this.inputFile;
       var file = inpFile.files[0];
       if (!_utlls2.default.checkFileInput(['image/jpeg', 'image/png', 'image/gif'], file['type'])) {
         _this.setState({ 'picUrl': _extends({}, _this.state.picUrl, { isValid: false, errorMessage: 'Wrong file format, Download jpeg, png or gif file' }) }, function () {
@@ -25218,7 +25222,7 @@ var Card = function (_React$Component) {
       _this.setState({ cardMode: newProps.cardMode, id: newProps.product.id });
     };
 
-    _this.fileInput = _React2.default.createRef();
+    _this.inputFile = null;
     _this.state = {
       id: _this.props.product.id,
       picUrl: {
@@ -25290,7 +25294,7 @@ var Card = function (_React$Component) {
               _React2.default.createElement(
                 'div',
                 { className: 'card__input-wrap' },
-                _React2.default.createElement('input', { type: 'file', ref: this.fileInput, onChange: this.inputFileHandler,
+                _React2.default.createElement('input', { type: 'file', ref: this.setInputFile, onChange: this.inputFileHandler,
                   onBlur: this.validateInput,
                   name: 'picUrl', required: true })
               ),

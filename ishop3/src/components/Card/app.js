@@ -7,7 +7,7 @@ class Card extends React.Component {
 
   constructor(props) {
     super(props);
-    this.fileInput = React.createRef();
+    this.inputFile = null;
     this.state = {
       id: this.props.product.id,
       picUrl: {
@@ -64,8 +64,12 @@ class Card extends React.Component {
     });
   };
 
+  setInputFile = (element) => {
+    this.inputFile = element;
+  };
+
   inputFileHandler = () => {
-    const inpFile = this.fileInput.current;
+    const inpFile = this.inputFile;
     const file = inpFile.files[0];
     if (!utils.checkFileInput(['image/jpeg', 'image/png', 'image/gif'], file['type'])) {
       this.setState({'picUrl': {...this.state.picUrl, isValid: false, errorMessage: `Wrong file format, Download jpeg, png or gif file`}}, () => {this.checkFormValidity()});
@@ -129,7 +133,7 @@ class Card extends React.Component {
               <div className='card__name'>picture</div>
               <div className='card__descr'>
                 <div className="card__input-wrap">
-                  <input type='file' ref={this.fileInput} onChange={this.inputFileHandler}
+                  <input type='file' ref={this.setInputFile} onChange={this.inputFileHandler}
                          onBlur={this.validateInput}
                          name='picUrl' required/>
                 </div>
