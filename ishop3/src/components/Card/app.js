@@ -53,6 +53,9 @@ class Card extends React.Component {
 
   submitForm = (e) => {
     e.preventDefault();
+    if (!this.state.isValidForm) {
+      return false;
+    }
     const {id, picUrl, name, price, balance} = this.state;
     this.props.onFormSubmit({id, picUrl: picUrl.value, name: name.value, price: price.value, balance: balance.value});
   };

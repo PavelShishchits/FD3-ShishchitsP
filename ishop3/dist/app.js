@@ -25142,6 +25142,9 @@ var Card = function (_React$Component) {
 
     _this.submitForm = function (e) {
       e.preventDefault();
+      if (!_this.state.isValidForm) {
+        return false;
+      }
       var _this$state = _this.state,
           id = _this$state.id,
           picUrl = _this$state.picUrl,
