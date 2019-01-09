@@ -31,14 +31,14 @@ class ProductCard extends React.Component {
         errorMessage: ''
       },
       cardMode: this.props.cardMode,
-      formValid: null
+      isValidForm: null
     }
   }
 
   static propTypes = {
     title: PropTypes.string.isRequired,
     product: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       name: PropTypes.string,
       price: PropTypes.number,
       picUrl: PropTypes.string,
@@ -81,24 +81,23 @@ class ProductCard extends React.Component {
 
     switch (target.name) {
       case 'picUrl':
-        this.setState({[target.name]: utils.validateTextInput(this.state[target.name])});
+        this.setState({[target.name]: utils.validateTextInput(this.state[target.name])}, () => {this.checkFormValidity()});
         break;
       case 'name':
-        this.setState({[target.name]: utils.validateTextInput(this.state[target.name], 5, 25)});
+        this.setState({[target.name]: utils.validateTextInput(this.state[target.name], 5, 25)}, () => {this.checkFormValidity()});
         break;
       case 'price':
-        this.setState({[target.name]: utils.validateNumberInput(this.state[target.name])});
+        this.setState({[target.name]: utils.validateNumberInput(this.state[target.name])}, () => {this.checkFormValidity()});
         break;
       case 'balance':
-        this.setState({[target.name]: utils.validateNumberInput(this.state[target.name])});
+        this.setState({[target.name]: utils.validateNumberInput(this.state[target.name])}, () => {this.checkFormValidity()});
         break;
     }
-
-    this.checkFormValidity();
   };
 
   checkFormValidity = () => {
-
+    const arr = [this.state.picUrl.isValid, this.state.name.isValid, this.state.price.isValid, this.state.balance.isValid];
+    this.setState({isValidForm: arr.every((field) => field)});
   };
 
   closeForm = () => {
@@ -164,7 +163,7 @@ class ProductCard extends React.Component {
             </div>
             <div className='ProductCard__row'>
               <div className="ProductCard__descr">
-                <button type='submit' className={`btn edit-btn ${this.state.formValid === false ? `disabled` : ``}`}>Save</button>
+                <button type='submit' className={`btn edit-btn ${this.state.isValidForm === false ? `disabled` : ``}`}>Save</button>
                 <button className='btn delete-btn' onClick={this.closeForm}>Cancel</button>
               </div>
             </div>

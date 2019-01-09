@@ -18,7 +18,7 @@ class ProductList extends React.Component {
     shopName: PropTypes.string.isRequired,
     propductList: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         picUrl: PropTypes.string.isRequired,
@@ -67,7 +67,8 @@ class ProductList extends React.Component {
   };
   
   addProduct = () => {
-    this.setState({cardMode: 3, newProduct: {id: `product_${this.state.productList.length + 1}`}})
+    const id = this.state.productList[this.state.productList.length - 1].id + 1;
+    this.setState({cardMode: 3, newProduct: {id: id}})
   };
 
   onProductAdd = (product) => {
@@ -97,7 +98,7 @@ class ProductList extends React.Component {
         balance={prod.balance}
         id={prod.id}
         cbTargeted={this.onProductClick}
-        selectedProduct={this.state.selectedProduct ? this.state.selectedProduct.id : null}
+        selectedProductID={this.state.selectedProduct ? this.state.selectedProduct.id : null}
         cbDeleted={this.onProductDelete}
       />
     });

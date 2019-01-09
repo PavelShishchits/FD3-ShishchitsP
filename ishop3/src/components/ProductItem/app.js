@@ -5,12 +5,12 @@ import './style.css';
 class ProductItem extends React.Component {
 
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     picUrl: PropTypes.string.isRequired,
     balance: PropTypes.number.isRequired,
-    selectedProduct: PropTypes.string,
+    selectedProductID: PropTypes.number,
     cbTargeted: PropTypes.func.isRequired,
     cbDeleted: PropTypes.func.isRequired,
   };
@@ -35,9 +35,8 @@ class ProductItem extends React.Component {
   };
 
   render() {
-
     return (
-      <tr className={`product__item ${this.props.id === this.props.selectedProduct ? `highlight` : ``}`}
+      <tr className={`product__item ${this.props.id === this.props.selectedProductID ? `highlight` : ``}`}
           onClick={this.highlightProduct}>
         <td className='product__pic'>
           <img src={this.props.picUrl} alt={this.props.name}/>
