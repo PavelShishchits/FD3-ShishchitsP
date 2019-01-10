@@ -139,7 +139,7 @@ class Card extends React.Component {
               <div className='card__name'><label htmlFor='picUrl'>picture</label></div>
               <div className='card__descr'>
                 <div className="card__input-wrap file-wrap">
-                  <input type='text' id='picUrl' value={this.state.picUrl.value} onChange={this.inputHandler} onBlur={this.validateInput}
+                  <input type='text' id='picUrl' readOnly={true} value={this.state.picUrl.value} onChange={this.inputHandler} onBlur={this.validateInput}
                          name='picUrl' required/>
                   <label htmlFor='file' className='card__file'>
                     <input type='file' ref={this.setInputFile} onChange={this.inputFileHandler} name='file'/>

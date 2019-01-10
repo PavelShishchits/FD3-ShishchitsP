@@ -128,6 +128,11 @@ img {
     color: red;
 }
 
+.card__row input {
+    height: 30px;
+    border: 1px solid #bababa;
+}
+
 .card__row.error input {
     border-color: red;
 }
@@ -155,19 +160,52 @@ img {
     width: 70%;
     padding: 15px;
     display: flex;
+    align-items: center;
     margin: 0 -5px;
 }
+
 .card__input-wrap {
     padding: 0 5px;
     max-width: 180px;
 }
 
+.card__input-wrap .file-wrap {
+    position: relative;
+}
 
 .card__descr > img {
     max-width: 170px;
     max-height: 100px;
 }
 
+.card__file {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
+.card__file input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
 
+.card__file .file-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #ebac40;
+    border: 1px solid #bababa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card__file .file-icon img {
+    max-width: 20px;
+}
+
+.card .file-wrap {
+    position: relative;
+}
 /*# sourceMappingURL=style.css.map*/
