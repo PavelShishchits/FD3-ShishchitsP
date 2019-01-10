@@ -66,7 +66,7 @@ class ProductList extends React.Component {
   
   addProduct = () => {
     const id = this.state.productList[this.state.productList.length - 1].id + 1;
-    this.setState({cardMode: 3, newProduct: {id: id}})
+    this.setState({cardMode: 3, newProduct: {id: id, picUrl: '', name: '', price: 0, balance: 0}})
   };
 
   onProductAdd = (product) => {

@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css'
 import utils from '../../utlls'
@@ -16,17 +16,17 @@ class Card extends React.Component {
         errorMessage: ''
       },
       name: {
-        value: '',
+        value: this.props.product.name,
         isValid: null,
         errorMessage: ''
       },
       price: {
-        value: '',
+        value: this.props.product.price,
         isValid: null,
         errorMessage: ''
       },
       balance: {
-        value: '',
+        value: this.props.product.balance,
         isValid: null,
         errorMessage: ''
       },
@@ -96,7 +96,7 @@ class Card extends React.Component {
 
     switch (target.name) {
       case 'name':
-        this.setState({[target.name]: utils.validateTextInput(this.state[target.name], 5, 25)}, () => {this.checkFormValidity()});
+        this.setState({[target.name]: utils.validateTextInput(this.state[target.name], 5, 50)}, () => {this.checkFormValidity()});
         break;
       case 'price':
         this.setState({[target.name]: utils.validateNumberInput(this.state[target.name])}, () => {this.checkFormValidity()});

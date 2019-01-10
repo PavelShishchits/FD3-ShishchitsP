@@ -27,7 +27,7 @@ export default {
       isValid = false;
       errorMessage = `Value must be positive number`;
     }
-    if (!value.length) {
+    if (typeof value === 'string' && !value.length) {
       isValid = false;
       errorMessage = `Please fill the field`;
     }
