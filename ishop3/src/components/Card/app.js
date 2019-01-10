@@ -136,10 +136,10 @@ class Card extends React.Component {
               <div className='card__descr'>{this.state.id}</div>
             </div>
             <div className={`card__row ${this.state.picUrl.isValid === false ? `error` : this.state.picUrl.isValid === true ? `success` : ``}`}>
-              <div className='card__name'>picture</div>
+              <div className='card__name'><label htmlFor='picUrl'>picture</label></div>
               <div className='card__descr'>
                 <div className="card__input-wrap file-wrap">
-                  <input type='text' value={this.state.picUrl.value} onChange={this.inputHandler} onBlur={this.validateInput}
+                  <input type='text' id='picUrl' value={this.state.picUrl.value} onChange={this.inputHandler} onBlur={this.validateInput}
                          name='picUrl' required/>
                   <label htmlFor='file' className='card__file'>
                     <input type='file' ref={this.setInputFile} onChange={this.inputFileHandler} name='file'/>
@@ -152,30 +152,30 @@ class Card extends React.Component {
               </div>
             </div>
             <div className={`card__row ${this.state.name.isValid === false ? `error` : this.state.name.isValid === true ? `success` : ``}`}>
-              <div className='card__name'>name</div>
+              <div className='card__name'><label htmlFor='name'>name</label></div>
               <div className='card__descr'>
                 <div className="card__input-wrap">
-                  <input type='text' value={this.state.name.value} onChange={this.inputHandler} onBlur={this.validateInput}
+                  <input type='text' id='name' value={this.state.name.value} onChange={this.inputHandler} onBlur={this.validateInput}
                          name='name' required/>
                 </div>
                 <div className='controls'>{this.state.name.errorMessage}</div>
               </div>
             </div>
             <div className={`card__row ${this.state.price.isValid === false ? `error` : this.state.price.isValid === true ? `success` : ``}`}>
-              <div className='card__name'>price</div>
+              <div className='card__name'><label htmlFor='price'>price</label></div>
               <div className='card__descr'>
                 <div className="card__input-wrap">
-                  <input type='text' value={this.state.price.value} onChange={this.inputHandler} onBlur={this.validateInput}
+                  <input type='text' id='price' value={this.state.price.value} onChange={this.inputHandler} onBlur={this.validateInput}
                          name='price' required/>
                 </div>
                 <div className='controls'>{this.state.price.errorMessage}</div>
               </div>
             </div>
             <div className={`card__row ${this.state.balance.isValid === false ? `error` : this.state.balance.isValid === true ? `success` : ``}`}>
-              <div className='card__name'>balance</div>
+              <div className='card__name'><label htmlFor='balance'>balance</label></div>
               <div className='card__descr'>
                 <div className="card__input-wrap">
-                  <input type='text' value={this.state.balance.value} onChange={this.inputHandler} onBlur={this.validateInput}
+                  <input type='text' id='balance' value={this.state.balance.value} onChange={this.inputHandler} onBlur={this.validateInput}
                          name='balance' required/>
                 </div>
                 <div className='controls'>{this.state.balance.errorMessage}</div>
