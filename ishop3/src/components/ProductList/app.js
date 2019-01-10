@@ -136,6 +136,7 @@ class ProductList extends React.Component {
             onFormSubmit={this.onProductAdd}
             onFormClose={this.onFormClose}
             cardMode={this.state.cardMode}
+            validForm={false}
           />
         }
         {
@@ -147,6 +148,7 @@ class ProductList extends React.Component {
             onFormSubmit={this.onProductEdit}
             onFormClose={this.onFormClose}
             cardMode={this.state.cardMode}
+            validForm={true}
           />
         }
         {

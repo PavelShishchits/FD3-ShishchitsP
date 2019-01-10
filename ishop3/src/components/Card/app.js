@@ -31,7 +31,7 @@ class Card extends React.Component {
         errorMessage: ''
       },
       cardMode: this.props.cardMode,
-      isValidForm: null
+      isValidForm: this.props.validForm
     }
   }
 
@@ -142,9 +142,7 @@ class Card extends React.Component {
                   <input type='text' value={this.state.picUrl.value} onChange={this.inputHandler} onBlur={this.validateInput}
                          name='picUrl' required/>
                   <label htmlFor='file' className='card__file'>
-                    <input type='file' ref={this.setInputFile} onChange={this.inputFileHandler}
-                           onBlur={this.validateInput}
-                           name='file' required/>
+                    <input type='file' ref={this.setInputFile} onChange={this.inputFileHandler} name='file'/>
                     <div className='file-icon'>
                       <img src='img/download.svg' alt='download-icon'/>
                     </div>
