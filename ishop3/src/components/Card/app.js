@@ -11,7 +11,7 @@ class Card extends React.Component {
     this.state = {
       id: this.props.product.id,
       picUrl: {
-        value: '',
+        value: this.props.product.picUrl,
         isValid: null,
         errorMessage: ''
       },
@@ -95,6 +95,9 @@ class Card extends React.Component {
     const target = e.target;
 
     switch (target.name) {
+      case 'picUrl':
+        this.setState({[target.name]: utils.validateTextInput(this.state[target.name], 5)}, () => {this.checkFormValidity()});
+        break;
       case 'name':
         this.setState({[target.name]: utils.validateTextInput(this.state[target.name], 5, 50)}, () => {this.checkFormValidity()});
         break;
@@ -135,10 +138,17 @@ class Card extends React.Component {
             <div className={`card__row ${this.state.picUrl.isValid === false ? `error` : this.state.picUrl.isValid === true ? `success` : ``}`}>
               <div className='card__name'>picture</div>
               <div className='card__descr'>
-                <div className="card__input-wrap">
-                  <input type='file' ref={this.setInputFile} onChange={this.inputFileHandler}
-                         onBlur={this.validateInput}
+                <div className="card__input-wrap file-wrap">
+                  <input type='text' value={this.state.picUrl.value} onChange={this.inputHandler} onBlur={this.validateInput}
                          name='picUrl' required/>
+                  <label htmlFor='file' className='card__file'>
+                    <input type='file' ref={this.setInputFile} onChange={this.inputFileHandler}
+                           onBlur={this.validateInput}
+                           name='file' required/>
+                    <div className='file-icon'>
+                      <img src='img/download.svg' alt='download-icon'/>
+                    </div>
+                  </label>
                 </div>
                 <div className='controls'>{this.state.picUrl.errorMessage}</div>
               </div>
