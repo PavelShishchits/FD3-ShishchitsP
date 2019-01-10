@@ -31,7 +31,13 @@ class Card extends React.Component {
         errorMessage: ''
       },
       cardMode: this.props.cardMode,
-      isValidForm: this.props.validForm
+      isValidForm: null,
+      validFileds: {
+        picUrl: null,
+        name: null,
+        price: null,
+        balance: null
+      }
     }
   }
 
@@ -53,11 +59,11 @@ class Card extends React.Component {
 
   submitForm = (e) => {
     e.preventDefault();
-    if (!this.state.isValidForm) {
-      return false;
+    // console.log(this.validateForm());
+    if (this.validateForm()) {
+      const {id, picUrl, name, price, balance} = this.state;
+      this.props.onFormSubmit({id, picUrl: picUrl.value, name: name.value, price: price.value, balance: balance.value});
     }
-    const {id, picUrl, name, price, balance} = this.state;
-    this.props.onFormSubmit({id, picUrl: picUrl.value, name: name.value, price: price.value, balance: balance.value});
   };
 
   inputHandler = (e) => {
@@ -75,10 +81,10 @@ class Card extends React.Component {
     const inpFile = this.inputFile;
     const file = inpFile.files[0];
     if (!utils.checkFileInput(['image/jpeg', 'image/png', 'image/gif'], file['type'])) {
-      this.setState({'picUrl': {...this.state.picUrl, isValid: false, errorMessage: `Wrong file format, Download jpeg, png or gif file`}}, () => {this.checkFormValidity()});
+      this.setState({'picUrl': {...this.state.picUrl, isValid: false, errorMessage: `Wrong file format, Download jpeg, png or gif file`}});
       return false;
     } else {
-      this.setState({'picUrl': {...this.state.picUrl, isValid: true, errorMessage: ``}}, () => {this.checkFormValidity()});
+      this.setState({'picUrl': {...this.state.picUrl, isValid: true, errorMessage: ``}});
     }
 
     const fileReader = new FileReader();
@@ -91,28 +97,44 @@ class Card extends React.Component {
     fileReader.readAsDataURL(file);
   };
 
-  validateInput = (e) => {
-    const target = e.target;
-
-    switch (target.name) {
-      case 'picUrl':
-        this.setState({[target.name]: utils.validateTextInput(this.state[target.name], 5)}, () => {this.checkFormValidity()});
-        break;
-      case 'name':
-        this.setState({[target.name]: utils.validateTextInput(this.state[target.name], 5, 50)}, () => {this.checkFormValidity()});
-        break;
-      case 'price':
-        this.setState({[target.name]: utils.validateNumberInput(this.state[target.name])}, () => {this.checkFormValidity()});
-        break;
-      case 'balance':
-        this.setState({[target.name]: utils.validateNumberInput(this.state[target.name])}, () => {this.checkFormValidity()});
-        break;
-    }
+  onInputBlur = (e) => {
+    this.validateInput(e.target.name);
   };
 
-  checkFormValidity = () => {
-    const arr = [this.state.picUrl.isValid, this.state.name.isValid, this.state.price.isValid, this.state.balance.isValid];
-    this.setState({isValidForm: arr.every((field) => field)});
+  validateForm = () => {
+    return Object.keys(this.state.validFileds).reduce((state, fieldName) => {
+      state = this.validateInput(fieldName);
+      return state;
+    }, null);
+  };
+
+  validateInput = (name) => {
+    let field = this.state[name];
+    let validFileds = this.state.validFileds;
+    let isValidForm = null;
+
+    switch (name) {
+      case 'picUrl':
+        field = utils.validateTextInput(field, 5);
+        break;
+      case 'name':
+        field = utils.validateTextInput(field, 5, 50);
+        break;
+      case 'price':
+        field = utils.validateNumberInput(field);
+        break;
+      case 'balance':
+        field = utils.validateNumberInput(field);
+        break;
+    }
+
+    let {isValid} = field;
+    validFileds[name] = isValid;
+    isValidForm = Object.keys(validFileds).some((fieldName) => {
+      return validFileds[fieldName] === false;
+    });
+    this.setState({[name]: field, validFileds, isValidForm: !isValidForm});
+    return !isValidForm;
   };
 
   closeForm = () => {
@@ -139,8 +161,8 @@ class Card extends React.Component {
               <div className='card__name'><label htmlFor='picUrl'>picture</label></div>
               <div className='card__descr'>
                 <div className="card__input-wrap file-wrap">
-                  <input type='text' id='picUrl' readOnly={true} value={this.state.picUrl.value} onChange={this.inputHandler} onBlur={this.validateInput}
-                         name='picUrl' required/>
+                  <input type='text' id='picUrl' readOnly={true} value={this.state.picUrl.value} onChange={this.inputHandler} onBlur={this.onInputBlur}
+                         name='picUrl'/>
                   <label htmlFor='file' className='card__file'>
                     <input type='file' ref={this.setInputFile} onChange={this.inputFileHandler} name='file'/>
                     <div className='file-icon'>
@@ -155,8 +177,8 @@ class Card extends React.Component {
               <div className='card__name'><label htmlFor='name'>name</label></div>
               <div className='card__descr'>
                 <div className="card__input-wrap">
-                  <input type='text' id='name' value={this.state.name.value} onChange={this.inputHandler} onBlur={this.validateInput}
-                         name='name' required/>
+                  <input type='text' id='name' value={this.state.name.value} onChange={this.inputHandler} onBlur={this.onInputBlur}
+                         name='name'/>
                 </div>
                 <div className='controls'>{this.state.name.errorMessage}</div>
               </div>
@@ -165,8 +187,8 @@ class Card extends React.Component {
               <div className='card__name'><label htmlFor='price'>price</label></div>
               <div className='card__descr'>
                 <div className="card__input-wrap">
-                  <input type='text' id='price' value={this.state.price.value} onChange={this.inputHandler} onBlur={this.validateInput}
-                         name='price' required/>
+                  <input type='text' id='price' value={this.state.price.value} onChange={this.inputHandler} onBlur={this.onInputBlur}
+                         name='price'/>
                 </div>
                 <div className='controls'>{this.state.price.errorMessage}</div>
               </div>
@@ -175,8 +197,8 @@ class Card extends React.Component {
               <div className='card__name'><label htmlFor='balance'>balance</label></div>
               <div className='card__descr'>
                 <div className="card__input-wrap">
-                  <input type='text' id='balance' value={this.state.balance.value} onChange={this.inputHandler} onBlur={this.validateInput}
-                         name='balance' required/>
+                  <input type='text' id='balance' value={this.state.balance.value} onChange={this.inputHandler} onBlur={this.onInputBlur}
+                         name='balance'/>
                 </div>
                 <div className='controls'>{this.state.balance.errorMessage}</div>
               </div>
