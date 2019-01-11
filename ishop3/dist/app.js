@@ -25142,7 +25142,6 @@ var Card = function (_React$Component) {
 
     _this.submitForm = function (e) {
       e.preventDefault();
-      // console.log(this.validateForm());
       if (_this.validateForm()) {
         var _this$state = _this.state,
             id = _this$state.id,
@@ -25178,6 +25177,7 @@ var Card = function (_React$Component) {
       fileReader.addEventListener('load', function () {
         if (fileReader.readyState === 2) {
           _this.setState({ 'picUrl': _extends({}, _this.state.picUrl, { value: fileReader.result }) });
+          _this.validateInput('picUrl');
         }
       });
 
@@ -25190,9 +25190,11 @@ var Card = function (_React$Component) {
 
     _this.validateForm = function () {
       return Object.keys(_this.state.validFileds).reduce(function (state, fieldName) {
-        state = _this.validateInput(fieldName);
+        if (_this.validateInput(fieldName) === false) {
+          state = false;
+        }
         return state;
-      }, null);
+      }, true);
     };
 
     _this.validateInput = function (name) {
@@ -25225,7 +25227,7 @@ var Card = function (_React$Component) {
         return validFileds[fieldName] === false;
       });
       _this.setState((_this$setState2 = {}, _defineProperty(_this$setState2, name, field), _defineProperty(_this$setState2, 'validFileds', validFileds), _defineProperty(_this$setState2, 'isValidForm', !isValidForm), _this$setState2));
-      return !isValidForm;
+      return isValid;
     };
 
     _this.closeForm = function () {
