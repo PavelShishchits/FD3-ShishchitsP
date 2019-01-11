@@ -24293,8 +24293,7 @@ var ProductList = function (_React$Component) {
           product: this.state.newProduct,
           onFormSubmit: this.onProductAdd,
           onFormClose: this.onFormClose,
-          cardMode: this.state.cardMode,
-          validForm: false
+          cardMode: this.state.cardMode
         }),
         this.state.cardMode === 2 && _react2.default.createElement(_app4.default, {
           title: 'Edit existing product',
@@ -24302,8 +24301,7 @@ var ProductList = function (_React$Component) {
           product: this.state.selectedProduct,
           onFormSubmit: this.onProductEdit,
           onFormClose: this.onFormClose,
-          cardMode: this.state.cardMode,
-          validForm: true
+          cardMode: this.state.cardMode
         }),
         this.state.cardMode === 1 && _react2.default.createElement(_app4.default, {
           title: this.state.selectedProduct.name,
@@ -25144,17 +25142,17 @@ var Card = function (_React$Component) {
 
     _this.submitForm = function (e) {
       e.preventDefault();
-      if (!_this.state.isValidForm) {
-        return false;
-      }
-      var _this$state = _this.state,
-          id = _this$state.id,
-          picUrl = _this$state.picUrl,
-          name = _this$state.name,
-          price = _this$state.price,
-          balance = _this$state.balance;
+      // console.log(this.validateForm());
+      if (_this.validateForm()) {
+        var _this$state = _this.state,
+            id = _this$state.id,
+            picUrl = _this$state.picUrl,
+            name = _this$state.name,
+            price = _this$state.price,
+            balance = _this$state.balance;
 
-      _this.props.onFormSubmit({ id: id, picUrl: picUrl.value, name: name.value, price: price.value, balance: balance.value });
+        _this.props.onFormSubmit({ id: id, picUrl: picUrl.value, name: name.value, price: price.value, balance: balance.value });
+      }
     };
 
     _this.inputHandler = function (e) {
@@ -25170,14 +25168,10 @@ var Card = function (_React$Component) {
       var inpFile = _this.inputFile;
       var file = inpFile.files[0];
       if (!_utlls2.default.checkFileInput(['image/jpeg', 'image/png', 'image/gif'], file['type'])) {
-        _this.setState({ 'picUrl': _extends({}, _this.state.picUrl, { isValid: false, errorMessage: 'Wrong file format, Download jpeg, png or gif file' }) }, function () {
-          _this.checkFormValidity();
-        });
+        _this.setState({ 'picUrl': _extends({}, _this.state.picUrl, { isValid: false, errorMessage: 'Wrong file format, Download jpeg, png or gif file' }) });
         return false;
       } else {
-        _this.setState({ 'picUrl': _extends({}, _this.state.picUrl, { isValid: true, errorMessage: '' }) }, function () {
-          _this.checkFormValidity();
-        });
+        _this.setState({ 'picUrl': _extends({}, _this.state.picUrl, { isValid: true, errorMessage: '' }) });
       }
 
       var fileReader = new FileReader();
@@ -25190,38 +25184,48 @@ var Card = function (_React$Component) {
       fileReader.readAsDataURL(file);
     };
 
-    _this.validateInput = function (e) {
-      var target = e.target;
-
-      switch (target.name) {
-        case 'picUrl':
-          _this.setState(_defineProperty({}, target.name, _utlls2.default.validateTextInput(_this.state[target.name], 5)), function () {
-            _this.checkFormValidity();
-          });
-          break;
-        case 'name':
-          _this.setState(_defineProperty({}, target.name, _utlls2.default.validateTextInput(_this.state[target.name], 5, 50)), function () {
-            _this.checkFormValidity();
-          });
-          break;
-        case 'price':
-          _this.setState(_defineProperty({}, target.name, _utlls2.default.validateNumberInput(_this.state[target.name])), function () {
-            _this.checkFormValidity();
-          });
-          break;
-        case 'balance':
-          _this.setState(_defineProperty({}, target.name, _utlls2.default.validateNumberInput(_this.state[target.name])), function () {
-            _this.checkFormValidity();
-          });
-          break;
-      }
+    _this.onInputBlur = function (e) {
+      _this.validateInput(e.target.name);
     };
 
-    _this.checkFormValidity = function () {
-      var arr = [_this.state.picUrl.isValid, _this.state.name.isValid, _this.state.price.isValid, _this.state.balance.isValid];
-      _this.setState({ isValidForm: arr.every(function (field) {
-          return field;
-        }) });
+    _this.validateForm = function () {
+      return Object.keys(_this.state.validFileds).reduce(function (state, fieldName) {
+        state = _this.validateInput(fieldName);
+        return state;
+      }, null);
+    };
+
+    _this.validateInput = function (name) {
+      var _this$setState2;
+
+      var field = _this.state[name];
+      var validFileds = _this.state.validFileds;
+      var isValidForm = null;
+
+      switch (name) {
+        case 'picUrl':
+          field = _utlls2.default.validateTextInput(field, 5);
+          break;
+        case 'name':
+          field = _utlls2.default.validateTextInput(field, 5, 50);
+          break;
+        case 'price':
+          field = _utlls2.default.validateNumberInput(field);
+          break;
+        case 'balance':
+          field = _utlls2.default.validateNumberInput(field);
+          break;
+      }
+
+      var _field = field,
+          isValid = _field.isValid;
+
+      validFileds[name] = isValid;
+      isValidForm = Object.keys(validFileds).some(function (fieldName) {
+        return validFileds[fieldName] === false;
+      });
+      _this.setState((_this$setState2 = {}, _defineProperty(_this$setState2, name, field), _defineProperty(_this$setState2, 'validFileds', validFileds), _defineProperty(_this$setState2, 'isValidForm', !isValidForm), _this$setState2));
+      return !isValidForm;
     };
 
     _this.closeForm = function () {
@@ -25256,7 +25260,13 @@ var Card = function (_React$Component) {
         errorMessage: ''
       },
       cardMode: _this.props.cardMode,
-      isValidForm: _this.props.validForm
+      isValidForm: null,
+      validFileds: {
+        picUrl: null,
+        name: null,
+        price: null,
+        balance: null
+      }
     };
     return _this;
   }
@@ -25308,8 +25318,8 @@ var Card = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'card__input-wrap file-wrap' },
-                _react2.default.createElement('input', { type: 'text', id: 'picUrl', readOnly: true, value: this.state.picUrl.value, onChange: this.inputHandler, onBlur: this.validateInput,
-                  name: 'picUrl', required: true }),
+                _react2.default.createElement('input', { type: 'text', id: 'picUrl', readOnly: true, value: this.state.picUrl.value, onChange: this.inputHandler, onBlur: this.onInputBlur,
+                  name: 'picUrl' }),
                 _react2.default.createElement(
                   'label',
                   { htmlFor: 'file', className: 'card__file' },
@@ -25346,8 +25356,8 @@ var Card = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'card__input-wrap' },
-                _react2.default.createElement('input', { type: 'text', id: 'name', value: this.state.name.value, onChange: this.inputHandler, onBlur: this.validateInput,
-                  name: 'name', required: true })
+                _react2.default.createElement('input', { type: 'text', id: 'name', value: this.state.name.value, onChange: this.inputHandler, onBlur: this.onInputBlur,
+                  name: 'name' })
               ),
               _react2.default.createElement(
                 'div',
@@ -25374,8 +25384,8 @@ var Card = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'card__input-wrap' },
-                _react2.default.createElement('input', { type: 'text', id: 'price', value: this.state.price.value, onChange: this.inputHandler, onBlur: this.validateInput,
-                  name: 'price', required: true })
+                _react2.default.createElement('input', { type: 'text', id: 'price', value: this.state.price.value, onChange: this.inputHandler, onBlur: this.onInputBlur,
+                  name: 'price' })
               ),
               _react2.default.createElement(
                 'div',
@@ -25402,8 +25412,8 @@ var Card = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'card__input-wrap' },
-                _react2.default.createElement('input', { type: 'text', id: 'balance', value: this.state.balance.value, onChange: this.inputHandler, onBlur: this.validateInput,
-                  name: 'balance', required: true })
+                _react2.default.createElement('input', { type: 'text', id: 'balance', value: this.state.balance.value, onChange: this.inputHandler, onBlur: this.onInputBlur,
+                  name: 'balance' })
               ),
               _react2.default.createElement(
                 'div',

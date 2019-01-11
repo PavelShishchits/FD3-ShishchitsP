@@ -59,7 +59,6 @@ class Card extends React.Component {
 
   submitForm = (e) => {
     e.preventDefault();
-    // console.log(this.validateForm());
     if (this.validateForm()) {
       const {id, picUrl, name, price, balance} = this.state;
       this.props.onFormSubmit({id, picUrl: picUrl.value, name: name.value, price: price.value, balance: balance.value});
@@ -90,7 +89,8 @@ class Card extends React.Component {
     const fileReader = new FileReader();
     fileReader.addEventListener('load', () => {
       if (fileReader.readyState === 2) {
-        this.setState({'picUrl': {...this.state.picUrl, value: fileReader.result}})
+        this.setState({'picUrl': {...this.state.picUrl, value: fileReader.result}});
+        this.validateInput('picUrl');
       }
     });
 
@@ -103,9 +103,11 @@ class Card extends React.Component {
 
   validateForm = () => {
     return Object.keys(this.state.validFileds).reduce((state, fieldName) => {
-      state = this.validateInput(fieldName);
+      if (this.validateInput(fieldName) === false) {
+        state = false;
+      }
       return state;
-    }, null);
+    }, true);
   };
 
   validateInput = (name) => {
@@ -134,7 +136,7 @@ class Card extends React.Component {
       return validFileds[fieldName] === false;
     });
     this.setState({[name]: field, validFileds, isValidForm: !isValidForm});
-    return !isValidForm;
+    return isValid;
   };
 
   closeForm = () => {
