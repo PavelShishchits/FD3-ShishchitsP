@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Rainbow from './components/Rainbow/app'
+import RainbowFrame from "./components/RainbowFrame/app";
 
 ReactDOM.render(
-    <Rainbow/>,
+    <RainbowFrame colors={['red','orange', 'yellow','green', '#00BFFF', 'blue', 'purple']}>Hello</RainbowFrame>,
     document.querySelector('.container')
 );

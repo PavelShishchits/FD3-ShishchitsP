@@ -5,15 +5,21 @@ import PropTypes from 'prop-types';
 class RainbowFrame extends React.Component {
 
   static propTypes = {
-    color: PropTypes.string.isRequired
+    colors: PropTypes.arrayOf(
+      PropTypes.string.isRequired
+    ).isRequired
   };
 
   render() {
+    const colors = this.props.colors;
     return (
-      <div className='rainbowFrame' style={{border: `3px solid ${this.props.color}`}}>
-        {this.props.children}
+      colors.length ?
+      <div key={colors[0]} className='rainbowFrame' style={{border: `3px solid ${colors[0]}`}}>
+        <RainbowFrame colors={colors.slice(1)}>{this.props.children}</RainbowFrame>
       </div>
-    );
+      :
+      <div>{this.props.children}</div>
+    )
   }
 }
 
