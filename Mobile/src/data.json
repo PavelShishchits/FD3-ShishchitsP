@@ -1,0 +1,18 @@
+{
+  "mobileCompanies": [
+    {
+      "name": "Мтс",
+      "clients": [
+        {
+          "fio": {
+            "name": "Виталий",
+            "surName": "Мяу",
+            "secondName": "Петрович"
+          },
+          "balace": 300
+        }
+      ]
+    }
+  ]
+
+}
