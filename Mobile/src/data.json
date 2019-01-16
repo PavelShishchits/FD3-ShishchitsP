@@ -4,15 +4,53 @@
       "name": "Мтс",
       "clients": [
         {
-          "fio": {
-            "name": "Виталий",
-            "surName": "Мяу",
-            "secondName": "Петрович"
-          },
-          "balace": 300
+          "name": "Виталий",
+          "surName": "Новиков",
+          "secondName": "Петрович",
+          "balace": 300,
+          "status": 1
+        },
+        {
+          "name": "Александ",
+          "surName": "Глеб",
+          "secondName": "Юрьевич",
+          "balace": 180,
+          "status": 1
+        },
+        {
+          "name": "Вячеслав",
+          "surName": "Глеб",
+          "secondName": "Юрьевич",
+          "balace": -100,
+          "status": 0
+        }
+      ]
+    },
+    {
+      "name": "Velcom",
+      "clients": [
+        {
+          "name": "Виталий",
+          "surName": "Новиков 2",
+          "secondName": "Петрович",
+          "balace": 300,
+          "status": 1
+        },
+        {
+          "name": "Александ",
+          "surName": "Глеб 2",
+          "secondName": "Юрьевич",
+          "balace": -180,
+          "status": 0
+        },
+        {
+          "name": "Вячеслав",
+          "surName": "Глеб 2",
+          "secondName": "Юрьевич",
+          "balace": 100,
+          "status": 1
         }
       ]
     }
   ]
-
 }
