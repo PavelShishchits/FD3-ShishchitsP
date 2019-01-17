@@ -21,7 +21,11 @@ class MobileClient extends React.PureComponent {
   };
 
   removeItem = () => {
-    appEvents.emit('EItemRemove', this.props.client.id)
+    appEvents.emit('EItemRemove', this.props.client.id);
+  };
+
+  editItem = () => {
+    appEvents.emit('EItemEdit', this.props.client.id);
   };
 
   render() {
@@ -35,8 +39,8 @@ class MobileClient extends React.PureComponent {
         <td>{this.props.client.balance}</td>
         <td>{this.props.client.status}</td>
         <td>
-          <button className='btn'>Редактировать</button>
-          <button className='btn' onClick={this.removeItem}>Удалить</button>
+          <button className='btn edit-btn' onClick={this.editItem}>Редактировать</button>
+          <button className='btn delete-btn' onClick={this.removeItem}>Удалить</button>
         </td>
       </tr>
     )

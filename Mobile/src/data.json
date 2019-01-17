@@ -1,56 +1,28 @@
 {
-  "mobileCompanies": [
+  "clients": [
     {
-      "name": "Мтс",
-      "clients": [
-        {
-          "name": "Виталий",
-          "surName": "Новиков",
-          "secondName": "Петрович",
-          "balace": 300,
-          "status": 1
-        },
-        {
-          "name": "Александ",
-          "surName": "Глеб",
-          "secondName": "Юрьевич",
-          "balace": 180,
-          "status": 1
-        },
-        {
-          "name": "Вячеслав",
-          "surName": "Глеб",
-          "secondName": "Юрьевич",
-          "balace": -100,
-          "status": 0
-        }
-      ]
+      "id": 1,
+      "name": "Виталий",
+      "surName": "Новиков",
+      "secondName": "Петрович",
+      "balance": 300,
+      "status": 1
     },
     {
-      "name": "Velcom",
-      "clients": [
-        {
-          "name": "Виталий",
-          "surName": "Новиков 2",
-          "secondName": "Петрович",
-          "balace": 300,
-          "status": 1
-        },
-        {
-          "name": "Александ",
-          "surName": "Глеб 2",
-          "secondName": "Юрьевич",
-          "balace": -180,
-          "status": 0
-        },
-        {
-          "name": "Вячеслав",
-          "surName": "Глеб 2",
-          "secondName": "Юрьевич",
-          "balace": 100,
-          "status": 1
-        }
-      ]
+      "id": 2,
+      "name": "Александ",
+      "surName": "Глеб",
+      "secondName": "Юрьевич",
+      "balance": 180,
+      "status": 1
+    },
+    {
+      "id": 3,
+      "name": "Вячеслав",
+      "surName": "Глеб",
+      "secondName": "Юрьевич",
+      "balance": -100,
+      "status": 0
     }
   ]
 }

@@ -1,0 +1,66 @@
+.mForm {
+  background-color: #fff;
+  box-shadow: 0 8px 19.2px 0 rgba(0,0,0,.13);
+  max-width: 500px;
+  margin: 30px 0 30px;
+}
+
+.mForm__title {
+  font-size:  22px;
+  padding: 15px;
+  background-color: #d2e6f3;
+}
+
+.mForm__row {
+  display: flex;
+}
+
+.mForm__row.error .controls {
+  display: block;
+  color: red;
+}
+
+.mForm__row input {
+  height: 30px;
+  border: 1px solid #bababa;
+}
+
+.mForm__row input[readonly] {
+  border-color: transparent;
+  pointer-events: none;
+}
+
+.mForm__row.error input {
+  border-color: red;
+}
+
+.mForm__row.success input {
+  border-color: green;
+}
+
+.mForm__row .controls {
+  padding: 0 5px;
+  display: none;
+}
+
+.mForm__row + .mForm__row {
+  border-top: 1px solid #e5e5e5;
+}
+
+.mForm__cell-name {
+  width: 30%;
+  padding: 15px;
+  flex-shrink: 0;
+}
+
+.mForm__cell-value {
+  width: 70%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  margin: 0 -5px;
+}
+
+.mForm__btn-wrap {
+  padding: 15px;
+}
