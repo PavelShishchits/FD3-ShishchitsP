@@ -40,6 +40,14 @@ img {
   text-align: center;
 }
 
+.mobile__clients td.unavail {
+  background-color: rgba(255, 0, 0, .4);
+}
+
+.mobile__clients td.avail {
+  background-color: rgba(0, 255, 0, .4);
+}
+
 .btn {
   padding: 10px 15px;
   display: inline-block;

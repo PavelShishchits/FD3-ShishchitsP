@@ -23,7 +23,7 @@ class Mobile extends React.PureComponent {
 
   state = {
     clients: this.props.clients,
-    formMode: null, // 1 - форма редактирования, 2 - форма добавления,
+    formMode: 0, // 1 - форма редактирования, 2 - форма добавления,
     clientToEdit: null
   };
 
@@ -32,6 +32,7 @@ class Mobile extends React.PureComponent {
     appEvents.addListener('EItemEdit', this.onClientEdit);
     appEvents.addListener('EEditClient', this.editClient);
     appEvents.addListener('EAddClient', this.addClient);
+    appEvents.addListener('ECloseForm', this.closeForm);
   }
 
   componentWillUnmount() {
@@ -39,6 +40,7 @@ class Mobile extends React.PureComponent {
     appEvents.removeListener('EItemEdit', this.onClientEdit);
     appEvents.removeListener('EEditClient', this.editClient);
     appEvents.removeListener('EAddClient', this.addClient);
+    appEvents.removeListener('ECloseForm', this.closeForm);
   }
 
   editClient = (editedClient) => {
@@ -71,6 +73,10 @@ class Mobile extends React.PureComponent {
   onClientAdd = () => {
     const id = this.state.clients[this.state.clients.length - 1].id + 1;
     this.setState({formMode: 2, clientToEdit: {id: id, name: '', surName: '', secondName: '', balance: 0, status: ''}})
+  };
+
+  closeForm = (formMode) => {
+    this.setState({formMode: formMode});
   };
 
   render() {
@@ -115,7 +121,7 @@ class Mobile extends React.PureComponent {
         <div className="mobile__form">
           {
             (this.state.formMode === 1) &&
-            <MobileForm btnText='Редактировать' title='Редактировать данные клиента' client={this.state.clientToEdit} formMode={this.state.formMode}/>
+            <MobileForm key={this.state.clientToEdit.id} btnText='Редактировать' title='Редактировать данные клиента' client={this.state.clientToEdit} formMode={this.state.formMode}/>
           }
           {
             (this.state.formMode === 2) &&

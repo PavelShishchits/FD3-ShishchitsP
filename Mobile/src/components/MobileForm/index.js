@@ -6,6 +6,7 @@ import {appEvents} from '../event'
 class MobileForm extends React.PureComponent {
 
   constructor(props) {
+    // console.log('mew');
     super();
     this.inputs = {
       surName: null,
@@ -26,24 +27,48 @@ class MobileForm extends React.PureComponent {
       name: PropTypes.string.isRequired,
       surName: PropTypes.string.isRequired,
       secondName: PropTypes.string.isRequired,
-      balance: PropTypes.number.isRequired,
-      status: PropTypes.number.isRequired // 0 - неактивен, 1 - активен
+      balance: PropTypes.number.isRequired
     }).isRequired,
     formMode: PropTypes.number.isRequired
   };
+
+  // componentWillUnmount() {
+  //   this.inputs = {
+  //     surName: null,
+  //     name: null,
+  //     secondName: null,
+  //     balance: null
+  //   };
+  // }
+
+  componentDidMount() {
+    console.log('componentDidMount MobileForm');
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('componentDidUpdate MobileForm');
+  }
 
   submitForm = (e) => {
     e.preventDefault();
     const {surName, name, secondName, balance} = this.inputs;
     if (this.state.formMode === 1) {
-      appEvents.emit('EEditClient', {id: this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value)});
+      appEvents.emit('EEditClient', {id: this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value), status: this.calcClientStatus(balance.value)});
     } else {
-      appEvents.emit('EAddClient', {id: this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value)});
+      appEvents.emit('EAddClient', {id: this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value), status: this.calcClientStatus(balance.value)});
     }
   };
 
+  calcClientStatus = (balance) => balance >= 0 ? 1 : 0;
+
+  closeForm = () => {
+    appEvents.emit('ECloseForm', 0)
+  };
+
   setInput = (element) => {
-    this.inputs[element.name] = element;
+    if (element) {
+      this.inputs[element.name] = element;
+    }
   };
 
   render() {
@@ -95,7 +120,7 @@ class MobileForm extends React.PureComponent {
         </div>
         <div className="mForm__btn-wrap">
           <button className='btn edit-btn' type='submit'>{this.props.btnText}</button>
-          <button className='btn delete-btn' type='reset'>Отмена</button>
+          <button className='btn delete-btn' type='reset' onClick={this.closeForm}>Отмена</button>
         </div>
       </form>
     )

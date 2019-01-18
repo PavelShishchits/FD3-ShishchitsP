@@ -37,7 +37,7 @@ class MobileClient extends React.PureComponent {
         <td>{this.props.client.surName}</td>
         <td>{this.props.client.secondName}</td>
         <td>{this.props.client.balance}</td>
-        <td>{this.props.client.status}</td>
+        <td className={this.props.client.status === 0 ? 'unavail' : 'avail'}>{this.props.client.status === 0 ? `Неактивен` : `Активен`}</td>
         <td>
           <button className='btn edit-btn' onClick={this.editItem}>Редактировать</button>
           <button className='btn delete-btn' onClick={this.removeItem}>Удалить</button>
