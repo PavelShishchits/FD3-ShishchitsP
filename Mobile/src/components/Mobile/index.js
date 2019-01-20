@@ -69,7 +69,7 @@ class Mobile extends React.PureComponent {
         return client
       }
     });
-    this.setState({clients: clients, filteredClients: this.filterList(clients)});
+    this.setState({clients: clients, filteredClients: this.filterList(clients), formMode: 0});
   };
 
   onClientEdit = (id) => {

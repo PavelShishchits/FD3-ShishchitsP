@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -258,6 +258,21 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(10);
+} else {
+  module.exports = __webpack_require__(11);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /*
 object-assign
 (c) Sindre Sorhus
@@ -349,21 +364,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(8);
-} else {
-  module.exports = __webpack_require__(9);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 3 */
@@ -487,19 +487,72 @@ module.exports = ReactPropTypesSecret;
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(12);
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(21)(isValidElement, throwOnDirectAccess);
 } else {
-  module.exports = __webpack_require__(13);
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(22)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.appEvents = undefined;
+
+var _events = __webpack_require__(24);
+
+var appEvents = new _events.EventEmitter();
+
+exports.appEvents = appEvents;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(14);
+} else {
+  module.exports = __webpack_require__(15);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports) {
 
 var g;
@@ -526,34 +579,32 @@ module.exports = g;
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(10);
+var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _app = __webpack_require__(18);
+var _index = __webpack_require__(20);
 
-var _app2 = _interopRequireDefault(_app);
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(
-    _app2.default,
-    { colors: ['red', 'orange', 'yellow', 'green', '#00BFFF', 'blue', 'purple'] },
-    'Hello'
-), document.querySelector('.container'));
+var mobileData = __webpack_require__(29);
+
+_reactDom2.default.render(_react2.default.createElement(_index2.default, { currCompanyName: mobileData.currCompanyName, clients: mobileData.clients }), document.querySelector('.container'));
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -566,7 +617,7 @@ _reactDom2.default.render(_react2.default.createElement(
  * LICENSE file in the root directory of this source tree.
  */
 
-var k=__webpack_require__(1),n="function"===typeof Symbol&&Symbol.for,p=n?Symbol.for("react.element"):60103,q=n?Symbol.for("react.portal"):60106,r=n?Symbol.for("react.fragment"):60107,t=n?Symbol.for("react.strict_mode"):60108,u=n?Symbol.for("react.profiler"):60114,v=n?Symbol.for("react.provider"):60109,w=n?Symbol.for("react.context"):60110,x=n?Symbol.for("react.concurrent_mode"):60111,y=n?Symbol.for("react.forward_ref"):60112,z=n?Symbol.for("react.suspense"):60113,A=n?Symbol.for("react.memo"):
+var k=__webpack_require__(2),n="function"===typeof Symbol&&Symbol.for,p=n?Symbol.for("react.element"):60103,q=n?Symbol.for("react.portal"):60106,r=n?Symbol.for("react.fragment"):60107,t=n?Symbol.for("react.strict_mode"):60108,u=n?Symbol.for("react.profiler"):60114,v=n?Symbol.for("react.provider"):60109,w=n?Symbol.for("react.context"):60110,x=n?Symbol.for("react.concurrent_mode"):60111,y=n?Symbol.for("react.forward_ref"):60112,z=n?Symbol.for("react.suspense"):60113,A=n?Symbol.for("react.memo"):
 60115,B=n?Symbol.for("react.lazy"):60116,C="function"===typeof Symbol&&Symbol.iterator;function aa(a,b,e,c,d,g,h,f){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var l=[e,c,d,g,h,f],m=0;a=Error(b.replace(/%s/g,function(){return l[m++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
 function D(a){for(var b=arguments.length-1,e="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=0;c<b;c++)e+="&args[]="+encodeURIComponent(arguments[c+1]);aa(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",e)}var E={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},F={};
 function G(a,b,e){this.props=a;this.context=b;this.refs=F;this.updater=e||E}G.prototype.isReactComponent={};G.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?D("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};G.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};function H(){}H.prototype=G.prototype;function I(a,b,e){this.props=a;this.context=b;this.refs=F;this.updater=e||E}var J=I.prototype=new H;
@@ -584,7 +635,7 @@ unstable_ConcurrentMode:x,unstable_Profiler:u,__SECRET_INTERNALS_DO_NOT_USE_OR_Y
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -605,7 +656,7 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(1);
+var _assign = __webpack_require__(2);
 var checkPropTypes = __webpack_require__(3);
 
 // TODO: this is special because it gets imported during build.
@@ -2475,7 +2526,7 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2513,15 +2564,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(11);
+  module.exports = __webpack_require__(13);
 } else {
-  module.exports = __webpack_require__(14);
+  module.exports = __webpack_require__(16);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2537,7 +2588,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(2),n=__webpack_require__(1),ba=__webpack_require__(5);function ca(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var k=[c,d,e,f,g,h],l=0;a=Error(b.replace(/%s/g,function(){return k[l++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
+var aa=__webpack_require__(1),n=__webpack_require__(2),ba=__webpack_require__(7);function ca(a,b,c,d,e,f,g,h){if(!a){a=void 0;if(void 0===b)a=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var k=[c,d,e,f,g,h],l=0;a=Error(b.replace(/%s/g,function(){return k[l++]}));a.name="Invariant Violation"}a.framesToPop=1;throw a;}}
 function t(a){for(var b=arguments.length-1,c="https://reactjs.org/docs/error-decoder.html?invariant="+a,d=0;d<b;d++)c+="&args[]="+encodeURIComponent(arguments[d+1]);ca(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}aa?void 0:t("227");function da(a,b,c,d,e,f,g,h,k){var l=Array.prototype.slice.call(arguments,3);try{b.apply(c,l)}catch(m){this.onError(m)}}
 var ea=!1,fa=null,ha=!1,ia=null,ja={onError:function(a){ea=!0;fa=a}};function ka(a,b,c,d,e,f,g,h,k){ea=!1;fa=null;da.apply(ja,arguments)}function la(a,b,c,d,e,f,g,h,k){ka.apply(this,arguments);if(ea){if(ea){var l=fa;ea=!1;fa=null}else t("198"),l=void 0;ha||(ha=!0,ia=l)}}var ma=null,na={};
 function oa(){if(ma)for(var a in na){var b=na[a],c=ma.indexOf(a);-1<c?void 0:t("96",a);if(!pa[c]){b.extractEvents?void 0:t("97",a);pa[c]=b;c=b.eventTypes;for(var d in c){var e=void 0;var f=c[d],g=b,h=d;qa.hasOwnProperty(h)?t("99",h):void 0;qa[h]=f;var k=f.phasedRegistrationNames;if(k){for(e in k)k.hasOwnProperty(e)&&ra(k[e],g,h);e=!0}else f.registrationName?(ra(f.registrationName,g,h),e=!0):e=!1;e?void 0:t("98",d,a)}}}}
@@ -2777,7 +2828,7 @@ var li={default:ki},mi=li&&ki||li;module.exports=mi.default||mi;
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2803,10 +2854,10 @@ exports.unstable_scheduleCallback=function(a,b){var d=-1!==k?k:exports.unstable_
 b=d.previous;b.next=d.previous=a;a.next=d;a.previous=b}return a};exports.unstable_cancelCallback=function(a){var b=a.next;if(null!==b){if(b===a)c=null;else{a===c&&(c=b);var d=a.previous;d.next=b;b.previous=d}a.next=a.previous=null}};exports.unstable_wrapCallback=function(a){var b=h;return function(){var d=h,e=k;h=b;k=exports.unstable_now();try{return a.apply(this,arguments)}finally{h=d,k=e,v()}}};exports.unstable_getCurrentPriorityLevel=function(){return h};
 exports.unstable_shouldYield=function(){return!f&&(null!==c&&c.expirationTime<l||w())};exports.unstable_continueExecution=function(){null!==c&&p()};exports.unstable_pauseExecution=function(){};exports.unstable_getFirstCallbackNode=function(){return c};
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3514,10 +3565,10 @@ exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(8)))
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3538,11 +3589,11 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var React = __webpack_require__(2);
-var _assign = __webpack_require__(1);
+var React = __webpack_require__(1);
+var _assign = __webpack_require__(2);
 var checkPropTypes = __webpack_require__(3);
-var scheduler = __webpack_require__(5);
-var tracing = __webpack_require__(15);
+var scheduler = __webpack_require__(7);
+var tracing = __webpack_require__(17);
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -23610,22 +23661,22 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(16);
+  module.exports = __webpack_require__(18);
 } else {
-  module.exports = __webpack_require__(17);
+  module.exports = __webpack_require__(19);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23642,7 +23693,7 @@ Object.defineProperty(exports,"__esModule",{value:!0});var b=0;exports.__interac
 
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24073,7 +24124,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24085,15 +24136,29 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(19);
+var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+__webpack_require__(23);
+
+var _event = __webpack_require__(6);
+
+var _index = __webpack_require__(25);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = __webpack_require__(27);
+
+var _index4 = _interopRequireDefault(_index3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -24101,80 +24166,239 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RainbowFrame = function (_React$Component) {
-  _inherits(RainbowFrame, _React$Component);
+var Mobile = function (_React$PureComponent) {
+  _inherits(Mobile, _React$PureComponent);
 
-  function RainbowFrame() {
-    _classCallCheck(this, RainbowFrame);
+  function Mobile() {
+    var _ref;
 
-    return _possibleConstructorReturn(this, (RainbowFrame.__proto__ || Object.getPrototypeOf(RainbowFrame)).apply(this, arguments));
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Mobile);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Mobile.__proto__ || Object.getPrototypeOf(Mobile)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      clients: _this.props.clients,
+      filteredClients: _this.props.clients,
+      formMode: 0, // 1 - форма редактирования, 2 - форма добавления,
+      clientToEdit: null,
+      currentCompany: _this.props.currCompanyName,
+      filterMod: 'all'
+    }, _this.editClient = function (editedClient) {
+      var editedClients = _this.state.clients.map(function (client) {
+        if (client.id === editedClient.id && (client.surName !== editedClient.surName || client.balance !== editedClient.balance)) {
+          client = editedClient;
+        }
+        return client;
+      });
+      _this.setState({ clients: editedClients, filteredClients: _this.filterList(editedClients), formMode: 0, clientToEdit: null });
+    }, _this.addClient = function (client) {
+      var addedClients = [].concat(_toConsumableArray(_this.state.clients), [client]);
+      _this.setState({ clients: addedClients, filteredClients: _this.filterList(addedClients), formMode: 0, clientToEdit: null });
+    }, _this.onClientRemove = function (id) {
+      var clients = _this.state.clients.filter(function (client) {
+        if (client.id !== id) {
+          return client;
+        }
+      });
+      _this.setState({ clients: clients, filteredClients: _this.filterList(clients), formMode: 0 });
+    }, _this.onClientEdit = function (id) {
+      _this.setState({ formMode: 1, clientToEdit: _this.state.clients.find(function (client) {
+          return client.id === id;
+        }) });
+    }, _this.onClientAdd = function () {
+      var id = _this.state.clients.length ? _this.state.clients[_this.state.clients.length - 1].id + 1 : 1;
+      _this.setState({ formMode: 2, clientToEdit: { id: id, name: '', surName: '', secondName: '', balance: 0, status: '' } });
+    }, _this.closeForm = function (formMode) {
+      _this.setState({ formMode: formMode });
+    }, _this.changeCompanyName = function (e) {
+      _this.setState({ currentCompany: e.target.value });
+    }, _this.filterList = function (arr) {
+      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _this.state.filterMod;
+
+      if (type === 'all') {
+        return arr;
+      } else {
+        return arr.filter(function (item) {
+          return type === 'active' ? item.status === 1 : item.status === 0;
+        });
+      }
+    }, _this.onFilterClick = function (e) {
+      var type = e.target.value;
+      _this.setState({ filterMod: type, filteredClients: _this.filterList(_this.state.clients, type) });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(RainbowFrame, [{
+  _createClass(Mobile, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _event.appEvents.addListener('EItemRemove', this.onClientRemove);
+      _event.appEvents.addListener('EItemEdit', this.onClientEdit);
+      _event.appEvents.addListener('EEditClient', this.editClient);
+      _event.appEvents.addListener('EAddClient', this.addClient);
+      _event.appEvents.addListener('ECloseForm', this.closeForm);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _event.appEvents.removeListener('EitemRemove', this.onClientRemove);
+      _event.appEvents.removeListener('EItemEdit', this.onClientEdit);
+      _event.appEvents.removeListener('EEditClient', this.editClient);
+      _event.appEvents.removeListener('EAddClient', this.addClient);
+      _event.appEvents.removeListener('ECloseForm', this.closeForm);
+    }
+
+    // forms
+
+
+    // end of forms
+
+  }, {
     key: 'render',
     value: function render() {
-      var colors = this.props.colors;
-      return colors.length ? _react2.default.createElement(
+
+      console.log('MobileCompany render');
+
+      var clients = this.state.filteredClients.map(function (client) {
+        return _react2.default.createElement(_index2.default, { key: client.id, client: client });
+      });
+
+      return _react2.default.createElement(
         'div',
-        { key: colors[0], className: 'rainbowFrame', style: { border: '3px solid ' + colors[0] } },
+        { className: 'mobile container' },
         _react2.default.createElement(
-          RainbowFrame,
-          { colors: colors.slice(1) },
-          this.props.children
+          'div',
+          { className: 'mobile__name' },
+          this.state.currentCompany
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mobile__btn-wrap' },
+          _react2.default.createElement(
+            'button',
+            { className: 'btn', value: 'Velcom', onClick: this.changeCompanyName },
+            'Velcom'
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'btn', value: 'Mts', onClick: this.changeCompanyName },
+            'Mts'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mobile__filter' },
+          _react2.default.createElement(
+            'button',
+            { className: 'btn', value: 'all', onClick: this.onFilterClick },
+            '\u0412\u0441\u0435'
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'btn', value: 'active', onClick: this.onFilterClick },
+            '\u0410\u043A\u0442\u0438\u0432\u043D\u044B\u0435'
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'btn', value: 'unavail', onClick: this.onFilterClick },
+            '\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0435'
+          )
+        ),
+        _react2.default.createElement(
+          'table',
+          { className: 'mobile__clients' },
+          _react2.default.createElement(
+            'thead',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u0424\u0430\u043C\u0438\u043B\u0438\u044F'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u0418\u043C\u044F'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u041E\u0442\u0447\u0435\u0442\u0441\u0432\u043E'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u0411\u0430\u043B\u0430\u043D\u0441'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u0421\u0442\u0430\u0442\u0443\u0441'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            this.state.filteredClients.length ? clients : _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u041A\u043B\u0438\u0435\u043D\u0442\u043E\u0432 \u043D\u0435\u0442'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mobile__add' },
+          _react2.default.createElement(
+            'button',
+            { className: 'btn edit-btn', onClick: this.onClientAdd },
+            '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u043B\u0438\u0435\u043D\u0442\u0430'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mobile__form' },
+          this.state.formMode === 1 && _react2.default.createElement(_index4.default, { key: this.state.clientToEdit.id, btnText: '\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C', title: '\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0434\u0430\u043D\u043D\u044B\u0435 \u043A\u043B\u0438\u0435\u043D\u0442\u0430', client: this.state.clientToEdit, formMode: this.state.formMode }),
+          this.state.formMode === 2 && _react2.default.createElement(_index4.default, { btnText: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C', title: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043D\u043E\u0432\u043E\u0433\u043E \u043A\u043B\u0438\u0435\u043D\u0442\u0430', client: this.state.clientToEdit, formMode: this.state.formMode })
         )
-      ) : _react2.default.createElement(
-        'div',
-        null,
-        this.props.children
       );
     }
   }]);
 
-  return RainbowFrame;
-}(_react2.default.Component);
+  return Mobile;
+}(_react2.default.PureComponent);
 
-RainbowFrame.propTypes = {
-  colors: _propTypes2.default.arrayOf(_propTypes2.default.string.isRequired).isRequired
+Mobile.propTypes = {
+  currCompanyName: _propTypes2.default.string.isRequired,
+  clients: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+    id: _propTypes2.default.number.isRequired,
+    name: _propTypes2.default.string.isRequired,
+    surName: _propTypes2.default.string.isRequired,
+    secondName: _propTypes2.default.string.isRequired,
+    balance: _propTypes2.default.number.isRequired,
+    status: _propTypes2.default.number.isRequired // 0 - неактивен, 1 - активен
+  }).isRequired).isRequired
 };
-exports.default = RainbowFrame;
+exports.default = Mobile;
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-    Symbol.for &&
-    Symbol.for('react.element')) ||
-    0xeac7;
-
-  var isValidElement = function(object) {
-    return typeof object === 'object' &&
-      object !== null &&
-      object.$$typeof === REACT_ELEMENT_TYPE;
-  };
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(20)(isValidElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(21)();
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24187,7 +24411,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 
-var assign = __webpack_require__(1);
+var assign = __webpack_require__(2);
 
 var ReactPropTypesSecret = __webpack_require__(4);
 var checkPropTypes = __webpack_require__(3);
@@ -24737,7 +24961,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24801,6 +25025,689 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+function EventEmitter() {
+  this._events = this._events || {};
+  this._maxListeners = this._maxListeners || undefined;
+}
+module.exports = EventEmitter;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+EventEmitter.defaultMaxListeners = 10;
+
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function(n) {
+  if (!isNumber(n) || n < 0 || isNaN(n))
+    throw TypeError('n must be a positive number');
+  this._maxListeners = n;
+  return this;
+};
+
+EventEmitter.prototype.emit = function(type) {
+  var er, handler, len, args, i, listeners;
+
+  if (!this._events)
+    this._events = {};
+
+  // If there is no 'error' event listener then throw.
+  if (type === 'error') {
+    if (!this._events.error ||
+        (isObject(this._events.error) && !this._events.error.length)) {
+      er = arguments[1];
+      if (er instanceof Error) {
+        throw er; // Unhandled 'error' event
+      } else {
+        // At least give some kind of context to the user
+        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
+        err.context = er;
+        throw err;
+      }
+    }
+  }
+
+  handler = this._events[type];
+
+  if (isUndefined(handler))
+    return false;
+
+  if (isFunction(handler)) {
+    switch (arguments.length) {
+      // fast cases
+      case 1:
+        handler.call(this);
+        break;
+      case 2:
+        handler.call(this, arguments[1]);
+        break;
+      case 3:
+        handler.call(this, arguments[1], arguments[2]);
+        break;
+      // slower
+      default:
+        args = Array.prototype.slice.call(arguments, 1);
+        handler.apply(this, args);
+    }
+  } else if (isObject(handler)) {
+    args = Array.prototype.slice.call(arguments, 1);
+    listeners = handler.slice();
+    len = listeners.length;
+    for (i = 0; i < len; i++)
+      listeners[i].apply(this, args);
+  }
+
+  return true;
+};
+
+EventEmitter.prototype.addListener = function(type, listener) {
+  var m;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events)
+    this._events = {};
+
+  // To avoid recursion in the case that type === "newListener"! Before
+  // adding it to the listeners, first emit "newListener".
+  if (this._events.newListener)
+    this.emit('newListener', type,
+              isFunction(listener.listener) ?
+              listener.listener : listener);
+
+  if (!this._events[type])
+    // Optimize the case of one listener. Don't need the extra array object.
+    this._events[type] = listener;
+  else if (isObject(this._events[type]))
+    // If we've already got an array, just append.
+    this._events[type].push(listener);
+  else
+    // Adding the second element, need to change to array.
+    this._events[type] = [this._events[type], listener];
+
+  // Check for listener leak
+  if (isObject(this._events[type]) && !this._events[type].warned) {
+    if (!isUndefined(this._maxListeners)) {
+      m = this._maxListeners;
+    } else {
+      m = EventEmitter.defaultMaxListeners;
+    }
+
+    if (m && m > 0 && this._events[type].length > m) {
+      this._events[type].warned = true;
+      console.error('(node) warning: possible EventEmitter memory ' +
+                    'leak detected. %d listeners added. ' +
+                    'Use emitter.setMaxListeners() to increase limit.',
+                    this._events[type].length);
+      if (typeof console.trace === 'function') {
+        // not supported in IE 10
+        console.trace();
+      }
+    }
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.once = function(type, listener) {
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  var fired = false;
+
+  function g() {
+    this.removeListener(type, g);
+
+    if (!fired) {
+      fired = true;
+      listener.apply(this, arguments);
+    }
+  }
+
+  g.listener = listener;
+  this.on(type, g);
+
+  return this;
+};
+
+// emits a 'removeListener' event iff the listener was removed
+EventEmitter.prototype.removeListener = function(type, listener) {
+  var list, position, length, i;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events || !this._events[type])
+    return this;
+
+  list = this._events[type];
+  length = list.length;
+  position = -1;
+
+  if (list === listener ||
+      (isFunction(list.listener) && list.listener === listener)) {
+    delete this._events[type];
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+
+  } else if (isObject(list)) {
+    for (i = length; i-- > 0;) {
+      if (list[i] === listener ||
+          (list[i].listener && list[i].listener === listener)) {
+        position = i;
+        break;
+      }
+    }
+
+    if (position < 0)
+      return this;
+
+    if (list.length === 1) {
+      list.length = 0;
+      delete this._events[type];
+    } else {
+      list.splice(position, 1);
+    }
+
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.removeAllListeners = function(type) {
+  var key, listeners;
+
+  if (!this._events)
+    return this;
+
+  // not listening for removeListener, no need to emit
+  if (!this._events.removeListener) {
+    if (arguments.length === 0)
+      this._events = {};
+    else if (this._events[type])
+      delete this._events[type];
+    return this;
+  }
+
+  // emit removeListener for all listeners on all events
+  if (arguments.length === 0) {
+    for (key in this._events) {
+      if (key === 'removeListener') continue;
+      this.removeAllListeners(key);
+    }
+    this.removeAllListeners('removeListener');
+    this._events = {};
+    return this;
+  }
+
+  listeners = this._events[type];
+
+  if (isFunction(listeners)) {
+    this.removeListener(type, listeners);
+  } else if (listeners) {
+    // LIFO order
+    while (listeners.length)
+      this.removeListener(type, listeners[listeners.length - 1]);
+  }
+  delete this._events[type];
+
+  return this;
+};
+
+EventEmitter.prototype.listeners = function(type) {
+  var ret;
+  if (!this._events || !this._events[type])
+    ret = [];
+  else if (isFunction(this._events[type]))
+    ret = [this._events[type]];
+  else
+    ret = this._events[type].slice();
+  return ret;
+};
+
+EventEmitter.prototype.listenerCount = function(type) {
+  if (this._events) {
+    var evlistener = this._events[type];
+
+    if (isFunction(evlistener))
+      return 1;
+    else if (evlistener)
+      return evlistener.length;
+  }
+  return 0;
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  return emitter.listenerCount(type);
+};
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(5);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(26);
+
+var _event = __webpack_require__(6);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MobileClient = function (_React$PureComponent) {
+  _inherits(MobileClient, _React$PureComponent);
+
+  function MobileClient() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, MobileClient);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MobileClient.__proto__ || Object.getPrototypeOf(MobileClient)).call.apply(_ref, [this].concat(args))), _this), _this.removeItem = function () {
+      _event.appEvents.emit('EItemRemove', _this.props.client.id);
+    }, _this.editItem = function () {
+      _event.appEvents.emit('EItemEdit', _this.props.client.id);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(MobileClient, [{
+    key: 'render',
+    value: function render() {
+      console.log('MobileClient id: ' + this.props.client.id + ' rendered');
+
+      return _react2.default.createElement(
+        'tr',
+        null,
+        _react2.default.createElement(
+          'td',
+          null,
+          this.props.client.name
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.props.client.surName
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.props.client.secondName
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.props.client.balance
+        ),
+        _react2.default.createElement(
+          'td',
+          { className: this.props.client.status === 0 ? 'unavail' : 'avail' },
+          this.props.client.status === 0 ? '\u041D\u0435\u0430\u043A\u0442\u0438\u0432\u0435\u043D' : '\u0410\u043A\u0442\u0438\u0432\u0435\u043D'
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          _react2.default.createElement(
+            'button',
+            { className: 'btn edit-btn', onClick: this.editItem },
+            '\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C'
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'btn delete-btn', onClick: this.removeItem },
+            '\u0423\u0434\u0430\u043B\u0438\u0442\u044C'
+          )
+        )
+      );
+    }
+  }]);
+
+  return MobileClient;
+}(_react2.default.PureComponent);
+
+MobileClient.propTypes = {
+  client: _propTypes2.default.shape({
+    id: _propTypes2.default.number.isRequired,
+    name: _propTypes2.default.string.isRequired,
+    surName: _propTypes2.default.string.isRequired,
+    secondName: _propTypes2.default.string.isRequired,
+    balance: _propTypes2.default.number.isRequired,
+    status: _propTypes2.default.number.isRequired // 0 - неактивен, 1 - активен
+  }).isRequired
+};
+exports.default = MobileClient;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(5);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(28);
+
+var _event = __webpack_require__(6);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MobileForm = function (_React$PureComponent) {
+  _inherits(MobileForm, _React$PureComponent);
+
+  function MobileForm(props) {
+    _classCallCheck(this, MobileForm);
+
+    var _this = _possibleConstructorReturn(this, (MobileForm.__proto__ || Object.getPrototypeOf(MobileForm)).call(this));
+
+    _this.submitForm = function (e) {
+      e.preventDefault();
+      var _this$inputs = _this.inputs,
+          surName = _this$inputs.surName,
+          name = _this$inputs.name,
+          secondName = _this$inputs.secondName,
+          balance = _this$inputs.balance;
+
+      if (_this.state.formMode === 1) {
+        _event.appEvents.emit('EEditClient', { id: _this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value), status: _this.calcClientStatus(balance.value) });
+      } else {
+        _event.appEvents.emit('EAddClient', { id: _this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value), status: _this.calcClientStatus(balance.value) });
+      }
+    };
+
+    _this.calcClientStatus = function (balance) {
+      return balance >= 0 ? 1 : 0;
+    };
+
+    _this.closeForm = function () {
+      _event.appEvents.emit('ECloseForm', 0);
+    };
+
+    _this.setInput = function (element) {
+      if (element) {
+        _this.inputs[element.name] = element;
+      }
+    };
+
+    _this.inputs = {
+      surName: null,
+      name: null,
+      secondName: null,
+      balance: null
+    };
+    _this.state = {
+      formMode: props.formMode
+    };
+    return _this;
+  }
+
+  _createClass(MobileForm, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('componentDidMount MobileForm');
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      console.log('componentDidUpdate MobileForm');
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      console.log('MobileForm render');
+
+      return _react2.default.createElement(
+        'form',
+        { className: 'mForm', onSubmit: this.submitForm },
+        _react2.default.createElement(
+          'div',
+          { className: 'mForm__title' },
+          this.props.title
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mForm__row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-name' },
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'id' },
+              'Id'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-value' },
+            this.props.client.id
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mForm__row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-name' },
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'id' },
+              '\u0424\u0430\u043C\u0438\u043B\u0438\u044F'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-value' },
+            _react2.default.createElement('input', { type: 'text', id: 'surName', ref: this.setInput, name: 'surName', defaultValue: this.props.client.surName, required: true })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mForm__row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-name' },
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'id' },
+              '\u0418\u043C\u044F'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-value' },
+            _react2.default.createElement('input', { type: 'text', id: 'name', name: 'name', ref: this.setInput, defaultValue: this.props.client.name, readOnly: this.props.formMode === 1, required: true })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mForm__row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-name' },
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'id' },
+              '\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-value' },
+            _react2.default.createElement('input', { type: 'text', id: 'secondName', name: 'secondName', ref: this.setInput, defaultValue: this.props.client.secondName, readOnly: this.props.formMode === 1, required: true })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mForm__row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-name' },
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'id' },
+              '\u0411\u0430\u043B\u0430\u043D\u0441'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'mForm__cell-value' },
+            _react2.default.createElement('input', { type: 'text', id: 'balance', name: 'balance', ref: this.setInput, defaultValue: this.props.client.balance, required: true })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mForm__btn-wrap' },
+          _react2.default.createElement(
+            'button',
+            { className: 'btn edit-btn', type: 'submit' },
+            this.props.btnText
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'btn delete-btn', type: 'reset', onClick: this.closeForm },
+            '\u041E\u0442\u043C\u0435\u043D\u0430'
+          )
+        )
+      );
+    }
+  }]);
+
+  return MobileForm;
+}(_react2.default.PureComponent);
+
+MobileForm.proptypes = {
+  btnText: _propTypes2.default.string.isRequired,
+  title: _propTypes2.default.string.isRequired,
+  client: _propTypes2.default.shape({
+    id: _propTypes2.default.number.isRequired,
+    name: _propTypes2.default.string.isRequired,
+    surName: _propTypes2.default.string.isRequired,
+    secondName: _propTypes2.default.string.isRequired,
+    balance: _propTypes2.default.number.isRequired
+  }).isRequired,
+  formMode: _propTypes2.default.number.isRequired
+};
+exports.default = MobileForm;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports) {
+
+module.exports = {"currCompanyName":"Velcom","clients":[{"id":1,"name":"Виталий","surName":"Новиков","secondName":"Петрович","balance":300,"status":1},{"id":2,"name":"Александ","surName":"Глеб","secondName":"Юрьевич","balance":180,"status":1},{"id":3,"name":"Вячеслав","surName":"Глеб","secondName":"Юрьевич","balance":-100,"status":0}]}
 
 /***/ })
 /******/ ]);
