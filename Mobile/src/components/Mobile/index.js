@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css'
-import {appEvents} from "../event";
+import {appEvents} from '../event';
 
 import MobileClient from '../MobileClient/index'
 import MobileForm from '../MobileForm/index'
@@ -24,9 +24,11 @@ class Mobile extends React.PureComponent {
 
   state = {
     clients: this.props.clients,
+    filteredClients: this.props.clients,
     formMode: 0, // 1 - форма редактирования, 2 - форма добавления,
     clientToEdit: null,
-    currentCompany: this.props.currCompanyName
+    currentCompany: this.props.currCompanyName,
+    filterMod: 'all'
   };
 
   componentDidMount() {
@@ -47,26 +49,27 @@ class Mobile extends React.PureComponent {
 
   // forms
   editClient = (editedClient) => {
-    console.log('cleintEditted');
-    this.setState({clients: this.state.clients.map((client) => {
-        if (client.id === editedClient.id) {
-          client = editedClient;
-        }
-        return client;
-      }), formMode: 0});
-  };
+    const editedClients = this.state.clients.map((client) => {
+      if (client.id === editedClient.id && (client.surName !== editedClient.surName || client.balance !== editedClient.balance)) {
+        client = editedClient;
+      }
+      return client;
+    });
+    this.setState({clients: editedClients, filteredClients: this.filterList(editedClients), formMode: 0, clientToEdit: null});
+};
 
   addClient = (client) => {
-    console.log('clientAdded');
-    this.setState({clients: [...this.state.clients, client], formMode: 0});
+    const addedClients = [...this.state.clients, client];
+    this.setState({clients: addedClients, filteredClients: this.filterList(addedClients), formMode: 0, clientToEdit: null});
   };
 
   onClientRemove = (id) => {
-    this.setState({clients: this.state.clients.filter((client) => {
-        if (client.id !== id) {
-          return client
-        }
-      })});
+    const clients = this.state.clients.filter((client) => {
+      if (client.id !== id) {
+        return client
+      }
+    });
+    this.setState({clients: clients, filteredClients: this.filterList(clients)});
   };
 
   onClientEdit = (id) => {
@@ -74,7 +77,7 @@ class Mobile extends React.PureComponent {
   };
 
   onClientAdd = () => {
-    const id = this.state.clients[this.state.clients.length - 1].id + 1;
+    const id = this.state.clients.length ? this.state.clients[this.state.clients.length - 1].id + 1 : 1;
     this.setState({formMode: 2, clientToEdit: {id: id, name: '', surName: '', secondName: '', balance: 0, status: ''}})
   };
 
@@ -88,27 +91,24 @@ class Mobile extends React.PureComponent {
     this.setState({currentCompany: e.target.value})
   };
 
-  filterList = (e) => {
-    let clients = this.props.clients;
-    switch (e.target.value) {
-      case 'all':
-        // this.setState({clients: this.s})
-        break;
-      case 'active':
-        clients = clients.filter((client) => client.status === 1);
-        break;
-      case 'unavail':
-        clients = clients.filter((client) => client.status === 0);
-        break;
+  filterList = (arr, type = this.state.filterMod) => {
+    if (type === 'all') {
+      return arr;
+    } else {
+      return arr.filter((item) => type === 'active' ? item.status === 1 : item.status === 0);
     }
-    this.setState({clients: clients})
+  };
+
+  onFilterClick = (e) => {
+    const type = e.target.value;
+    this.setState({filterMod: type, filteredClients: this.filterList(this.state.clients, type)})
   };
 
   render() {
 
     console.log('MobileCompany render');
 
-    const clients = this.state.clients.map((client) => {
+    const clients = this.state.filteredClients.map((client) => {
       return <MobileClient key={client.id} client={client}/>
     });
 
@@ -120,9 +120,9 @@ class Mobile extends React.PureComponent {
           <button className='btn' value='Mts' onClick={this.changeCompanyName}>Mts</button>
         </div>
         <div className='mobile__filter'>
-          <button className='btn' value='all' onClick={this.filterList}>Все</button>
-          <button className='btn' value='active' onClick={this.filterList}>Активные</button>
-          <button className='btn' value='unavail' onClick={this.filterList}>Заблокированные</button>
+          <button className='btn' value='all' onClick={this.onFilterClick}>Все</button>
+          <button className='btn' value='active' onClick={this.onFilterClick}>Активные</button>
+          <button className='btn' value='unavail' onClick={this.onFilterClick}>Заблокированные</button>
         </div>
         <table className='mobile__clients'>
           <thead>
@@ -137,7 +137,12 @@ class Mobile extends React.PureComponent {
           </thead>
           <tbody>
             {
+              this.state.filteredClients.length ?
               clients
+              :
+              <tr>
+                <td>Клиентов нет</td>
+              </tr>
             }
           </tbody>
         </table>

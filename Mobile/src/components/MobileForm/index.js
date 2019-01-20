@@ -6,7 +6,6 @@ import {appEvents} from '../event'
 class MobileForm extends React.PureComponent {
 
   constructor(props) {
-    // console.log('mew');
     super();
     this.inputs = {
       surName: null,
@@ -36,7 +35,7 @@ class MobileForm extends React.PureComponent {
     console.log('componentDidMount MobileForm');
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     console.log('componentDidUpdate MobileForm');
   }
 

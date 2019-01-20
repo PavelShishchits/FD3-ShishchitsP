@@ -23,7 +23,7 @@ img {
   font-size:  40px;
 }
 
-.mobile__clients tr + .mobile__clients tr {
+.mobile__clients tr + tr {
   border-top: 1px solid #e5e5e5;
 }
 
@@ -32,6 +32,10 @@ img {
   box-shadow: 0 8px 19.2px 0 rgba(0,0,0,.13);
   margin-bottom:  30px;
   width: 100%;
+  font-size: 16px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #e5e5e5;
 }
 
 .mobile__clients thead {
