@@ -4,6 +4,6 @@ import Mobile from "./components/Mobile/index";
 const mobileData = require('./data.json');
 
 ReactDOM.render(
-    <Mobile clients={mobileData.clients}/>,
+    <Mobile currCompanyName={mobileData.currCompanyName} clients={mobileData.clients}/>,
     document.querySelector('.container')
 );

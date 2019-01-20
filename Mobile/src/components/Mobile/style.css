@@ -19,6 +19,10 @@ img {
   padding: 0 15px;
 }
 
+.mobile__name {
+  font-size:  40px;
+}
+
 .mobile__clients tr + .mobile__clients tr {
   border-top: 1px solid #e5e5e5;
 }

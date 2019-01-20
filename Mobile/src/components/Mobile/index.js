@@ -9,6 +9,7 @@ import MobileForm from '../MobileForm/index'
 class Mobile extends React.PureComponent {
 
   static propTypes = {
+    currCompanyName: PropTypes.string.isRequired,
     clients: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -17,14 +18,15 @@ class Mobile extends React.PureComponent {
         secondName: PropTypes.string.isRequired,
         balance: PropTypes.number.isRequired,
         status: PropTypes.number.isRequired // 0 - неактивен, 1 - активен
-      })
-    )
+      }).isRequired
+    ).isRequired
   };
 
   state = {
     clients: this.props.clients,
     formMode: 0, // 1 - форма редактирования, 2 - форма добавления,
-    clientToEdit: null
+    clientToEdit: null,
+    currentCompany: this.props.currCompanyName
   };
 
   componentDidMount() {
@@ -43,6 +45,7 @@ class Mobile extends React.PureComponent {
     appEvents.removeListener('ECloseForm', this.closeForm);
   }
 
+  // forms
   editClient = (editedClient) => {
     console.log('cleintEditted');
     this.setState({clients: this.state.clients.map((client) => {
@@ -50,12 +53,12 @@ class Mobile extends React.PureComponent {
           client = editedClient;
         }
         return client;
-      })});
+      }), formMode: 0});
   };
 
   addClient = (client) => {
     console.log('clientAdded');
-    this.setState({clients: [...this.state.clients, client]});
+    this.setState({clients: [...this.state.clients, client], formMode: 0});
   };
 
   onClientRemove = (id) => {
@@ -79,6 +82,28 @@ class Mobile extends React.PureComponent {
     this.setState({formMode: formMode});
   };
 
+  // end of forms
+
+  changeCompanyName = (e) => {
+    this.setState({currentCompany: e.target.value})
+  };
+
+  filterList = (e) => {
+    let clients = this.props.clients;
+    switch (e.target.value) {
+      case 'all':
+        // this.setState({clients: this.s})
+        break;
+      case 'active':
+        clients = clients.filter((client) => client.status === 1);
+        break;
+      case 'unavail':
+        clients = clients.filter((client) => client.status === 0);
+        break;
+    }
+    this.setState({clients: clients})
+  };
+
   render() {
 
     console.log('MobileCompany render');
@@ -89,14 +114,15 @@ class Mobile extends React.PureComponent {
 
     return (
       <div className='mobile container'>
+        <div className="mobile__name">{this.state.currentCompany}</div>
         <div className='mobile__btn-wrap'>
-          <button className='btn'>Velcom</button>
-          <button className='btn'>Mts</button>
+          <button className='btn' value='Velcom' onClick={this.changeCompanyName}>Velcom</button>
+          <button className='btn' value='Mts' onClick={this.changeCompanyName}>Mts</button>
         </div>
         <div className='mobile__filter'>
-          <button className='btn'>Все</button>
-          <button className='btn'>Активные</button>
-          <button className='btn'>Заблокированные</button>
+          <button className='btn' value='all' onClick={this.filterList}>Все</button>
+          <button className='btn' value='active' onClick={this.filterList}>Активные</button>
+          <button className='btn' value='unavail' onClick={this.filterList}>Заблокированные</button>
         </div>
         <table className='mobile__clients'>
           <thead>

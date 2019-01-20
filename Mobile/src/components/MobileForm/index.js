@@ -32,15 +32,6 @@ class MobileForm extends React.PureComponent {
     formMode: PropTypes.number.isRequired
   };
 
-  // componentWillUnmount() {
-  //   this.inputs = {
-  //     surName: null,
-  //     name: null,
-  //     secondName: null,
-  //     balance: null
-  //   };
-  // }
-
   componentDidMount() {
     console.log('componentDidMount MobileForm');
   }
