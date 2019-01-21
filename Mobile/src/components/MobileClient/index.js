@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css'
+import './style.scss';
 import {appEvents} from '../event';
 
 class MobileClient extends React.PureComponent {
