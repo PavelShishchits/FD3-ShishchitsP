@@ -47,7 +47,6 @@ class Mobile extends React.PureComponent {
     appEvents.removeListener('ECloseForm', this.closeForm);
   }
 
-  // forms
   editClient = (editedClient) => {
     const editedClients = this.state.clients.map((client) => {
       if (client.id === editedClient.id && (client.surName !== editedClient.surName || client.balance !== editedClient.balance)) {
@@ -55,12 +54,22 @@ class Mobile extends React.PureComponent {
       }
       return client;
     });
-    this.setState({clients: editedClients, filteredClients: this.filterList(editedClients), formMode: 0, clientToEdit: null});
-};
+    this.setState({
+      clients: editedClients,
+      filteredClients: this.filterList(editedClients),
+      formMode: 0,
+      clientToEdit: null
+    });
+  };
 
   addClient = (client) => {
     const addedClients = [...this.state.clients, client];
-    this.setState({clients: addedClients, filteredClients: this.filterList(addedClients), formMode: 0, clientToEdit: null});
+    this.setState({
+      clients: addedClients,
+      filteredClients: this.filterList(addedClients),
+      formMode: 0,
+      clientToEdit: null
+    });
   };
 
   onClientRemove = (id) => {
@@ -84,8 +93,6 @@ class Mobile extends React.PureComponent {
   closeForm = (formMode) => {
     this.setState({formMode: formMode});
   };
-
-  // end of forms
 
   changeCompanyName = (e) => {
     this.setState({currentCompany: e.target.value})
@@ -126,24 +133,24 @@ class Mobile extends React.PureComponent {
         </div>
         <table className='mobile__clients'>
           <thead>
-            <tr>
-              <td>Фамилия</td>
-              <td>Имя</td>
-              <td>Отчетсво</td>
-              <td>Баланс</td>
-              <td>Статус</td>
-              <td>Управление</td>
-            </tr>
+          <tr>
+            <td>Фамилия</td>
+            <td>Имя</td>
+            <td>Отчетсво</td>
+            <td>Баланс</td>
+            <td>Статус</td>
+            <td>Управление</td>
+          </tr>
           </thead>
           <tbody>
-            {
-              this.state.filteredClients.length ?
+          {
+            this.state.filteredClients.length ?
               clients
               :
               <tr>
                 <td>Клиентов нет</td>
               </tr>
-            }
+          }
           </tbody>
         </table>
         <div className='mobile__add'>
@@ -152,11 +159,13 @@ class Mobile extends React.PureComponent {
         <div className="mobile__form">
           {
             (this.state.formMode === 1) &&
-            <MobileForm key={this.state.clientToEdit.id} btnText='Редактировать' title='Редактировать данные клиента' client={this.state.clientToEdit} formMode={this.state.formMode}/>
+            <MobileForm key={this.state.clientToEdit.id} btnText='Редактировать' title='Редактировать данные клиента'
+                        client={this.state.clientToEdit} formMode={this.state.formMode}/>
           }
           {
             (this.state.formMode === 2) &&
-            <MobileForm btnText='Добавить' title='Добавить нового клиента' client={this.state.clientToEdit} formMode={this.state.formMode}/>
+            <MobileForm btnText='Добавить' title='Добавить нового клиента' client={this.state.clientToEdit}
+                        formMode={this.state.formMode}/>
           }
         </div>
       </div>

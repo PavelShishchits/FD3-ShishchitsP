@@ -1,14 +1,13 @@
-﻿'use strict';
+﻿"use strict";
 
 import React from 'react';
 import renderer from 'react-test-renderer';
 
 import Mobile from '../src/components/Mobile/index';
+
 const mobileData = require('../src/data.json');
 
-console.log(Mobile);
-
-test('работа TestComponent', () => {
+test('работа компонента Mobile', () => {
 
   const component = renderer.create(
     <Mobile currCompanyName={mobileData.currCompanyName} clients={mobileData.clients}/>
@@ -16,5 +15,5 @@ test('работа TestComponent', () => {
 
   let componentTree = component.toJSON();
   expect(componentTree).toMatchSnapshot();
-    
+
 });
