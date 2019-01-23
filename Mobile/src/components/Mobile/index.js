@@ -120,9 +120,9 @@ class Mobile extends React.PureComponent {
           <button className='btn' value='Mts' onClick={this.changeCompanyName}>Mts</button>
         </div>
         <div className='mobile__filter'>
-          <button className='btn' value='all' onClick={this.onFilterClick}>Все</button>
-          <button className='btn' value='active' onClick={this.onFilterClick}>Активные</button>
-          <button className='btn' value='unavail' onClick={this.onFilterClick}>Заблокированные</button>
+          <button className='btn filter-all' value='all' onClick={this.onFilterClick}>Все</button>
+          <button className='btn filter-active' value='active' onClick={this.onFilterClick}>Активные</button>
+          <button className='btn filter-unavail' value='unavail' onClick={this.onFilterClick}>Заблокированные</button>
         </div>
         <table className='mobile__clients'>
           <thead>

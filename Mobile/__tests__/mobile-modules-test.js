@@ -15,7 +15,7 @@ describe('AddClient func tests', () => {
     expect(mModules.addClient(mobileData.clients, mobileData.newClient)).toContain(mobileData.newClient);
   });
 
-  test('Reference to array always should change', () => {
+  test('Reference to array always should be change', () => {
     expect(mModules.addClient(mobileData.clients, mobileData.newClient)).not.toBe(mobileData.clients);
   });
 });
