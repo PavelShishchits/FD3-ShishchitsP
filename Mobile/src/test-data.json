@@ -1,0 +1,37 @@
+{
+  "currCompanyName": "Velcom",
+  "clients": [
+    {
+      "id": 1,
+      "name": "Виталий",
+      "surName": "Новиков",
+      "secondName": "Петрович",
+      "balance": 300,
+      "status": 1
+    },
+    {
+      "id": 2,
+      "name": "Александ",
+      "surName": "Глеб",
+      "secondName": "Юрьевич",
+      "balance": 180,
+      "status": 1
+    },
+    {
+      "id": 3,
+      "name": "Вячеслав",
+      "surName": "Глеб",
+      "secondName": "Юрьевич",
+      "balance": -100,
+      "status": 0
+    }
+  ],
+  "newClient": {
+    "id": 4,
+    "name": "Габриель",
+    "surName": "Батистута",
+    "secondName": "Юрьевич",
+    "balance": 5,
+    "status": 1
+  }
+}

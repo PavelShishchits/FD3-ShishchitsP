@@ -32,11 +32,11 @@ class MobileForm extends React.PureComponent {
   };
 
   componentDidMount() {
-    console.log('componentDidMount MobileForm');
+    // console.log('componentDidMount MobileForm');
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate MobileForm');
+    // console.log('componentDidUpdate MobileForm');
   }
 
   submitForm = (e) => {
@@ -63,7 +63,7 @@ class MobileForm extends React.PureComponent {
 
   render() {
 
-    console.log('MobileForm render');
+    // console.log('MobileForm render');
 
     return (
       <form className='mForm' onSubmit={this.submitForm}>

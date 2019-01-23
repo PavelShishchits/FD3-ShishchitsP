@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import './style.scss';
 import {appEvents} from '../event';
 
-import MobileClient from '../MobileClient/index'
-import MobileForm from '../MobileForm/index'
+import MobileClient from '../MobileClient/index';
+import MobileForm from '../MobileForm/index';
+
+import * as mModules from '../../modules/mobile';
 
 class Mobile extends React.PureComponent {
 
@@ -32,7 +34,7 @@ class Mobile extends React.PureComponent {
   };
 
   componentDidMount() {
-    appEvents.addListener('EItemRemove', this.onClientRemove);
+    appEvents.addListener('EItemRemove', this.removeClient);
     appEvents.addListener('EItemEdit', this.onClientEdit);
     appEvents.addListener('EEditClient', this.editClient);
     appEvents.addListener('EAddClient', this.addClient);
@@ -40,7 +42,7 @@ class Mobile extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    appEvents.removeListener('EitemRemove', this.onClientRemove);
+    appEvents.removeListener('EitemRemove', this.removeClient);
     appEvents.removeListener('EItemEdit', this.onClientEdit);
     appEvents.removeListener('EEditClient', this.editClient);
     appEvents.removeListener('EAddClient', this.addClient);
@@ -48,12 +50,7 @@ class Mobile extends React.PureComponent {
   }
 
   editClient = (editedClient) => {
-    const editedClients = this.state.clients.map((client) => {
-      if (client.id === editedClient.id && (client.surName !== editedClient.surName || client.balance !== editedClient.balance)) {
-        client = editedClient;
-      }
-      return client;
-    });
+    const editedClients = mModules.editClient(this.state.clients, editedClient);
     this.setState({
       clients: editedClients,
       filteredClients: this.filterList(editedClients),
@@ -63,7 +60,7 @@ class Mobile extends React.PureComponent {
   };
 
   addClient = (client) => {
-    const addedClients = [...this.state.clients, client];
+    const addedClients = mModules.addClient(this.state.clients, client);
     this.setState({
       clients: addedClients,
       filteredClients: this.filterList(addedClients),
@@ -72,12 +69,8 @@ class Mobile extends React.PureComponent {
     });
   };
 
-  onClientRemove = (id) => {
-    const clients = this.state.clients.filter((client) => {
-      if (client.id !== id) {
-        return client
-      }
-    });
+  removeClient = (id) => {
+    const clients = mModules.removeClient(this.state.clients, id);
     this.setState({clients: clients, filteredClients: this.filterList(clients), formMode: 0});
   };
 
@@ -113,7 +106,7 @@ class Mobile extends React.PureComponent {
 
   render() {
 
-    console.log('MobileCompany render');
+    // console.log('MobileCompany render');
 
     const clients = this.state.filteredClients.map((client) => {
       return <MobileClient key={client.id} client={client}/>
@@ -154,7 +147,7 @@ class Mobile extends React.PureComponent {
           </tbody>
         </table>
         <div className='mobile__add'>
-          <button className='btn edit-btn' onClick={this.onClientAdd}>Добавить клиента</button>
+          <button className='btn edit-btn add-client' onClick={this.onClientAdd}>Добавить клиента</button>
         </div>
         <div className="mobile__form">
           {

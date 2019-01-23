@@ -16,4 +16,9 @@ test('работа компонента Mobile', () => {
   let componentTree = component.toJSON();
   expect(componentTree).toMatchSnapshot();
 
+  const addBtn = component.root.find((el) => el.props.className === 'btn edit-btn add-client');
+
+  addBtn.props.onClick(); // Кнопка добавления клиента
+  expect(componentTree).toMatchSnapshot();
+
 });
