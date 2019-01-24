@@ -1,49 +1,62 @@
 ﻿"use strict";
 
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 
 import Mobile from '../src/components/Mobile/index';
 
 const mobileData = require('../src/test-data.json');
 
-test('работа компонента Mobile', () => {
+describe('Mobile\'s component filter work ', () => {
 
-  const component = renderer.create(
-    <Mobile currCompanyName={mobileData.currCompanyName} clients={mobileData.clients}/>
-  );
+  const activeMobileClients = mobileData.clients.filter((client) => client.status === 1);
+  const unavailMobileClients = mobileData.clients.filter((client) => client.status === 0);
 
-  let componentTree = component.toJSON();
-  expect(componentTree).toMatchSnapshot();
+  it('should render only clients with active status', () => {
+    var mockValue = {
+      target: {
+        value: 'active'
+      }
+    };
+    const mobileComponent = shallow(<Mobile clients={mobileData.clients} currCompanyName={mobileData.currCompanyName} />);
+    mobileComponent.find('.filter-all').simulate('click', mockValue);
 
-  // component.root.instance.state.filterMod = 'active';
-  // expect(componentTree).toMatchSnapshot();
+    const filteredClients = mobileComponent.find('MobileClient');
+    expect(filteredClients.length).toBe(activeMobileClients.length);
 
-  // component.root.instance.state.filterMod = 'unavail';
+    expect(mobileComponent).toMatchSnapshot();
+  });
 
-  // const instance = component.root.instance;
-  // instance.setState({filterMod: 'active'}, () => {
-  //   componentTree = component.toJSON();
-  //   expect(componentTree).toMatchSnapshot();
-  // });
+  it('should render only clients with unavail status', () => {
+    var mockValue = {
+      target: {
+        value: 'unavail'
+      }
+    };
 
+    const mobileComponent = shallow(<Mobile clients={mobileData.clients} currCompanyName={mobileData.currCompanyName} />);
+    mobileComponent.find('.filter-all').simulate('click', mockValue);
 
-  const activeBtn = component.root.find((el) => el.props.className === 'btn filter-active');
-  // const unavailBtn = component.root.find((el) => el.props.className === 'btn filter-unavail');
-  // const allBtn = component.root.find((el) => el.props.className === 'btn filter-all');
-  //
-  activeBtn.props.onClick(); // Кнопка фильтрации клинетов со статусом "активен"
+    const filteredClients = mobileComponent.find('MobileClient');
+    expect(filteredClients.length).toBe(unavailMobileClients.length);
 
-  componentTree = component.toJSON();
-  expect(componentTree).toMatchSnapshot();
+    expect(mobileComponent).toMatchSnapshot();
+  });
 
-  //
-  // allBtn.props.onClick(); // Кнопка фильтрации клинетов со статусом "все"
-  // expect(componentTree).toMatchSnapshot();
-  //
-  // unavailBtn.props.onClick(); // Кнопка фильтрации клинетов со статусом "неактивен"
-  // expect(componentTree).toMatchSnapshot();
-  //
-  // allBtn.props.onClick(); // Кнопка фильтрации клинетов со статусом "все"
-  // expect(componentTree).toMatchSnapshot();
+  it('should render all clients', () => {
+    var mockValue = {
+      target: {
+        value: 'all'
+      }
+    };
+
+    const mobileComponent = shallow(<Mobile clients={mobileData.clients} currCompanyName={mobileData.currCompanyName} />);
+    mobileComponent.find('.filter-all').simulate('click', mockValue);
+
+    const filteredClients = mobileComponent.find('MobileClient');
+    expect(filteredClients.length).toBe(mobileData.clients.length);
+
+    expect(mobileComponent).toMatchSnapshot();
+  });
+
 });
