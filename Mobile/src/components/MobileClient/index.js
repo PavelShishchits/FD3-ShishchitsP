@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {NavLink} from "react-router-dom";
 import './style.scss';
 import {appEvents} from '../event';
 
@@ -29,8 +30,8 @@ class MobileClient extends React.PureComponent {
 
     return (
       <tr>
+        <td><NavLink to={`/client/${this.props.client.id}`}>{this.props.client.surName}</NavLink></td>
         <td>{this.props.client.name}</td>
-        <td>{this.props.client.surName}</td>
         <td>{this.props.client.secondName}</td>
         <td>{this.props.client.balance}</td>
         <td className={this.props.client.status === 0 ? 'unavail' : 'avail'}>{this.props.client.status === 0 ? `Неактивен` : `Активен`}</td>

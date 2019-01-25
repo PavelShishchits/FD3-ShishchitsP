@@ -11,7 +11,6 @@ import * as mModules from '../../modules/mobile';
 class Mobile extends React.PureComponent {
 
   static propTypes = {
-    currCompanyName: PropTypes.string.isRequired,
     clients: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -29,7 +28,6 @@ class Mobile extends React.PureComponent {
     filteredClients: this.props.clients,
     formMode: 0, // 1 - форма редактирования, 2 - форма добавления,
     clientToEdit: null,
-    currentCompany: this.props.currCompanyName,
     filterMod: 'all'
   };
 
@@ -87,10 +85,6 @@ class Mobile extends React.PureComponent {
     this.setState({formMode: formMode});
   };
 
-  changeCompanyName = (e) => {
-    this.setState({currentCompany: e.target.value})
-  };
-
   filterList = (arr, type = this.state.filterMod) => {
     if (type === 'all') {
       return arr;
@@ -113,12 +107,7 @@ class Mobile extends React.PureComponent {
     });
 
     return (
-      <div className='mobile container'>
-        <div className="mobile__name">{this.state.currentCompany}</div>
-        <div className='mobile__btn-wrap'>
-          <button className='btn' value='Velcom' onClick={this.changeCompanyName}>Velcom</button>
-          <button className='btn' value='Mts' onClick={this.changeCompanyName}>Mts</button>
-        </div>
+      <div className='mobile'>
         <div className='mobile__filter'>
           <button className='btn filter-all' value='all' onClick={this.onFilterClick}>Все</button>
           <button className='btn filter-active' value='active' onClick={this.onFilterClick}>Активные</button>

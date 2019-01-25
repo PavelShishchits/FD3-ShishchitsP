@@ -1,10 +1,16 @@
 ﻿import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom';
 import './app.scss';
-import Mobile from "./components/Mobile/index";
-const mobileData = require('./data.json');
+import Navigation from './components/Navigation/index';
+import Routes from './pages/Routes';
 
 ReactDOM.render(
-  <Mobile currCompanyName={mobileData.currCompanyName} clients={mobileData.clients}/>,
-  document.querySelector('.main-wrap')
+  <BrowserRouter>
+    <div className='container'>
+      <Navigation />
+      <Routes />
+    </div>
+  </BrowserRouter>
+  ,document.querySelector('.main-wrap')
 );

@@ -1,0 +1,19 @@
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+
+  &-link {
+    padding: 5px 10px;
+
+    &:not(:last-child) {
+      margin-right:  10px;
+    }
+    //&--active {
+    //  color: red;
+    //}
+  }
+
+  &-link--active {
+    color: red;
+  }
+}
