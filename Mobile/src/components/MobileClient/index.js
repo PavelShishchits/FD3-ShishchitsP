@@ -7,7 +7,7 @@ import {appEvents} from '../event';
 class MobileClient extends React.PureComponent {
 
   static propTypes = {
-    path: PropTypes.string.isRequired,
+    // path: PropTypes.string.isRequired,
     client: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,

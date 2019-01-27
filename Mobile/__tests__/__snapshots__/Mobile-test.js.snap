@@ -30,20 +30,13 @@ ShallowWrapper {
           "status": 0,
           "surName": "Глеб",
         },
-        Object {
-          "balance": -100,
-          "id": 5,
-          "name": "Вячеслав",
-          "secondName": "Юрьевич",
-          "status": 0,
-          "surName": "Глеб",
-        },
       ]
     }
     currCompanyName="Velcom"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -56,29 +49,6 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <div
-          className="mobile__name"
-        >
-          Velcom
-        </div>,
-        <div
-          className="mobile__btn-wrap"
-        >
-          <button
-            className="btn"
-            onClick={[Function]}
-            value="Velcom"
-          >
-            Velcom
-          </button>
-          <button
-            className="btn"
-            onClick={[Function]}
-            value="Mts"
-          >
-            Mts
-          </button>
-        </div>,
         <div
           className="mobile__filter"
         >
@@ -141,6 +111,7 @@ ShallowWrapper {
                   "surName": "Новиков",
                 }
               }
+              path={undefined}
             />
             <MobileClient
               client={
@@ -153,6 +124,7 @@ ShallowWrapper {
                   "surName": "Глеб",
                 }
               }
+              path={undefined}
             />
             <MobileClient
               client={
@@ -165,18 +137,7 @@ ShallowWrapper {
                   "surName": "Глеб",
                 }
               }
-            />
-            <MobileClient
-              client={
-                Object {
-                  "balance": -100,
-                  "id": 5,
-                  "name": "Вячеслав",
-                  "secondName": "Юрьевич",
-                  "status": 0,
-                  "surName": "Глеб",
-                }
-              }
+              path={undefined}
             />
           </tbody>
         </table>,
@@ -194,78 +155,10 @@ ShallowWrapper {
           className="mobile__form"
         />,
       ],
-      "className": "mobile container",
+      "className": "mobile",
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "Velcom",
-          "className": "mobile__name",
-        },
-        "ref": null,
-        "rendered": "Velcom",
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Velcom"
-            >
-              Velcom
-            </button>,
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Mts"
-            >
-              Mts
-            </button>,
-          ],
-          "className": "mobile__btn-wrap",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Velcom",
-              "className": "btn",
-              "onClick": [Function],
-              "value": "Velcom",
-            },
-            "ref": null,
-            "rendered": "Velcom",
-            "type": "button",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Mts",
-              "className": "btn",
-              "onClick": [Function],
-              "value": "Mts",
-            },
-            "ref": null,
-            "rendered": "Mts",
-            "type": "button",
-          },
-        ],
-        "type": "div",
-      },
       Object {
         "instance": null,
         "key": undefined,
@@ -383,6 +276,7 @@ ShallowWrapper {
                     "surName": "Новиков",
                   }
                 }
+                path={undefined}
               />
               <MobileClient
                 client={
@@ -395,6 +289,7 @@ ShallowWrapper {
                     "surName": "Глеб",
                   }
                 }
+                path={undefined}
               />
               <MobileClient
                 client={
@@ -407,18 +302,7 @@ ShallowWrapper {
                     "surName": "Глеб",
                   }
                 }
-              />
-              <MobileClient
-                client={
-                  Object {
-                    "balance": -100,
-                    "id": 5,
-                    "name": "Вячеслав",
-                    "secondName": "Юрьевич",
-                    "status": 0,
-                    "surName": "Глеб",
-                  }
-                }
+                path={undefined}
               />
             </tbody>,
           ],
@@ -569,6 +453,7 @@ ShallowWrapper {
                       "surName": "Новиков",
                     }
                   }
+                  path={undefined}
                 />,
                 <MobileClient
                   client={
@@ -581,6 +466,7 @@ ShallowWrapper {
                       "surName": "Глеб",
                     }
                   }
+                  path={undefined}
                 />,
                 <MobileClient
                   client={
@@ -593,18 +479,7 @@ ShallowWrapper {
                       "surName": "Глеб",
                     }
                   }
-                />,
-                <MobileClient
-                  client={
-                    Object {
-                      "balance": -100,
-                      "id": 5,
-                      "name": "Вячеслав",
-                      "secondName": "Юрьевич",
-                      "status": 0,
-                      "surName": "Глеб",
-                    }
-                  }
+                  path={undefined}
                 />,
               ],
             },
@@ -623,6 +498,7 @@ ShallowWrapper {
                     "status": 1,
                     "surName": "Новиков",
                   },
+                  "path": undefined,
                 },
                 "ref": null,
                 "rendered": null,
@@ -641,6 +517,7 @@ ShallowWrapper {
                     "status": 1,
                     "surName": "Глеб",
                   },
+                  "path": undefined,
                 },
                 "ref": null,
                 "rendered": null,
@@ -659,24 +536,7 @@ ShallowWrapper {
                     "status": 0,
                     "surName": "Глеб",
                   },
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": "5",
-                "nodeType": "class",
-                "props": Object {
-                  "client": Object {
-                    "balance": -100,
-                    "id": 5,
-                    "name": "Вячеслав",
-                    "secondName": "Юрьевич",
-                    "status": 0,
-                    "surName": "Глеб",
-                  },
+                  "path": undefined,
                 },
                 "ref": null,
                 "rendered": null,
@@ -746,29 +606,6 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <div
-            className="mobile__name"
-          >
-            Velcom
-          </div>,
-          <div
-            className="mobile__btn-wrap"
-          >
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Velcom"
-            >
-              Velcom
-            </button>
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Mts"
-            >
-              Mts
-            </button>
-          </div>,
-          <div
             className="mobile__filter"
           >
             <button
@@ -830,6 +667,7 @@ ShallowWrapper {
                     "surName": "Новиков",
                   }
                 }
+                path={undefined}
               />
               <MobileClient
                 client={
@@ -842,6 +680,7 @@ ShallowWrapper {
                     "surName": "Глеб",
                   }
                 }
+                path={undefined}
               />
               <MobileClient
                 client={
@@ -854,18 +693,7 @@ ShallowWrapper {
                     "surName": "Глеб",
                   }
                 }
-              />
-              <MobileClient
-                client={
-                  Object {
-                    "balance": -100,
-                    "id": 5,
-                    "name": "Вячеслав",
-                    "secondName": "Юрьевич",
-                    "status": 0,
-                    "surName": "Глеб",
-                  }
-                }
+                path={undefined}
               />
             </tbody>
           </table>,
@@ -883,78 +711,10 @@ ShallowWrapper {
             className="mobile__form"
           />,
         ],
-        "className": "mobile container",
+        "className": "mobile",
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Velcom",
-            "className": "mobile__name",
-          },
-          "ref": null,
-          "rendered": "Velcom",
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <button
-                className="btn"
-                onClick={[Function]}
-                value="Velcom"
-              >
-                Velcom
-              </button>,
-              <button
-                className="btn"
-                onClick={[Function]}
-                value="Mts"
-              >
-                Mts
-              </button>,
-            ],
-            "className": "mobile__btn-wrap",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Velcom",
-                "className": "btn",
-                "onClick": [Function],
-                "value": "Velcom",
-              },
-              "ref": null,
-              "rendered": "Velcom",
-              "type": "button",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Mts",
-                "className": "btn",
-                "onClick": [Function],
-                "value": "Mts",
-              },
-              "ref": null,
-              "rendered": "Mts",
-              "type": "button",
-            },
-          ],
-          "type": "div",
-        },
         Object {
           "instance": null,
           "key": undefined,
@@ -1072,6 +832,7 @@ ShallowWrapper {
                       "surName": "Новиков",
                     }
                   }
+                  path={undefined}
                 />
                 <MobileClient
                   client={
@@ -1084,6 +845,7 @@ ShallowWrapper {
                       "surName": "Глеб",
                     }
                   }
+                  path={undefined}
                 />
                 <MobileClient
                   client={
@@ -1096,18 +858,7 @@ ShallowWrapper {
                       "surName": "Глеб",
                     }
                   }
-                />
-                <MobileClient
-                  client={
-                    Object {
-                      "balance": -100,
-                      "id": 5,
-                      "name": "Вячеслав",
-                      "secondName": "Юрьевич",
-                      "status": 0,
-                      "surName": "Глеб",
-                    }
-                  }
+                  path={undefined}
                 />
               </tbody>,
             ],
@@ -1258,6 +1009,7 @@ ShallowWrapper {
                         "surName": "Новиков",
                       }
                     }
+                    path={undefined}
                   />,
                   <MobileClient
                     client={
@@ -1270,6 +1022,7 @@ ShallowWrapper {
                         "surName": "Глеб",
                       }
                     }
+                    path={undefined}
                   />,
                   <MobileClient
                     client={
@@ -1282,18 +1035,7 @@ ShallowWrapper {
                         "surName": "Глеб",
                       }
                     }
-                  />,
-                  <MobileClient
-                    client={
-                      Object {
-                        "balance": -100,
-                        "id": 5,
-                        "name": "Вячеслав",
-                        "secondName": "Юрьевич",
-                        "status": 0,
-                        "surName": "Глеб",
-                      }
-                    }
+                    path={undefined}
                   />,
                 ],
               },
@@ -1312,6 +1054,7 @@ ShallowWrapper {
                       "status": 1,
                       "surName": "Новиков",
                     },
+                    "path": undefined,
                   },
                   "ref": null,
                   "rendered": null,
@@ -1330,6 +1073,7 @@ ShallowWrapper {
                       "status": 1,
                       "surName": "Глеб",
                     },
+                    "path": undefined,
                   },
                   "ref": null,
                   "rendered": null,
@@ -1348,24 +1092,7 @@ ShallowWrapper {
                       "status": 0,
                       "surName": "Глеб",
                     },
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": "5",
-                  "nodeType": "class",
-                  "props": Object {
-                    "client": Object {
-                      "balance": -100,
-                      "id": 5,
-                      "name": "Вячеслав",
-                      "secondName": "Юрьевич",
-                      "status": 0,
-                      "surName": "Глеб",
-                    },
+                    "path": undefined,
                   },
                   "ref": null,
                   "rendered": null,
@@ -1432,9 +1159,13 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
           },
           "getDerivedStateFromProps": true,
           "getSnapshotBeforeUpdate": true,
@@ -1478,20 +1209,13 @@ ShallowWrapper {
           "status": 0,
           "surName": "Глеб",
         },
-        Object {
-          "balance": -100,
-          "id": 5,
-          "name": "Вячеслав",
-          "secondName": "Юрьевич",
-          "status": 0,
-          "surName": "Глеб",
-        },
       ]
     }
     currCompanyName="Velcom"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -1504,29 +1228,6 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <div
-          className="mobile__name"
-        >
-          Velcom
-        </div>,
-        <div
-          className="mobile__btn-wrap"
-        >
-          <button
-            className="btn"
-            onClick={[Function]}
-            value="Velcom"
-          >
-            Velcom
-          </button>
-          <button
-            className="btn"
-            onClick={[Function]}
-            value="Mts"
-          >
-            Mts
-          </button>
-        </div>,
         <div
           className="mobile__filter"
         >
@@ -1589,6 +1290,7 @@ ShallowWrapper {
                   "surName": "Новиков",
                 }
               }
+              path={undefined}
             />
             <MobileClient
               client={
@@ -1601,6 +1303,7 @@ ShallowWrapper {
                   "surName": "Глеб",
                 }
               }
+              path={undefined}
             />
           </tbody>
         </table>,
@@ -1618,78 +1321,10 @@ ShallowWrapper {
           className="mobile__form"
         />,
       ],
-      "className": "mobile container",
+      "className": "mobile",
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "Velcom",
-          "className": "mobile__name",
-        },
-        "ref": null,
-        "rendered": "Velcom",
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Velcom"
-            >
-              Velcom
-            </button>,
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Mts"
-            >
-              Mts
-            </button>,
-          ],
-          "className": "mobile__btn-wrap",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Velcom",
-              "className": "btn",
-              "onClick": [Function],
-              "value": "Velcom",
-            },
-            "ref": null,
-            "rendered": "Velcom",
-            "type": "button",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Mts",
-              "className": "btn",
-              "onClick": [Function],
-              "value": "Mts",
-            },
-            "ref": null,
-            "rendered": "Mts",
-            "type": "button",
-          },
-        ],
-        "type": "div",
-      },
       Object {
         "instance": null,
         "key": undefined,
@@ -1807,6 +1442,7 @@ ShallowWrapper {
                     "surName": "Новиков",
                   }
                 }
+                path={undefined}
               />
               <MobileClient
                 client={
@@ -1819,6 +1455,7 @@ ShallowWrapper {
                     "surName": "Глеб",
                   }
                 }
+                path={undefined}
               />
             </tbody>,
           ],
@@ -1969,6 +1606,7 @@ ShallowWrapper {
                       "surName": "Новиков",
                     }
                   }
+                  path={undefined}
                 />,
                 <MobileClient
                   client={
@@ -1981,6 +1619,7 @@ ShallowWrapper {
                       "surName": "Глеб",
                     }
                   }
+                  path={undefined}
                 />,
               ],
             },
@@ -1999,6 +1638,7 @@ ShallowWrapper {
                     "status": 1,
                     "surName": "Новиков",
                   },
+                  "path": undefined,
                 },
                 "ref": null,
                 "rendered": null,
@@ -2017,6 +1657,7 @@ ShallowWrapper {
                     "status": 1,
                     "surName": "Глеб",
                   },
+                  "path": undefined,
                 },
                 "ref": null,
                 "rendered": null,
@@ -2086,29 +1727,6 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <div
-            className="mobile__name"
-          >
-            Velcom
-          </div>,
-          <div
-            className="mobile__btn-wrap"
-          >
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Velcom"
-            >
-              Velcom
-            </button>
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Mts"
-            >
-              Mts
-            </button>
-          </div>,
-          <div
             className="mobile__filter"
           >
             <button
@@ -2170,6 +1788,7 @@ ShallowWrapper {
                     "surName": "Новиков",
                   }
                 }
+                path={undefined}
               />
               <MobileClient
                 client={
@@ -2182,6 +1801,7 @@ ShallowWrapper {
                     "surName": "Глеб",
                   }
                 }
+                path={undefined}
               />
             </tbody>
           </table>,
@@ -2199,78 +1819,10 @@ ShallowWrapper {
             className="mobile__form"
           />,
         ],
-        "className": "mobile container",
+        "className": "mobile",
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Velcom",
-            "className": "mobile__name",
-          },
-          "ref": null,
-          "rendered": "Velcom",
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <button
-                className="btn"
-                onClick={[Function]}
-                value="Velcom"
-              >
-                Velcom
-              </button>,
-              <button
-                className="btn"
-                onClick={[Function]}
-                value="Mts"
-              >
-                Mts
-              </button>,
-            ],
-            "className": "mobile__btn-wrap",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Velcom",
-                "className": "btn",
-                "onClick": [Function],
-                "value": "Velcom",
-              },
-              "ref": null,
-              "rendered": "Velcom",
-              "type": "button",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Mts",
-                "className": "btn",
-                "onClick": [Function],
-                "value": "Mts",
-              },
-              "ref": null,
-              "rendered": "Mts",
-              "type": "button",
-            },
-          ],
-          "type": "div",
-        },
         Object {
           "instance": null,
           "key": undefined,
@@ -2388,6 +1940,7 @@ ShallowWrapper {
                       "surName": "Новиков",
                     }
                   }
+                  path={undefined}
                 />
                 <MobileClient
                   client={
@@ -2400,6 +1953,7 @@ ShallowWrapper {
                       "surName": "Глеб",
                     }
                   }
+                  path={undefined}
                 />
               </tbody>,
             ],
@@ -2550,6 +2104,7 @@ ShallowWrapper {
                         "surName": "Новиков",
                       }
                     }
+                    path={undefined}
                   />,
                   <MobileClient
                     client={
@@ -2562,6 +2117,7 @@ ShallowWrapper {
                         "surName": "Глеб",
                       }
                     }
+                    path={undefined}
                   />,
                 ],
               },
@@ -2580,6 +2136,7 @@ ShallowWrapper {
                       "status": 1,
                       "surName": "Новиков",
                     },
+                    "path": undefined,
                   },
                   "ref": null,
                   "rendered": null,
@@ -2598,6 +2155,7 @@ ShallowWrapper {
                       "status": 1,
                       "surName": "Глеб",
                     },
+                    "path": undefined,
                   },
                   "ref": null,
                   "rendered": null,
@@ -2664,9 +2222,13 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
           },
           "getDerivedStateFromProps": true,
           "getSnapshotBeforeUpdate": true,
@@ -2710,20 +2272,13 @@ ShallowWrapper {
           "status": 0,
           "surName": "Глеб",
         },
-        Object {
-          "balance": -100,
-          "id": 5,
-          "name": "Вячеслав",
-          "secondName": "Юрьевич",
-          "status": 0,
-          "surName": "Глеб",
-        },
       ]
     }
     currCompanyName="Velcom"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -2736,29 +2291,6 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <div
-          className="mobile__name"
-        >
-          Velcom
-        </div>,
-        <div
-          className="mobile__btn-wrap"
-        >
-          <button
-            className="btn"
-            onClick={[Function]}
-            value="Velcom"
-          >
-            Velcom
-          </button>
-          <button
-            className="btn"
-            onClick={[Function]}
-            value="Mts"
-          >
-            Mts
-          </button>
-        </div>,
         <div
           className="mobile__filter"
         >
@@ -2821,18 +2353,7 @@ ShallowWrapper {
                   "surName": "Глеб",
                 }
               }
-            />
-            <MobileClient
-              client={
-                Object {
-                  "balance": -100,
-                  "id": 5,
-                  "name": "Вячеслав",
-                  "secondName": "Юрьевич",
-                  "status": 0,
-                  "surName": "Глеб",
-                }
-              }
+              path={undefined}
             />
           </tbody>
         </table>,
@@ -2850,78 +2371,10 @@ ShallowWrapper {
           className="mobile__form"
         />,
       ],
-      "className": "mobile container",
+      "className": "mobile",
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "Velcom",
-          "className": "mobile__name",
-        },
-        "ref": null,
-        "rendered": "Velcom",
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Velcom"
-            >
-              Velcom
-            </button>,
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Mts"
-            >
-              Mts
-            </button>,
-          ],
-          "className": "mobile__btn-wrap",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Velcom",
-              "className": "btn",
-              "onClick": [Function],
-              "value": "Velcom",
-            },
-            "ref": null,
-            "rendered": "Velcom",
-            "type": "button",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Mts",
-              "className": "btn",
-              "onClick": [Function],
-              "value": "Mts",
-            },
-            "ref": null,
-            "rendered": "Mts",
-            "type": "button",
-          },
-        ],
-        "type": "div",
-      },
       Object {
         "instance": null,
         "key": undefined,
@@ -3039,18 +2492,7 @@ ShallowWrapper {
                     "surName": "Глеб",
                   }
                 }
-              />
-              <MobileClient
-                client={
-                  Object {
-                    "balance": -100,
-                    "id": 5,
-                    "name": "Вячеслав",
-                    "secondName": "Юрьевич",
-                    "status": 0,
-                    "surName": "Глеб",
-                  }
-                }
+                path={undefined}
               />
             </tbody>,
           ],
@@ -3201,18 +2643,7 @@ ShallowWrapper {
                       "surName": "Глеб",
                     }
                   }
-                />,
-                <MobileClient
-                  client={
-                    Object {
-                      "balance": -100,
-                      "id": 5,
-                      "name": "Вячеслав",
-                      "secondName": "Юрьевич",
-                      "status": 0,
-                      "surName": "Глеб",
-                    }
-                  }
+                  path={undefined}
                 />,
               ],
             },
@@ -3231,24 +2662,7 @@ ShallowWrapper {
                     "status": 0,
                     "surName": "Глеб",
                   },
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": "5",
-                "nodeType": "class",
-                "props": Object {
-                  "client": Object {
-                    "balance": -100,
-                    "id": 5,
-                    "name": "Вячеслав",
-                    "secondName": "Юрьевич",
-                    "status": 0,
-                    "surName": "Глеб",
-                  },
+                  "path": undefined,
                 },
                 "ref": null,
                 "rendered": null,
@@ -3318,29 +2732,6 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <div
-            className="mobile__name"
-          >
-            Velcom
-          </div>,
-          <div
-            className="mobile__btn-wrap"
-          >
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Velcom"
-            >
-              Velcom
-            </button>
-            <button
-              className="btn"
-              onClick={[Function]}
-              value="Mts"
-            >
-              Mts
-            </button>
-          </div>,
-          <div
             className="mobile__filter"
           >
             <button
@@ -3402,18 +2793,7 @@ ShallowWrapper {
                     "surName": "Глеб",
                   }
                 }
-              />
-              <MobileClient
-                client={
-                  Object {
-                    "balance": -100,
-                    "id": 5,
-                    "name": "Вячеслав",
-                    "secondName": "Юрьевич",
-                    "status": 0,
-                    "surName": "Глеб",
-                  }
-                }
+                path={undefined}
               />
             </tbody>
           </table>,
@@ -3431,78 +2811,10 @@ ShallowWrapper {
             className="mobile__form"
           />,
         ],
-        "className": "mobile container",
+        "className": "mobile",
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Velcom",
-            "className": "mobile__name",
-          },
-          "ref": null,
-          "rendered": "Velcom",
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <button
-                className="btn"
-                onClick={[Function]}
-                value="Velcom"
-              >
-                Velcom
-              </button>,
-              <button
-                className="btn"
-                onClick={[Function]}
-                value="Mts"
-              >
-                Mts
-              </button>,
-            ],
-            "className": "mobile__btn-wrap",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Velcom",
-                "className": "btn",
-                "onClick": [Function],
-                "value": "Velcom",
-              },
-              "ref": null,
-              "rendered": "Velcom",
-              "type": "button",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Mts",
-                "className": "btn",
-                "onClick": [Function],
-                "value": "Mts",
-              },
-              "ref": null,
-              "rendered": "Mts",
-              "type": "button",
-            },
-          ],
-          "type": "div",
-        },
         Object {
           "instance": null,
           "key": undefined,
@@ -3620,18 +2932,7 @@ ShallowWrapper {
                       "surName": "Глеб",
                     }
                   }
-                />
-                <MobileClient
-                  client={
-                    Object {
-                      "balance": -100,
-                      "id": 5,
-                      "name": "Вячеслав",
-                      "secondName": "Юрьевич",
-                      "status": 0,
-                      "surName": "Глеб",
-                    }
-                  }
+                  path={undefined}
                 />
               </tbody>,
             ],
@@ -3782,18 +3083,7 @@ ShallowWrapper {
                         "surName": "Глеб",
                       }
                     }
-                  />,
-                  <MobileClient
-                    client={
-                      Object {
-                        "balance": -100,
-                        "id": 5,
-                        "name": "Вячеслав",
-                        "secondName": "Юрьевич",
-                        "status": 0,
-                        "surName": "Глеб",
-                      }
-                    }
+                    path={undefined}
                   />,
                 ],
               },
@@ -3812,24 +3102,7 @@ ShallowWrapper {
                       "status": 0,
                       "surName": "Глеб",
                     },
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": "5",
-                  "nodeType": "class",
-                  "props": Object {
-                    "client": Object {
-                      "balance": -100,
-                      "id": 5,
-                      "name": "Вячеслав",
-                      "secondName": "Юрьевич",
-                      "status": 0,
-                      "surName": "Глеб",
-                    },
+                    "path": undefined,
                   },
                   "ref": null,
                   "rendered": null,
@@ -3896,9 +3169,13 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
           },
           "getDerivedStateFromProps": true,
           "getSnapshotBeforeUpdate": true,

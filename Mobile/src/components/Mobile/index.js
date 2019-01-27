@@ -11,7 +11,7 @@ import * as mModules from '../../modules/mobile';
 class Mobile extends React.PureComponent {
 
   static propTypes = {
-    path: PropTypes.string.isRequired,
+    // path: PropTypes.string.isRequired,
     clients: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,

@@ -191,6 +191,15 @@ img {
   max-width: 960px;
   margin: 0 auto;
   padding: 0 15px; }
+.nav {
+  display: flex;
+  flex-wrap: wrap; }
+  .nav-link {
+    padding: 5px 10px; }
+    .nav-link:not(:last-child) {
+      margin-right: 10px; }
+  .nav-link--active {
+    color: red; }
 .mobile__name {
   font-size: 40px; }
 
@@ -217,6 +226,13 @@ img {
     .mobile__clients th.avail,
     .mobile__clients td.avail {
       background-color: rgba(0, 255, 0, 0.4); }
+    .mobile__clients th a,
+    .mobile__clients td a {
+      text-decoration: none;
+      color: #005190; }
+      .mobile__clients th a:hover,
+      .mobile__clients td a:hover {
+        text-decoration: underline; }
 
 .btn {
   padding: 10px 15px;
@@ -275,4 +291,4 @@ img {
   .mForm__btn-wrap {
     padding: 15px; }
 
-/*# sourceMappingURL=main.336079c0f627c19bf9b64d078c26eaa8.css.map*/
+/*# sourceMappingURL=main.ef2479168f22d04797e2c0bdacea513c.css.map*/
