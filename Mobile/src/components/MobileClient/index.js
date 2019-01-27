@@ -7,6 +7,7 @@ import {appEvents} from '../event';
 class MobileClient extends React.PureComponent {
 
   static propTypes = {
+    path: PropTypes.string.isRequired,
     client: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
@@ -30,7 +31,7 @@ class MobileClient extends React.PureComponent {
 
     return (
       <tr>
-        <td><NavLink to={`/client/${this.props.client.id}`}>{this.props.client.surName}</NavLink></td>
+        <td><NavLink to={`${this.props.path}/client/${this.props.client.id}`}>{this.props.client.surName}</NavLink></td>
         <td>{this.props.client.name}</td>
         <td>{this.props.client.secondName}</td>
         <td>{this.props.client.balance}</td>

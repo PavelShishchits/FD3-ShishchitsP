@@ -8,7 +8,7 @@ class Navigation extends React.Component {
 
     return (
       <nav className='nav'>
-        <NavLink to="/velcome" className='nav-link' activeClassName='nav-link--active'>Velcom</NavLink>
+        <NavLink to="/velcom" className='nav-link' activeClassName='nav-link--active'>Velcom</NavLink>
         <NavLink to="/mts" className='nav-link' activeClassName='nav-link--active'>Mts</NavLink>
       </nav>
     )

@@ -11,6 +11,7 @@ import * as mModules from '../../modules/mobile';
 class Mobile extends React.PureComponent {
 
   static propTypes = {
+    path: PropTypes.string.isRequired,
     clients: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -99,11 +100,10 @@ class Mobile extends React.PureComponent {
   };
 
   render() {
-
     // console.log('MobileCompany render');
 
     const clients = this.state.filteredClients.map((client) => {
-      return <MobileClient key={client.id} client={client}/>
+      return <MobileClient path={this.props.path} key={client.id} client={client}/>
     });
 
     return (
