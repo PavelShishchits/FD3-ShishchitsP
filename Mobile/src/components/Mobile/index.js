@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
-import {appEvents} from '../event';
+import isoFetch from 'isomorphic-fetch';
+import { appEvents } from '../event';
 
 import MobileClient from '../MobileClient/index';
 import MobileForm from '../MobileForm/index';
@@ -12,27 +13,30 @@ class Mobile extends React.PureComponent {
 
   static propTypes = {
     // path: PropTypes.string.isRequired,
-    clients: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        surName: PropTypes.string.isRequired,
-        secondName: PropTypes.string.isRequired,
-        balance: PropTypes.number.isRequired,
-        status: PropTypes.number.isRequired // 0 - неактивен, 1 - активен
-      }).isRequired
-    ).isRequired
+    // clients: PropTypes.arrayOf(
+    //   PropTypes.shape({
+    //     id: PropTypes.number.isRequired,
+    //     name: PropTypes.string.isRequired,
+    //     surName: PropTypes.string.isRequired,
+    //     secondName: PropTypes.string.isRequired,
+    //     balance: PropTypes.number.isRequired,
+    //     status: PropTypes.number.isRequired // 0 - неактивен, 1 - активен
+    //   }).isRequired
+    // ).isRequired
   };
 
+  // аякс запрос будет в этом компоненте, и в зависимости от переданного path, я выбираю клиентов из общего объекта даты, кроме path, никаких других пропсов не передаётся
   state = {
-    clients: this.props.clients,
-    filteredClients: this.props.clients,
+    clients: [],
+    filteredClients: [],
+    isLoaded: false,
     formMode: 0, // 1 - форма редактирования, 2 - форма добавления,
     clientToEdit: null,
     filterMod: 'all'
   };
 
   componentDidMount() {
+    this.downloadData();
     appEvents.addListener('EItemRemove', this.removeClient);
     appEvents.addListener('EItemEdit', this.onClientEdit);
     appEvents.addListener('EEditClient', this.editClient);
@@ -47,6 +51,45 @@ class Mobile extends React.PureComponent {
     appEvents.removeListener('EAddClient', this.addClient);
     appEvents.removeListener('ECloseForm', this.closeForm);
   }
+
+  fetchError = (error) => {
+    console.log(error);
+  };
+
+  fetchSuccess = (data) => {
+    this.setState({
+      clients: data,
+      filteredClients: data,
+      isLoaded: true
+    });
+  };
+
+  downloadData = () => {
+    isoFetch("http://5c4ea42cd87cab001476ef73.mockapi.io/api/mts", {
+      method: 'get',
+      headers: {
+        "Accept": "application/json",
+      },
+    })
+      .then((response) => { // response - HTTP-ответ
+        if (!response.ok) {
+          let Err = new Error("fetch error " + response.status);
+          Err.userMessage = "Ошибка связи";
+          throw Err; // дальше по цепочке пойдёт отвергнутый промис
+        } else
+          return response.json(); // дальше по цепочке пойдёт промис с пришедшими по сети данными
+      })
+      .then((data) => {
+        try {
+          this.fetchSuccess(data); // передаём полезные данные в fetchSuccess, дальше по цепочке пойдёт успешный пустой промис
+        } catch (error) {
+          this.fetchError(error.message); // если что-то пошло не так - дальше по цепочке пойдёт отвергнутый промис
+        }
+      })
+      .catch((error) => {
+        this.fetchError(error.userMessage || error.message);
+      });
+  };
 
   editClient = (editedClient) => {
     const editedClients = mModules.editClient(this.state.clients, editedClient);
@@ -107,6 +150,7 @@ class Mobile extends React.PureComponent {
     });
 
     return (
+
       <div className='mobile'>
         <div className='mobile__filter'>
           <button className='btn filter-all' value='all' onClick={this.onFilterClick}>Все</button>
@@ -126,12 +170,17 @@ class Mobile extends React.PureComponent {
           </thead>
           <tbody>
           {
-            this.state.filteredClients.length ?
-              clients
-              :
+            (!this.state.isLoaded) ?
               <tr>
-                <td>Клиентов нет</td>
+                <td>Загрузка данных...</td>
               </tr>
+              :
+              this.state.filteredClients.length ?
+                clients
+                :
+                <tr>
+                  <td>Клиентов нет</td>
+                </tr>
           }
           </tbody>
         </table>

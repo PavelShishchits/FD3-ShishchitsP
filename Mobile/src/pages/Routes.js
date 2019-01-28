@@ -10,10 +10,10 @@ class Routes extends React.Component {
 
     return (
       <Fragment>
-        <Route path='/velcom' exact render={(props) => <Page_Operator {...props} clients={mobileData.clients} />}/>
-        <Route path='/mts' exact render={(props) => <Page_Operator {...props} clients={mobileData.clientsMts} />}/>
-        <Route path='/velcom/client/:clid' render={(props) => (<Page_Client {...props} clients={mobileData.clients} />)}/>
-        <Route path='/mts/client/:clid' render={(props) => (<Page_Client {...props} clients={mobileData.clientsMts} />)}/>
+        <Route path='/velcom' exact render={(props) => <Page_Operator {...props} clients={mobileData.velcom} />}/>
+        <Route path='/mts' exact render={(props) => <Page_Operator {...props} clients={mobileData.mts} />}/>
+        <Route path='/velcom/client/:clid' render={(props) => (<Page_Client {...props} clients={mobileData.velcom} />)}/>
+        <Route path='/mts/client/:clid' render={(props) => (<Page_Client {...props} clients={mobileData.mts} />)}/>
       </Fragment>
     )
   }
