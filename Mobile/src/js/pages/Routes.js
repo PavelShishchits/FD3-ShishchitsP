@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import {Route} from 'react-router-dom';
 import Page_Operator from './Page_Operator';
 import Page_Client from './Page_Client';
-const mobileData = require('../data.json');
+const mobileData = require('../../data.json');
 
 class Routes extends React.Component {
 

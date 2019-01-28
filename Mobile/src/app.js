@@ -1,18 +1,18 @@
 ﻿import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
 import './app.scss';
-import Navigation from './components/Navigation/index';
-import Routes from './pages/Routes';
-import Mobile from './components/Mobile/index'; // temp
+import App from './js/components/App/index';
+import configureStore from './js/redux/configureStore';
+
+const store = configureStore({});
 
 ReactDOM.render(
-  <BrowserRouter>
-    <div className='container'>
-      <Mobile />
-      {/*<Navigation />*/}
-      {/*<Routes />*/}
-    </div>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
   ,document.querySelector('.main-wrap')
 );

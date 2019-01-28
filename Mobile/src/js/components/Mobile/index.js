@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import './style.scss';
 import isoFetch from 'isomorphic-fetch';
@@ -8,6 +9,8 @@ import MobileClient from '../MobileClient/index';
 import MobileForm from '../MobileForm/index';
 
 import * as mModules from '../../modules/mobile';
+
+import {fetchDataSuccess, fetchDataFailure} from '../../redux/actions/clientActions';
 
 class Mobile extends React.PureComponent {
 
@@ -25,7 +28,6 @@ class Mobile extends React.PureComponent {
     // ).isRequired
   };
 
-  // аякс запрос будет в этом компоненте, и в зависимости от переданного path, я выбираю клиентов из общего объекта даты, кроме path, никаких других пропсов не передаётся
   state = {
     clients: [],
     filteredClients: [],
@@ -37,31 +39,31 @@ class Mobile extends React.PureComponent {
 
   componentDidMount() {
     this.downloadData();
-    appEvents.addListener('EItemRemove', this.removeClient);
-    appEvents.addListener('EItemEdit', this.onClientEdit);
-    appEvents.addListener('EEditClient', this.editClient);
-    appEvents.addListener('EAddClient', this.addClient);
-    appEvents.addListener('ECloseForm', this.closeForm);
+    // appEvents.addListener('EItemRemove', this.removeClient);
+    // appEvents.addListener('EItemEdit', this.onClientEdit);
+    // appEvents.addListener('EEditClient', this.editClient);
+    // appEvents.addListener('EAddClient', this.addClient);
+    // appEvents.addListener('ECloseForm', this.closeForm);
   }
 
   componentWillUnmount() {
-    appEvents.removeListener('EitemRemove', this.removeClient);
-    appEvents.removeListener('EItemEdit', this.onClientEdit);
-    appEvents.removeListener('EEditClient', this.editClient);
-    appEvents.removeListener('EAddClient', this.addClient);
-    appEvents.removeListener('ECloseForm', this.closeForm);
+    // appEvents.removeListener('EitemRemove', this.removeClient);
+    // appEvents.removeListener('EItemEdit', this.onClientEdit);
+    // appEvents.removeListener('EEditClient', this.editClient);
+    // appEvents.removeListener('EAddClient', this.addClient);
+    // appEvents.removeListener('ECloseForm', this.closeForm);
   }
 
+  componentWillReceiveProps = (nextProps, nextContext) => {
+    this.setState({clients: nextProps.clients, isLoaded: nextProps.isLoaded});
+  };
+
   fetchError = (error) => {
-    console.log(error);
+    this.props.dispatch(fetchDataFailure(error));
   };
 
   fetchSuccess = (data) => {
-    this.setState({
-      clients: data,
-      filteredClients: data,
-      isLoaded: true
-    });
+    this.props.dispatch(fetchDataSuccess(data));
   };
 
   downloadData = () => {
@@ -143,9 +145,8 @@ class Mobile extends React.PureComponent {
   };
 
   render() {
-    // console.log('MobileCompany render');
 
-    const clients = this.state.filteredClients.map((client) => {
+    const clients = this.state.clients.map((client) => {
       return <MobileClient path={this.props.path} key={client.id} client={client}/>
     });
 
@@ -175,7 +176,7 @@ class Mobile extends React.PureComponent {
                 <td>Загрузка данных...</td>
               </tr>
               :
-              this.state.filteredClients.length ?
+              this.state.clients.length ?
                 clients
                 :
                 <tr>
@@ -204,4 +205,12 @@ class Mobile extends React.PureComponent {
   }
 }
 
-export default Mobile;
+const mapStateToProps = function (state) {
+  return {
+    clients: state.clients.clients,
+    error: state.clients.error,
+    isLoaded: state.clients.isLoaded
+  };
+};
+
+export default connect(mapStateToProps)(Mobile);
