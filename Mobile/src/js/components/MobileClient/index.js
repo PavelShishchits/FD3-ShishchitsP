@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import {connect} from 'react-redux';
 import './style.scss';
 
-import {removeClient} from '../../redux/actions/clientActions';
+import {removeClient, editClient} from '../../redux/actions/clientActions';
 
 class MobileClient extends React.PureComponent {
 
@@ -25,7 +25,7 @@ class MobileClient extends React.PureComponent {
   };
 
   editItem = () => {
-    appEvents.emit('EItemEdit', this.props.client.id);
+    this.props.dispatch(editClient(this.props.client.id, 1));
   };
 
   render() {
@@ -48,9 +48,7 @@ class MobileClient extends React.PureComponent {
 }
 
 const mapStateToProps = function (state) {
-  return {
-
-  };
+  return {};
 };
 
 export default connect(mapStateToProps)(MobileClient);

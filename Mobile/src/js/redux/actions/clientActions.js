@@ -2,6 +2,7 @@ export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const REMOVE_CLIENT = 'REMOVE_CLIENT';
+export const EDIT_CLIENT = 'EDIT_CLIENT';
 
 export const fetchDataSuccess = (clients) => {
   return {
@@ -21,6 +22,14 @@ export const removeClient = (id) => {
   return {
     type: REMOVE_CLIENT,
     id
+  }
+};
+
+export const editClient = (id, formMode) => {
+  return {
+    type: EDIT_CLIENT,
+    id,
+    formMode
   }
 };
 

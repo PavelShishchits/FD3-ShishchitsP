@@ -29,7 +29,6 @@ class Mobile extends React.PureComponent {
 
   componentDidMount() {
     this.downloadData();
-    // appEvents.addListener('EItemRemove', this.removeClient);
     // appEvents.addListener('EItemEdit', this.onClientEdit);
     // appEvents.addListener('EEditClient', this.editClient);
     // appEvents.addListener('EAddClient', this.addClient);
@@ -37,7 +36,6 @@ class Mobile extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    // appEvents.removeListener('EitemRemove', this.removeClient);
     // appEvents.removeListener('EItemEdit', this.onClientEdit);
     // appEvents.removeListener('EEditClient', this.editClient);
     // appEvents.removeListener('EAddClient', this.addClient);
@@ -45,7 +43,7 @@ class Mobile extends React.PureComponent {
   }
 
   componentWillReceiveProps = (nextProps, nextContext) => {
-    this.setState({clients: nextProps.clients, isLoaded: nextProps.isLoaded});
+    this.setState({clients: nextProps.clients, isLoaded: nextProps.isLoaded, formMode: nextProps.formMode});
   };
 
   fetchError = (error) => {
@@ -169,8 +167,8 @@ class Mobile extends React.PureComponent {
         <div className="mobile__form">
           {
             (this.state.formMode === 1) &&
-            <MobileForm key={this.state.clientToEdit.id} btnText='Редактировать' title='Редактировать данные клиента'
-                        client={this.state.clientToEdit} formMode={this.state.formMode}/>
+            <MobileForm key={this.props.clientToEdit.id} btnText='Редактировать' title='Редактировать данные клиента'
+                        client={this.props.clientToEdit} formMode={this.props.formMode}/>
           }
           {
             (this.state.formMode === 2) &&
@@ -197,11 +195,14 @@ const getFilteredList = (arr, filter) => {
 };
 
 const mapStateToProps = function (state) {
+  // console.log(state);
   return {
     clients: getFilteredList(state.clients.clients, state.visabilityFilter),
     error: state.clients.error,
     isLoaded: state.clients.isLoaded,
-    visabilityFilter: state.visabilityFilter
+    visabilityFilter: state.visabilityFilter,
+    clientToEdit: state.clients.clientToEdit,
+    formMode: state.clients.formMode
   };
 };
 
