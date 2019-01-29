@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from "react-router-dom";
+import {connect} from 'react-redux';
 import './style.scss';
-import {appEvents} from '../event';
+
+import {removeClient} from '../../redux/actions/clientActions';
 
 class MobileClient extends React.PureComponent {
 
@@ -19,7 +21,7 @@ class MobileClient extends React.PureComponent {
   };
 
   removeItem = () => {
-    appEvents.emit('EItemRemove', this.props.client.id);
+    this.props.dispatch(removeClient(this.props.client.id));
   };
 
   editItem = () => {
@@ -45,4 +47,10 @@ class MobileClient extends React.PureComponent {
   }
 }
 
-export default MobileClient;
+const mapStateToProps = function (state) {
+  return {
+
+  };
+};
+
+export default connect(mapStateToProps)(MobileClient);

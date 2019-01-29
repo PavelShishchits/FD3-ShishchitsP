@@ -1,4 +1,4 @@
-import {FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE} from '../actions/clientActions';
+import {FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE, REMOVE_CLIENT} from '../actions/clientActions';
 
 const initialState = {
   clients: [],
@@ -20,6 +20,11 @@ const clientReducers = (state = initialState, action) => {
         ...state,
         clients: [],
         error: action.error
+      };
+    case REMOVE_CLIENT:
+      return {
+        ...state,
+        clients: state.clients.filter((client) => client.id !== action.id)
       };
     default:
       return state;

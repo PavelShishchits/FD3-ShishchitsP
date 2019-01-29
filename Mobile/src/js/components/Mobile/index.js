@@ -1,40 +1,30 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './style.scss';
 import isoFetch from 'isomorphic-fetch';
-import { appEvents } from '../event';
+// import { appEvents } from '../event';
 
 import MobileClient from '../MobileClient/index';
 import MobileForm from '../MobileForm/index';
 
 import * as mModules from '../../modules/mobile';
 
-import {fetchDataSuccess, fetchDataFailure} from '../../redux/actions/clientActions';
+import {
+  fetchDataSuccess,
+  fetchDataFailure,
+  VisabilityFiltes,
+  setVisabilityFilters
+} from '../../redux/actions/clientActions';
+
 
 class Mobile extends React.PureComponent {
 
-  static propTypes = {
-    // path: PropTypes.string.isRequired,
-    // clients: PropTypes.arrayOf(
-    //   PropTypes.shape({
-    //     id: PropTypes.number.isRequired,
-    //     name: PropTypes.string.isRequired,
-    //     surName: PropTypes.string.isRequired,
-    //     secondName: PropTypes.string.isRequired,
-    //     balance: PropTypes.number.isRequired,
-    //     status: PropTypes.number.isRequired // 0 - неактивен, 1 - активен
-    //   }).isRequired
-    // ).isRequired
-  };
-
   state = {
     clients: [],
-    filteredClients: [],
     isLoaded: false,
     formMode: 0, // 1 - форма редактирования, 2 - форма добавления,
-    clientToEdit: null,
-    filterMod: 'all'
+    clientToEdit: null
   };
 
   componentDidMount() {
@@ -97,7 +87,6 @@ class Mobile extends React.PureComponent {
     const editedClients = mModules.editClient(this.state.clients, editedClient);
     this.setState({
       clients: editedClients,
-      filteredClients: this.filterList(editedClients),
       formMode: 0,
       clientToEdit: null
     });
@@ -107,7 +96,6 @@ class Mobile extends React.PureComponent {
     const addedClients = mModules.addClient(this.state.clients, client);
     this.setState({
       clients: addedClients,
-      filteredClients: this.filterList(addedClients),
       formMode: 0,
       clientToEdit: null
     });
@@ -115,7 +103,7 @@ class Mobile extends React.PureComponent {
 
   removeClient = (id) => {
     const clients = mModules.removeClient(this.state.clients, id);
-    this.setState({clients: clients, filteredClients: this.filterList(clients), formMode: 0});
+    this.setState({clients: clients, formMode: 0});
   };
 
   onClientEdit = (id) => {
@@ -131,17 +119,9 @@ class Mobile extends React.PureComponent {
     this.setState({formMode: formMode});
   };
 
-  filterList = (arr, type = this.state.filterMod) => {
-    if (type === 'all') {
-      return arr;
-    } else {
-      return arr.filter((item) => type === 'active' ? item.status === 1 : item.status === 0);
-    }
-  };
-
   onFilterClick = (e) => {
     const type = e.target.value;
-    this.setState({filterMod: type, filteredClients: this.filterList(this.state.clients, type)})
+    this.props.dispatch(setVisabilityFilters(type));
   };
 
   render() {
@@ -154,9 +134,9 @@ class Mobile extends React.PureComponent {
 
       <div className='mobile'>
         <div className='mobile__filter'>
-          <button className='btn filter-all' value='all' onClick={this.onFilterClick}>Все</button>
-          <button className='btn filter-active' value='active' onClick={this.onFilterClick}>Активные</button>
-          <button className='btn filter-unavail' value='unavail' onClick={this.onFilterClick}>Заблокированные</button>
+          <button className='btn filter-all' value={VisabilityFiltes.SHOW_ALL} onClick={this.onFilterClick}>Все</button>
+          <button className='btn filter-active' value={VisabilityFiltes.SHOW_ACTIVE} onClick={this.onFilterClick}>Активные</button>
+          <button className='btn filter-unavail' value={VisabilityFiltes.SHOW_UNACTiVE} onClick={this.onFilterClick}>Заблокированные</button>
         </div>
         <table className='mobile__clients'>
           <thead>
@@ -171,17 +151,15 @@ class Mobile extends React.PureComponent {
           </thead>
           <tbody>
           {
-            (!this.state.isLoaded) ?
-              <tr>
-                <td>Загрузка данных...</td>
-              </tr>
+            !this.state.isLoaded ?
+            <tr><td>Загрузка данных...</td></tr>
+            :
+            this.state.clients.length ?
+              clients
               :
-              this.state.clients.length ?
-                clients
-                :
-                <tr>
-                  <td>Клиентов нет</td>
-                </tr>
+              <tr>
+                <td>Клиентов нет</td>
+              </tr>
           }
           </tbody>
         </table>
@@ -204,12 +182,26 @@ class Mobile extends React.PureComponent {
     );
   }
 }
+// toDo где сторить эту функцию???
+const getFilteredList = (arr, filter) => {
+  switch (filter) {
+    case VisabilityFiltes.SHOW_ALL:
+      return arr;
+    case VisabilityFiltes.SHOW_ACTIVE:
+      return arr.filter((item) => item.status === 1);
+    case VisabilityFiltes.SHOW_UNACTiVE:
+      return arr.filter((item) => item.status === 0);
+    default:
+      return arr;
+  }
+};
 
 const mapStateToProps = function (state) {
   return {
-    clients: state.clients.clients,
+    clients: getFilteredList(state.clients.clients, state.visabilityFilter),
     error: state.clients.error,
-    isLoaded: state.clients.isLoaded
+    isLoaded: state.clients.isLoaded,
+    visabilityFilter: state.visabilityFilter
   };
 };
 
