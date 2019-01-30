@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import './style.scss';
-import {appEvents} from '../event';
+import {editClient, addClient, formClose} from '../../redux/actions/clientActions';
 
 class MobileForm extends React.PureComponent {
 
@@ -31,28 +32,20 @@ class MobileForm extends React.PureComponent {
     formMode: PropTypes.number.isRequired
   };
 
-  componentDidMount() {
-    // console.log('componentDidMount MobileForm');
-  }
-
-  componentDidUpdate() {
-    // console.log('componentDidUpdate MobileForm');
-  }
-
   submitForm = (e) => {
     e.preventDefault();
     const {surName, name, secondName, balance} = this.inputs;
     if (this.state.formMode === 1) {
-      appEvents.emit('EEditClient', {id: this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value), status: this.calcClientStatus(balance.value)});
+      this.props.editClient({id: this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value), status: this.calcClientStatus(balance.value)});
     } else {
-      appEvents.emit('EAddClient', {id: this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value), status: this.calcClientStatus(balance.value)});
+      this.props.addClient({id: this.props.client.id, surName: surName.value, name: name.value, secondName: secondName.value, balance: parseInt(balance.value), status: this.calcClientStatus(balance.value)});
     }
   };
 
   calcClientStatus = (balance) => balance >= 0 ? 1 : 0;
 
-  closeForm = () => {
-    appEvents.emit('ECloseForm', 0)
+  onCloseForm = () => {
+    this.props.closeForm(0);
   };
 
   setInput = (element) => {
@@ -62,7 +55,6 @@ class MobileForm extends React.PureComponent {
   };
 
   render() {
-
     // console.log('MobileForm render');
 
     return (
@@ -110,11 +102,29 @@ class MobileForm extends React.PureComponent {
         </div>
         <div className="mForm__btn-wrap">
           <button className='btn edit-btn' type='submit'>{this.props.btnText}</button>
-          <button className='btn delete-btn' type='reset' onClick={this.closeForm}>Отмена</button>
+          <button className='btn delete-btn' type='reset' onClick={this.onCloseForm}>Отмена</button>
         </div>
       </form>
     )
   }
 }
 
-export default MobileForm;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editClient(el) {
+      dispatch(editClient(el));
+    },
+    addClient(el) {
+      dispatch(addClient(el));
+    },
+    closeForm(formMode) {
+      dispatch(formClose(formMode))
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MobileForm);

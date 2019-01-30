@@ -8,7 +8,7 @@ class App extends React.PureComponent {
   render() {
 
     return(
-      <div className='main-wrap'>
+      <div className='container'>
         {/*<Navigation />*/}
         <Mobile />
       </div>

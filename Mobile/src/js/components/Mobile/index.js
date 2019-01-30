@@ -1,20 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-// import PropTypes from 'prop-types';
 import './style.scss';
 import isoFetch from 'isomorphic-fetch';
-// import { appEvents } from '../event';
 
 import MobileClient from '../MobileClient/index';
 import MobileForm from '../MobileForm/index';
-
-import * as mModules from '../../modules/mobile';
 
 import {
   fetchDataSuccess,
   fetchDataFailure,
   VisabilityFiltes,
-  setVisabilityFilters
+  setVisabilityFilters,
+  onAddClient
 } from '../../redux/actions/clientActions';
 
 
@@ -29,17 +26,6 @@ class Mobile extends React.PureComponent {
 
   componentDidMount() {
     this.downloadData();
-    // appEvents.addListener('EItemEdit', this.onClientEdit);
-    // appEvents.addListener('EEditClient', this.editClient);
-    // appEvents.addListener('EAddClient', this.addClient);
-    // appEvents.addListener('ECloseForm', this.closeForm);
-  }
-
-  componentWillUnmount() {
-    // appEvents.removeListener('EItemEdit', this.onClientEdit);
-    // appEvents.removeListener('EEditClient', this.editClient);
-    // appEvents.removeListener('EAddClient', this.addClient);
-    // appEvents.removeListener('ECloseForm', this.closeForm);
   }
 
   componentWillReceiveProps = (nextProps, nextContext) => {
@@ -81,40 +67,10 @@ class Mobile extends React.PureComponent {
       });
   };
 
-  editClient = (editedClient) => {
-    const editedClients = mModules.editClient(this.state.clients, editedClient);
-    this.setState({
-      clients: editedClients,
-      formMode: 0,
-      clientToEdit: null
-    });
-  };
-
-  addClient = (client) => {
-    const addedClients = mModules.addClient(this.state.clients, client);
-    this.setState({
-      clients: addedClients,
-      formMode: 0,
-      clientToEdit: null
-    });
-  };
-
-  removeClient = (id) => {
-    const clients = mModules.removeClient(this.state.clients, id);
-    this.setState({clients: clients, formMode: 0});
-  };
-
-  onClientEdit = (id) => {
-    this.setState({formMode: 1, clientToEdit: this.state.clients.find((client) => client.id === id)});
-  };
-
   onClientAdd = () => {
+    // toDo Формировать ид в редусере?
     const id = this.state.clients.length ? this.state.clients[this.state.clients.length - 1].id + 1 : 1;
-    this.setState({formMode: 2, clientToEdit: {id: id, name: '', surName: '', secondName: '', balance: 0, status: ''}})
-  };
-
-  closeForm = (formMode) => {
-    this.setState({formMode: formMode});
+    this.props.dispatch(onAddClient({id: id, name: '', surName: '', secondName: '', balance: 0, status: ''}, 2));
   };
 
   onFilterClick = (e) => {
@@ -129,6 +85,9 @@ class Mobile extends React.PureComponent {
     });
 
     return (
+      // toDo Вынести филтьры в отдельный комонент
+      // toDo onClient add
+      // toDo handle ajax error
 
       <div className='mobile'>
         <div className='mobile__filter'>
@@ -168,11 +127,11 @@ class Mobile extends React.PureComponent {
           {
             (this.state.formMode === 1) &&
             <MobileForm key={this.props.clientToEdit.id} btnText='Редактировать' title='Редактировать данные клиента'
-                        client={this.props.clientToEdit} formMode={this.props.formMode}/>
+                        client={this.props.clientToEdit} formMode={this.state.formMode}/>
           }
           {
             (this.state.formMode === 2) &&
-            <MobileForm btnText='Добавить' title='Добавить нового клиента' client={this.state.clientToEdit}
+            <MobileForm btnText='Добавить' title='Добавить нового клиента' client={this.props.clientToEdit}
                         formMode={this.state.formMode}/>
           }
         </div>
@@ -195,7 +154,7 @@ const getFilteredList = (arr, filter) => {
 };
 
 const mapStateToProps = function (state) {
-  // console.log(state);
+  console.log(state);
   return {
     clients: getFilteredList(state.clients.clients, state.visabilityFilter),
     error: state.clients.error,
