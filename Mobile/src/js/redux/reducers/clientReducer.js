@@ -8,6 +8,7 @@ import {
   EDIT_CLIENT,
   ADD_CLIENT,
 } from '../actions/clientActions';
+
 import * as mModules from '../../modules/mobile';
 
 const initialState = {
@@ -25,13 +26,13 @@ const clientReducer = (state = initialState, action) => {
       return {
         ...state,
         clients: action.clients,
-        isLoaded: true,
-        error: null
+        isLoaded: true
       };
     case FETCH_DATA_FAILURE:
       return {
         ...state,
         clients: [],
+        isLoaded: true,
         error: action.error
       };
     case REMOVE_CLIENT:

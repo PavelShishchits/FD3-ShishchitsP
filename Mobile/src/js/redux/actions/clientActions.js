@@ -1,6 +1,5 @@
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const REMOVE_CLIENT = 'REMOVE_CLIENT';
 export const ON_EDIT_CLIENT = 'ON_EDIT_CLIENT';
 export const ON_ADD_CLIENT = 'ON_ADD_CLIENT';
@@ -64,17 +63,4 @@ export const formClose = (formMode) => {
     type: FORM_CLOSE,
     formMode
   };
-};
-
-export const setVisabilityFilters = (filter) => {
-  return {
-    type: SET_VISIBILITY_FILTER,
-    filter
-  }
-};
-
-export const VisabilityFiltes = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_ACTIVE: 'SHOW_ACTIVE',
-  SHOW_UNACTiVE: 'SHOW_UNACTiVE',
 };

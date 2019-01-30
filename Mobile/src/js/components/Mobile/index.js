@@ -5,6 +5,7 @@ import isoFetch from 'isomorphic-fetch';
 
 import MobileClient from '../MobileClient/index';
 import MobileForm from '../MobileForm/index';
+import Filter from '../Filter/index';
 
 import {
   fetchDataSuccess,
@@ -14,23 +15,13 @@ import {
   onAddClient
 } from '../../redux/actions/clientActions';
 
+import {filterList, generateUniqId} from '../../modules/mobile';
 
 class Mobile extends React.PureComponent {
-
-  state = {
-    clients: [],
-    isLoaded: false,
-    formMode: 0, // 1 - форма редактирования, 2 - форма добавления,
-    clientToEdit: null
-  };
 
   componentDidMount() {
     this.downloadData();
   }
-
-  componentWillReceiveProps = (nextProps, nextContext) => {
-    this.setState({clients: nextProps.clients, isLoaded: nextProps.isLoaded, formMode: nextProps.formMode});
-  };
 
   fetchError = (error) => {
     this.props.dispatch(fetchDataFailure(error));
@@ -40,6 +31,7 @@ class Mobile extends React.PureComponent {
     this.props.dispatch(fetchDataSuccess(data));
   };
 
+  // toDo реализовать запрос в actionCreator
   downloadData = () => {
     isoFetch("http://5c4ea42cd87cab001476ef73.mockapi.io/api/mts", {
       method: 'get',
@@ -68,32 +60,33 @@ class Mobile extends React.PureComponent {
   };
 
   onClientAdd = () => {
-    // toDo Формировать ид в редусере?
-    const id = this.state.clients.length ? this.state.clients[this.state.clients.length - 1].id + 1 : 1;
-    this.props.dispatch(onAddClient({id: id, name: '', surName: '', secondName: '', balance: 0, status: ''}, 2));
+    this.props.dispatch(onAddClient({id: generateUniqId(this.props.clients), name: '', surName: '', secondName: '', balance: 0, status: ''}, 2));
   };
 
-  onFilterClick = (e) => {
-    const type = e.target.value;
-    this.props.dispatch(setVisabilityFilters(type));
+  renderClients = () => {
+    const {error, isLoaded, clients} = this.props;
+
+    const mobileClients = clients.map((client) => {
+      return <MobileClient path={this.props.path} key={client.id} client={client}/>
+    });
+
+    if (error) {
+      return <tr><td>{`Произошла ошибка ${error}`}</td></tr>;
+    }
+
+    return !isLoaded ? <tr><td>Загрузка данных...</td></tr> : clients.length ? mobileClients : <tr><td>Клиентов нет</td></tr>;
   };
 
   render() {
 
-    const clients = this.state.clients.map((client) => {
-      return <MobileClient path={this.props.path} key={client.id} client={client}/>
-    });
+    console.log('Mobile rendered');
 
     return (
-      // toDo Вынести филтьры в отдельный комонент
-      // toDo onClient add
-      // toDo handle ajax error
-
       <div className='mobile'>
         <div className='mobile__filter'>
-          <button className='btn filter-all' value={VisabilityFiltes.SHOW_ALL} onClick={this.onFilterClick}>Все</button>
-          <button className='btn filter-active' value={VisabilityFiltes.SHOW_ACTIVE} onClick={this.onFilterClick}>Активные</button>
-          <button className='btn filter-unavail' value={VisabilityFiltes.SHOW_UNACTiVE} onClick={this.onFilterClick}>Заблокированные</button>
+          {
+            <Filter />
+          }
         </div>
         <table className='mobile__clients'>
           <thead>
@@ -107,17 +100,9 @@ class Mobile extends React.PureComponent {
           </tr>
           </thead>
           <tbody>
-          {
-            !this.state.isLoaded ?
-            <tr><td>Загрузка данных...</td></tr>
-            :
-            this.state.clients.length ?
-              clients
-              :
-              <tr>
-                <td>Клиентов нет</td>
-              </tr>
-          }
+            {
+              this.renderClients()
+            }
           </tbody>
         </table>
         <div className='mobile__add'>
@@ -125,43 +110,30 @@ class Mobile extends React.PureComponent {
         </div>
         <div className="mobile__form">
           {
-            (this.state.formMode === 1) &&
+            (this.props.formMode === 1) &&
             <MobileForm key={this.props.clientToEdit.id} btnText='Редактировать' title='Редактировать данные клиента'
-                        client={this.props.clientToEdit} formMode={this.state.formMode}/>
+                        client={this.props.clientToEdit} formMode={this.props.formMode}/>
           }
           {
-            (this.state.formMode === 2) &&
+            (this.props.formMode === 2) &&
             <MobileForm btnText='Добавить' title='Добавить нового клиента' client={this.props.clientToEdit}
-                        formMode={this.state.formMode}/>
+                        formMode={this.props.formMode}/>
           }
         </div>
       </div>
     );
   }
 }
-// toDo где сторить эту функцию???
-const getFilteredList = (arr, filter) => {
-  switch (filter) {
-    case VisabilityFiltes.SHOW_ALL:
-      return arr;
-    case VisabilityFiltes.SHOW_ACTIVE:
-      return arr.filter((item) => item.status === 1);
-    case VisabilityFiltes.SHOW_UNACTiVE:
-      return arr.filter((item) => item.status === 0);
-    default:
-      return arr;
-  }
-};
 
-const mapStateToProps = function (state) {
-  console.log(state);
+const mapStateToProps = function (store) {
+  console.log(store);
   return {
-    clients: getFilteredList(state.clients.clients, state.visabilityFilter),
-    error: state.clients.error,
-    isLoaded: state.clients.isLoaded,
-    visabilityFilter: state.visabilityFilter,
-    clientToEdit: state.clients.clientToEdit,
-    formMode: state.clients.formMode
+    clients: filterList(store.clients.clients, store.visabilityFilter),
+    error: store.clients.error,
+    isLoaded: store.clients.isLoaded,
+    visabilityFilter: store.visabilityFilter,
+    clientToEdit: store.clients.clientToEdit,
+    formMode: store.clients.formMode
   };
 };
 

@@ -55,7 +55,7 @@ class MobileForm extends React.PureComponent {
   };
 
   render() {
-    // console.log('MobileForm render');
+    console.log('MobileForm render');
 
     return (
       <form className='mForm' onSubmit={this.submitForm}>

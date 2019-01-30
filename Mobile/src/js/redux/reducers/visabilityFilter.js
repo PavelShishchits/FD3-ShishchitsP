@@ -1,6 +1,6 @@
-import {VisabilityFiltes, SET_VISIBILITY_FILTER} from '../actions/clientActions';
+import {VisabilityFilters, SET_VISIBILITY_FILTER} from '../actions/filterActions';
 
-const visabilityFilter = (state = VisabilityFiltes.SHOW_ALL, action) => {
+const visabilityFilter = (state = VisabilityFilters.SHOW_ALL, action) => {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
       return action.filter;

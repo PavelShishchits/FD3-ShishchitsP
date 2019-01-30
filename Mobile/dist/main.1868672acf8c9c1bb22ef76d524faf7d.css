@@ -174,23 +174,6 @@ template {
 
 [hidden] {
   display: none; }
-
-body {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  font-size: 16px; }
-
-* {
-  box-sizing: border-box; }
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block; }
-
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 15px; }
 .nav {
   display: flex;
   flex-wrap: wrap; }
@@ -290,5 +273,21 @@ img {
     margin: 0 -5px; }
   .mForm__btn-wrap {
     padding: 15px; }
+body {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 16px; }
 
-/*# sourceMappingURL=main.ef2479168f22d04797e2c0bdacea513c.css.map*/
+* {
+  box-sizing: border-box; }
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px; }
+
+/*# sourceMappingURL=main.1868672acf8c9c1bb22ef76d524faf7d.css.map*/
