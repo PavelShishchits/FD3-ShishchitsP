@@ -33,7 +33,7 @@ class Mobile extends React.PureComponent {
 
   // toDo реализовать запрос в actionCreator
   downloadData = () => {
-    isoFetch("http://5c4ea42cd87cab001476ef73.mockapi.io/api/mts", {
+    isoFetch("https://5c4ea42cd87cab001476ef73.mockapi.io/api/mts", {
       method: 'get',
       headers: {
         "Accept": "application/json",
