@@ -1,24 +1,24 @@
 class Scales {
 
-    private products:Array<object>;
+    private products:Array<Product>;
 
     constructor() {
         this.products = [];
     }
 
     public add(product:Product):void {
-        this.products = [...this.products, product];
+        this.products.push(product);
     }
 
     public getSumScale():number {
-        return this.products.reduce((sumWeigth:number, item:{_name:string, _scale:number}):number => {
-            return sumWeigth += item._scale;
+        return this.products.reduce((sumWeigth:number, item:Product):number => {
+            return sumWeigth += item.scale;
         }, 0)
     }
 
     public getNameList():Array<string> {
-        return this.products.map((item:{_name:string, _scale:number}):string => {
-            return item._name;
+        return this.products.map((item:Product):string => {
+            return item.name;
         });
     }
 }

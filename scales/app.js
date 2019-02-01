@@ -16,16 +16,16 @@ var Scales = /** @class */ (function () {
         this.products = [];
     }
     Scales.prototype.add = function (product) {
-        this.products = this.products.concat([product]);
+        this.products.push(product);
     };
     Scales.prototype.getSumScale = function () {
         return this.products.reduce(function (sumWeigth, item) {
-            return sumWeigth += item._scale;
+            return sumWeigth += item.scale;
         }, 0);
     };
     Scales.prototype.getNameList = function () {
         return this.products.map(function (item) {
-            return item._name;
+            return item.name;
         });
     };
     return Scales;
