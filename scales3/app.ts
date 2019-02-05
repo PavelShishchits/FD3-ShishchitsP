@@ -72,7 +72,11 @@ class ScalesStorageEngineArray implements IStorageEngine {
     };
 
     public getItem(index:number):Product {
-        return this.items[index];
+        if (index < 0 || index > this.items.length - 1) {
+            throw new Error(`Под индексом ${index} не сущесвует продукта`);
+        } else {
+            return this.items[index];
+        }
     };
 
     public getCount():number {
@@ -80,11 +84,43 @@ class ScalesStorageEngineArray implements IStorageEngine {
     };
 }
 
+class ScalesStorageEngineLocalStorage implements IStorageEngine {
+
+    items:Array<Product> = [];
+
+    constructor() {
+      localStorage.clear();
+    };
+
+    public addItem(item:Product):void {
+        this.items.push(item);
+        localStorage.setItem('products', JSON.stringify(this.items));
+    };
+
+    public getItem(index:number):Product {
+        const items = JSON.parse(localStorage.getItem('products'));
+        if (index < 0 || index > items.length - 1) {
+            throw new Error(`Под индексом ${index} не сущесвует продукта`);
+        } else {
+            return items[index];
+        }
+    };
+
+    public getCount():number {
+        return JSON.parse(localStorage.getItem('products')).length;
+    };
+}
+
 const scales1:Scales<ScalesStorageEngineArray> = new Scales(new ScalesStorageEngineArray());
+const scales2:Scales<ScalesStorageEngineLocalStorage> = new Scales(new ScalesStorageEngineLocalStorage());
 
 
-scales1.addItem(apple2);
-scales1.addItem(kiwi1);
-console.log(scales1.getCount());
+// scales1.addItem(apple2);
+// scales1.addItem(kiwi1);
+//
+// scales2.addItem(kiwi2);
+// scales2.addItem(apple1);
+console.log(scales2.getCount());
 
-console.log(scales1.getSumScale(), scales1.getNameList());
+// console.log(scales1.getSumScale(), scales1.getNameList());
+// console.log(scales2.getSumScale(), scales2.getNameList());
