@@ -1,13 +1,12 @@
 class Product {
 
-    constructor(protected _name: string, protected _scale: number) {
+    constructor(public _name: string, public _scale: number) {
 
     };
 
     public getName():string {
         return this._name;
     };
-
 
     public getScale():number {
         return this._scale;
@@ -88,39 +87,45 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine {
 
     items:Array<Product> = [];
 
+    key:string = 'products';
+
+    static reviver(item:Product):Product {
+        return new Product(item._name, item._scale);
+    }
+
     constructor() {
-      localStorage.clear();
+        localStorage.setItem(this.key, JSON.stringify(this.items));
     };
 
     public addItem(item:Product):void {
         this.items.push(item);
-        localStorage.setItem('products', JSON.stringify(this.items));
+        localStorage.setItem(this.key, JSON.stringify(this.items));
     };
 
     public getItem(index:number):Product {
-        const items = JSON.parse(localStorage.getItem('products'));
+        const items = JSON.parse(localStorage.getItem(this.key));
         if (index < 0 || index > items.length - 1) {
             throw new Error(`Под индексом ${index} не сущесвует продукта`);
         } else {
-            return items[index];
+            return ScalesStorageEngineLocalStorage.reviver(items[index]);
         }
     };
 
     public getCount():number {
-        return JSON.parse(localStorage.getItem('products')).length;
+        return JSON.parse(localStorage.getItem(this.key)).length;
     };
 }
 
 const scales1:Scales<ScalesStorageEngineArray> = new Scales(new ScalesStorageEngineArray());
 const scales2:Scales<ScalesStorageEngineLocalStorage> = new Scales(new ScalesStorageEngineLocalStorage());
 
+scales1.addItem(apple2);
+scales1.addItem(kiwi1);
 
-// scales1.addItem(apple2);
-// scales1.addItem(kiwi1);
-//
-// scales2.addItem(kiwi2);
-// scales2.addItem(apple1);
-console.log(scales2.getCount());
+scales2.addItem(kiwi2);
+scales2.addItem(apple1);
+scales2.addItem(apple2);
+scales2.addItem(apple1);
 
-// console.log(scales1.getSumScale(), scales1.getNameList());
-// console.log(scales2.getSumScale(), scales2.getNameList());
+console.log(scales1.getSumScale(), scales1.getNameList());
+console.log(scales2.getSumScale(), scales2.getNameList());
