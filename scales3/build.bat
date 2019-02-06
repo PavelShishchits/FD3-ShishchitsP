@@ -1,0 +1,1 @@
+tsc --target es5 app.ts
