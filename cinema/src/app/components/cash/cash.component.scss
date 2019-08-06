@@ -1,0 +1,27 @@
+.cash {
+  width: 400px;
+  height: 200px;
+  border: 2px solid #e5e5e5;
+  margin-right: 20px;
+  padding: 35px;
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    label {
+
+      > span {
+        display: block;
+        margin-bottom: 3px;
+      }
+    }
+
+    input,
+    button {
+      height: 30px;
+    }
+  }
+}

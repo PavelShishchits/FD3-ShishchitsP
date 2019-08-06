@@ -1,0 +1,10 @@
+<div class="cash">
+  <h3 class="cash__title">{{ title }}</h3>
+  <div class="cash__controls">
+    <label>
+      <span>Enter ticket number</span>
+      <input #quantity type="number">
+    </label>
+    <button (click)='submitTicketQuant(quantity.value)'>Buy tickets</button>
+  </div>
+</div>
