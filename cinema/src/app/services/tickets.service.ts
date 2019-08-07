@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 
-type Place = {num: number, isFree: boolean};
+export type Place = {num: number, isFree: boolean};
 
 @Injectable()
 export class TicketsService {
@@ -29,24 +29,28 @@ export class TicketsService {
     return this.places.filter((place: Place): any => !place.isFree).length;
   }
 
-  public fillPlaces(quant: number): void|boolean {
+  public fillPlaces(quant: number): Array<Place> {
     let {places} = this;
     const freePlaces: number = this.getFreePlaces();
 
     if (quant > freePlaces) {
       console.error(`You have asked for ${quant} places, but there are only ${freePlaces} place|places`);
-      return false;
-    }
+    } else {
+      let boughtPlaces: Array<Place> = [];
 
-    const freeSit: number = this.findFreeSit();
-    let mew: number = 0;
-    for (let i: number = 0; i < places.length; i++) {
-      if (i === freeSit) {
-        while (quant > mew) {
-          places[i + mew].isFree = false;
-          mew++;
+      const freeSit: number = this.findFreeSit();
+      let k: number = 0;
+      for (let i: number = 0; i < places.length; i++) {
+        if (i === freeSit) {
+          while (quant > k) {
+            let place = places[i + k];
+            place.isFree = false;
+            boughtPlaces.push(place);
+            k++;
+          }
         }
       }
+      return boughtPlaces;
     }
   }
 
