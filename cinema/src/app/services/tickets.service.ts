@@ -15,8 +15,6 @@ export class TicketsService {
         isFree: true
       })
     }
-
-    this.fillRandomPlaces(2);
   }
 
   public getPlaces(): number {
@@ -31,9 +29,25 @@ export class TicketsService {
     return this.places.filter((place: Place): any => !place.isFree).length;
   }
 
-  public fillRandomPlaces(quant: number) {
-    const {places} = this;
-    console.log(quant, this.findFreeSit());
+  public fillPlaces(quant: number): void|boolean {
+    let {places} = this;
+    const freePlaces: number = this.getFreePlaces();
+
+    if (quant > freePlaces) {
+      console.error(`You have asked for ${quant} places, but there are only ${freePlaces} place|places`);
+      return false;
+    }
+
+    const freeSit: number = this.findFreeSit();
+    let mew: number = 0;
+    for (let i: number = 0; i < places.length; i++) {
+      if (i === freeSit) {
+        while (quant > mew) {
+          places[i + mew].isFree = false;
+          mew++;
+        }
+      }
+    }
   }
 
   public findFreeSit(): number {

@@ -1,4 +1,5 @@
 import {Component, Input} from "@angular/core";
+import {TicketsService} from "../../services/tickets.service";
 
 @Component({
   selector: 'cash',
@@ -9,7 +10,11 @@ export class CashComponent {
   @Input('title')
   private title: string;
 
-  public submitTicketQuant(quant) {
-    console.log(quant);
+  constructor(private tickets: TicketsService) {
+
+  }
+
+  public submitTicketQuant(quant): void {
+    this.tickets.fillPlaces(quant);
   }
 }
