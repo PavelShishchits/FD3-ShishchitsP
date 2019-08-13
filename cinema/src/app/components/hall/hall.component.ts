@@ -1,5 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {TicketsService} from "../../services/tickets.service";
+import Place from '../../models/place.model';
 
 @Component({
   selector: 'hall',
@@ -7,13 +8,17 @@ import {TicketsService} from "../../services/tickets.service";
   styleUrls: ['./hall.component.scss']
 })
 export class HallComponent {
-  private places: number;
-  private placesFree: number;
-  private placesTaken: number;
+  private places: Place[] = [];
 
   constructor(private tickets: TicketsService) {
-    this.places = this.tickets.getPlaces();
-    this.placesFree = this.tickets.getFreePlaces();
-    this.placesTaken = this.tickets.getTakenPlaces();
+
+  }
+
+  ngOnInit(): void {
+    this.tickets.getSubject().subscribe({
+      next: (value) => {
+        this.places = value;
+      }
+    })
   }
 }

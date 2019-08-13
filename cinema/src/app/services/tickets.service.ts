@@ -1,14 +1,19 @@
 import {Injectable} from "@angular/core";
-
-export type Place = {num: number, isFree: boolean};
+import {BehaviorSubject } from 'rxjs';
+import Place from '../models/place.model';
 
 @Injectable()
 export class TicketsService {
-  private places: Array<Place> = [];
-  private capacity: number = 10;
+  private places: Place[] = [];
+  private capacity: number = 20;
+  private places$:BehaviorSubject<Place[]> ;
 
   constructor() {
+    this.fillData();
+    this.places$ = new BehaviorSubject<Place[]>(this.places);
+  }
 
+  private fillData() {
     for (let i = 1; i <= this.capacity; i++) {
       this.places.push({
         num: i,
@@ -29,14 +34,14 @@ export class TicketsService {
     return this.places.filter((place: Place): any => !place.isFree).length;
   }
 
-  public fillPlaces(quant: number): Array<Place> {
+  public fillPlaces(quant: number): Place[] {
     let {places} = this;
-    const freePlaces: number = this.getFreePlaces();
+    let boughtPlaces: Array<Place> = [];
 
+    const freePlaces: number = this.getFreePlaces();
     if (quant > freePlaces) {
       console.error(`You have asked for ${quant} places, but there are only ${freePlaces} place|places`);
     } else {
-      let boughtPlaces: Array<Place> = [];
 
       const freeSit: number = this.findFreeSit();
       let k: number = 0;
@@ -50,12 +55,18 @@ export class TicketsService {
           }
         }
       }
-      return boughtPlaces;
+      this.places$.next(places);
     }
+    return boughtPlaces;
+  }
+
+  public getSubject(): BehaviorSubject<Place[]> {
+    return this.places$;
   }
 
   public findFreeSit(): number {
     const {places} = this;
+
     for (let i = 0; i < places.length; i++) {
       if (places[i].isFree) {
         return i;

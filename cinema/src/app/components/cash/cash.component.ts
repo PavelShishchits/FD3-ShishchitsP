@@ -1,5 +1,6 @@
 import {Component, Input} from "@angular/core";
-import {TicketsService, Place} from "../../services/tickets.service";
+import {TicketsService} from "../../services/tickets.service";
+import Place from '../../models/place.model';
 
 @Component({
   selector: 'cash',
@@ -18,7 +19,7 @@ export class CashComponent {
     this.renderTickets();
   }
 
-  private renderTickets() {
+  private renderTickets(): string {
     return this.ticketsArray.map((ticket: Place): string => {
       return `Ticket number ${ticket.num}`
     }).join(', ');

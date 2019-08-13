@@ -1,5 +1,11 @@
 <div class='hall'>
-  <div class="hall__places">Места: {{ places }}</div>
-  <div class="hall__places hall__places--free">Сободные места: <span [textContent]="placesFree"></span> </div>
-  <div class="hall__places hall__places--taken">Занятые места: <span [textContent]="placesTaken"></span> </div>
+  <div class="hall__places">Места: {{ tickets.getPlaces() }}</div>
+  <div class="hall__places hall__places--free">Сободные места: <span [textContent]="tickets.getFreePlaces()"></span> </div>
+  <div class="hall__places hall__places--taken">Занятые места: <span [textContent]="tickets.getTakenPlaces()"></span> </div>
+
+  <div class="hall__place-inner">
+    <div *ngFor="let place of this.places" class="hall__place" [ngClass]="{isFree: place.isFree}">
+      <span class="hall__place-num">{{ place.num }}</span>
+    </div>
+  </div>
 </div>
